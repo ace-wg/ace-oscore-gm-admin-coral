@@ -43,10 +43,51 @@ author:
         email: rikard.hoglund@ri.se
 
 normative:
+  I-D.ietf-core-oscore-groupcomm:
+  I-D.ietf-ace-key-groupcomm:
+  I-D.ietf-ace-key-groupcomm-oscore:
+  I-D.ietf-core-coral:
+  I-D.ietf-core-groupcomm-bis:
+  I-D.bormann-cbor-edn-literals:
+  I-D.ietf-cbor-packed:
+  I-D.ietf-core-href:
   RFC2119:
+  RFC3986:
+  RFC6690:
+  RFC6749:
+  RFC7252:
+  RFC7641:
+  RFC8132:
   RFC8174:
+  RFC8613:
+  RFC8949:
+  RFC9052:
+  RFC9053:
+  RFC9200:
+  RFC9202:
+  RFC9203:
+  RFC9237:
+  CURIE-20101216:
+    author:
+      -
+        ins: M. Birbeck
+        name: Mark Birbeck
+      -
+        ins: S. McCarron
+        name: Shane McCarron
+    title: CURIE Syntax 1.0 - A syntax for expressing Compact URIs - W3C Working Group Note
+    date: 2010-12-16
+    target: http://www.w3.org/TR/2010/NOTE-curie-20101216
 
 informative:
+  I-D.tiloca-core-oscore-discovery:
+  I-D.hartke-t2trg-coral-reef:
+  I-D.ietf-cose-cbor-encoded-cert:
+  I-D.ietf-core-target-attr:
+  RFC5280:
+  RFC8392:
+  RFC9147:
+  RFC9147:
 
 entity:
   SELF: "[RFC-XXXX]"
