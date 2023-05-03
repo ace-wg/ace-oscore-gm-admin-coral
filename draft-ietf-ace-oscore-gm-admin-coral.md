@@ -84,4 +84,6 @@ This document has no actions for IANA.
 # Acknowledgments # {#acknowledgment}
 {: numbered="no"}
 
-TBD
+This specification builds on draft-ietf-ace-oscore-gm-admin co-authored also by Peter van der Stok and Francesca Palombini, where Klaus Hartke contributed in defining the resource model and the interactions using CoRAL originally part of that document.
+
+The authors sincerely thank {{{Christian Amsüss}}}, {{{Carsten Bormann}}} and {{{Jim Schaad}} for their comments and feedback. The work on this document has been partly supported by VINNOVA and the Celtic-Next project CRITISEC; and by the H2020 project SIFIS-Home (Grant agreement 952652).
