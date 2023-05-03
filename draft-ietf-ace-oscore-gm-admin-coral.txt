@@ -66,7 +66,9 @@ Table of Contents
    2.  TBD
      2.1.  TBD
    3.  IANA Considerations
-   4.  Normative References
+   4.  References
+     4.1.  Normative References
+     4.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
@@ -97,16 +99,200 @@ Table of Contents
 
    This document has no actions for IANA.
 
-4.  Normative References
+4.  References
+
+4.1.  Normative References
+
+   [CURIE-20101216]
+              Birbeck, M. and S. McCarron, "CURIE Syntax 1.0 - A syntax
+              for expressing Compact URIs - W3C Working Group Note", 16
+              December 2010,
+              <http://www.w3.org/TR/2010/NOTE-curie-20101216>.
+
+   [I-D.bormann-cbor-edn-literals]
+              Bormann, C., "Application-Oriented Literals in CBOR
+              Extended Diagnostic Notation", Work in Progress, Internet-
+              Draft, draft-bormann-cbor-edn-literals-02, 28 March 2023,
+              <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
+              edn-literals-02>.
+
+   [I-D.ietf-ace-key-groupcomm]
+              Palombini, F. and M. Tiloca, "Key Provisioning for Group
+              Communication using ACE", Work in Progress, Internet-
+              Draft, draft-ietf-ace-key-groupcomm-16, 5 September 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-
+              groupcomm-16>.
+
+   [I-D.ietf-ace-key-groupcomm-oscore]
+              Tiloca, M., Park, J., and F. Palombini, "Key Management
+              for OSCORE Groups in ACE", Work in Progress, Internet-
+              Draft, draft-ietf-ace-key-groupcomm-oscore-16, 6 March
+              2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              ace-key-groupcomm-oscore-16>.
+
+   [I-D.ietf-cbor-packed]
+              Bormann, C., "Packed CBOR", Work in Progress, Internet-
+              Draft, draft-ietf-cbor-packed-08, 23 January 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
+              packed-08>.
+
+   [I-D.ietf-core-coral]
+              Amsüss, C. and T. Fossati, "The Constrained RESTful
+              Application Language (CoRAL)", Work in Progress, Internet-
+              Draft, draft-ietf-core-coral-05, 7 March 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-core-
+              coral-05>.
+
+   [I-D.ietf-core-groupcomm-bis]
+              Dijk, E., Wang, C., and M. Tiloca, "Group Communication
+              for the Constrained Application Protocol (CoAP)", Work in
+              Progress, Internet-Draft, draft-ietf-core-groupcomm-bis-
+              08, 11 January 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-core-
+              groupcomm-bis-08>.
+
+   [I-D.ietf-core-href]
+              Bormann, C. and H. Birkholz, "Constrained Resource
+              Identifiers", Work in Progress, Internet-Draft, draft-
+              ietf-core-href-12, 6 March 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-core-
+              href-12>.
+
+   [I-D.ietf-core-oscore-groupcomm]
+              Tiloca, M., Selander, G., Palombini, F., Mattsson, J. P.,
+              and J. Park, "Group OSCORE - Secure Group Communication
+              for CoAP", Work in Progress, Internet-Draft, draft-ietf-
+              core-oscore-groupcomm-17, 20 December 2022,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-core-
+              oscore-groupcomm-17>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
 
+   [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
+              Resource Identifier (URI): Generic Syntax", STD 66,
+              RFC 3986, DOI 10.17487/RFC3986, January 2005,
+              <https://www.rfc-editor.org/rfc/rfc3986>.
+
+   [RFC6690]  Shelby, Z., "Constrained RESTful Environments (CoRE) Link
+              Format", RFC 6690, DOI 10.17487/RFC6690, August 2012,
+              <https://www.rfc-editor.org/rfc/rfc6690>.
+
+   [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
+              RFC 6749, DOI 10.17487/RFC6749, October 2012,
+              <https://www.rfc-editor.org/rfc/rfc6749>.
+
+   [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
+              Application Protocol (CoAP)", RFC 7252,
+              DOI 10.17487/RFC7252, June 2014,
+              <https://www.rfc-editor.org/rfc/rfc7252>.
+
+   [RFC7641]  Hartke, K., "Observing Resources in the Constrained
+              Application Protocol (CoAP)", RFC 7641,
+              DOI 10.17487/RFC7641, September 2015,
+              <https://www.rfc-editor.org/rfc/rfc7641>.
+
+   [RFC8132]  van der Stok, P., Bormann, C., and A. Sehgal, "PATCH and
+              FETCH Methods for the Constrained Application Protocol
+              (CoAP)", RFC 8132, DOI 10.17487/RFC8132, April 2017,
+              <https://www.rfc-editor.org/rfc/rfc8132>.
+
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8613]  Selander, G., Mattsson, J., Palombini, F., and L. Seitz,
+              "Object Security for Constrained RESTful Environments
+              (OSCORE)", RFC 8613, DOI 10.17487/RFC8613, July 2019,
+              <https://www.rfc-editor.org/rfc/rfc8613>.
+
+   [RFC8949]  Bormann, C. and P. Hoffman, "Concise Binary Object
+              Representation (CBOR)", STD 94, RFC 8949,
+              DOI 10.17487/RFC8949, December 2020,
+              <https://www.rfc-editor.org/rfc/rfc8949>.
+
+   [RFC9052]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Structures and Process", STD 96, RFC 9052,
+              DOI 10.17487/RFC9052, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9052>.
+
+   [RFC9053]  Schaad, J., "CBOR Object Signing and Encryption (COSE):
+              Initial Algorithms", RFC 9053, DOI 10.17487/RFC9053,
+              August 2022, <https://www.rfc-editor.org/rfc/rfc9053>.
+
+   [RFC9200]  Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
+              H. Tschofenig, "Authentication and Authorization for
+              Constrained Environments Using the OAuth 2.0 Framework
+              (ACE-OAuth)", RFC 9200, DOI 10.17487/RFC9200, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9200>.
+
+   [RFC9202]  Gerdes, S., Bergmann, O., Bormann, C., Selander, G., and
+              L. Seitz, "Datagram Transport Layer Security (DTLS)
+              Profile for Authentication and Authorization for
+              Constrained Environments (ACE)", RFC 9202,
+              DOI 10.17487/RFC9202, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9202>.
+
+   [RFC9203]  Palombini, F., Seitz, L., Selander, G., and M. Gunnarsson,
+              "The Object Security for Constrained RESTful Environments
+              (OSCORE) Profile of the Authentication and Authorization
+              for Constrained Environments (ACE) Framework", RFC 9203,
+              DOI 10.17487/RFC9203, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9203>.
+
+   [RFC9237]  Bormann, C., "An Authorization Information Format (AIF)
+              for Authentication and Authorization for Constrained
+              Environments (ACE)", RFC 9237, DOI 10.17487/RFC9237,
+              August 2022, <https://www.rfc-editor.org/rfc/rfc9237>.
+
+4.2.  Informative References
+
+   [I-D.hartke-t2trg-coral-reef]
+              Hartke, K., "Resource Discovery in Constrained RESTful
+              Environments (CoRE) using the Constrained RESTful
+              Application Language (CoRAL)", Work in Progress, Internet-
+              Draft, draft-hartke-t2trg-coral-reef-04, 9 May 2020,
+              <https://datatracker.ietf.org/doc/html/draft-hartke-t2trg-
+              coral-reef-04>.
+
+   [I-D.ietf-core-target-attr]
+              Bormann, C., "CoRE Target Attributes Registry", Work in
+              Progress, Internet-Draft, draft-ietf-core-target-attr-04,
+              5 March 2023, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-core-target-attr-04>.
+
+   [I-D.ietf-cose-cbor-encoded-cert]
+              Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
+              M. Furuhed, "CBOR Encoded X.509 Certificates (C509
+              Certificates)", Work in Progress, Internet-Draft, draft-
+              ietf-cose-cbor-encoded-cert-05, 10 January 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
+              cbor-encoded-cert-05>.
+
+   [I-D.tiloca-core-oscore-discovery]
+              Tiloca, M., Amsüss, C., and P. Van der Stok, "Discovery of
+              OSCORE Groups with the CoRE Resource Directory", Work in
+              Progress, Internet-Draft, draft-tiloca-core-oscore-
+              discovery-13, 8 March 2023,
+              <https://datatracker.ietf.org/doc/html/draft-tiloca-core-
+              oscore-discovery-13>.
+
+   [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
+              Housley, R., and W. Polk, "Internet X.509 Public Key
+              Infrastructure Certificate and Certificate Revocation List
+              (CRL) Profile", RFC 5280, DOI 10.17487/RFC5280, May 2008,
+              <https://www.rfc-editor.org/rfc/rfc5280>.
+
+   [RFC8392]  Jones, M., Wahlstroem, E., Erdtman, S., and H. Tschofenig,
+              "CBOR Web Token (CWT)", RFC 8392, DOI 10.17487/RFC8392,
+              May 2018, <https://www.rfc-editor.org/rfc/rfc8392>.
+
+   [RFC9147]  Rescorla, E., Tschofenig, H., and N. Modadugu, "The
+              Datagram Transport Layer Security (DTLS) Protocol Version
+              1.3", RFC 9147, DOI 10.17487/RFC9147, April 2022,
+              <https://www.rfc-editor.org/rfc/rfc9147>.
 
 Acknowledgments
 
