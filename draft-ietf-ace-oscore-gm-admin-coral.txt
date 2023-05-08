@@ -80,7 +80,7 @@ Table of Contents
 
    TBD
 
-   The examples presented in this doccument are expressed in CBOR
+   The examples presented in this document are expressed in CBOR
    diagnostic notation, and refer to values from external dictionaries
    using Packed CBOR [I-D.ietf-cbor-packed].  Section 1.2 introduces the
    notation and assumptions used in the examples.
@@ -182,6 +182,14 @@ Table of Contents
               Draft, draft-ietf-ace-key-groupcomm-oscore-16, 6 March
               2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
               ace-key-groupcomm-oscore-16>.
+
+   [I-D.ietf-ace-oscore-gm-admin]
+              Tiloca, M., Höglund, R., Van der Stok, P., and F.
+              Palombini, "Admin Interface for the OSCORE Group Manager",
+              Work in Progress, Internet-Draft, draft-ietf-ace-oscore-
+              gm-admin-08, 13 March 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
+              oscore-gm-admin-08>.
 
    [I-D.ietf-cbor-packed]
               Bormann, C., "Packed CBOR", Work in Progress, Internet-
