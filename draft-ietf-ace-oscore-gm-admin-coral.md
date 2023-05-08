@@ -102,6 +102,10 @@ TBD
 
 TBD
 
+The examples presented in this doccument are expressed in CBOR diagnostic notation, and refer to values from external dictionaries using Packed CBOR {{I-D.ietf-cbor-packed}}. {{notation-coral-examples}} introduces the notation and assumptions used in the examples.
+
+TBD
+
 ## Terminology ## {#terminology}
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
@@ -109,6 +113,36 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 Readers are expected to be familiar with the terms and concepts from the following specifications:
 
 * TBD
+
+## Notation and Assumptions in the Examples ## {#notation-coral-examples}
+
+As per {{Section 2.4 of I-D.ietf-core-coral}}, CoRAL expresses Uniform Resource Identifiers (URIs) {{RFC3986}} as Constrained Resource Identifier (CRI) references {{I-D.ietf-core-href}}.
+
+The examples in this document use the following notation.
+
+When using the CURIE syntax {{CURIE-20101216}}, the following applies.
+
+* 'core.osc.gcoll' stands for http://coreapps.org/core.osc.gcoll#
+
+* 'core.osc.gconf' stands for http://coreapps.org/core.osc.gconf#
+
+* 'linkformat' stands for http://www.iana.org/assignments/linkformat
+
+   This URI is to be defined with IANA, together with other URIs that build on it through further path segments, e.g., http://www.iana.org/assignments/linkformat/rt
+
+When using a URI http://www.iana.org/assignments/linkformat/SEG1/SEG2
+
+* The path segment SEG1 is the name of a web link target attribute.
+
+   Names of target attributes used in Link Format {{RFC6690}} are expected to be coordinated through the "Target Attributes" registry defined in {{I-D.ietf-core-target-attr}}.
+
+* The path segment SEG2 is the value of the target attribute.
+
+The notation cri'' introduced in {{I-D.bormann-cbor-edn-literals}} is used to represent CRIs {{I-D.ietf-core-href}}. This format is not expected to be sent over the network.
+
+Packed CBOR {{I-D.ietf-cbor-packed}} is also used, thus reducing representation size. The examples especially refer to the values from the two shared item tables in {{sec-packed-cbor-tables}}.
+
+Finally, the examples consider a Group Manager with address \[2001:db8::ab\], and use the CoAP Content-Format ID 65087 for the media-type application/coral+cbor.
 
 # TBD
 
@@ -124,7 +158,7 @@ This document has no actions for IANA.
 
 # Shared item tables for Packed CBOR # {#sec-packed-cbor-tables}
 
-This appendix defines the two shared item tables that the CoRAL examples refer to for using Packed CBOR {{I-D.ietf-cbor-packed}}.
+This appendix defines the two shared item tables that the examples in this document refer to for using Packed CBOR {{I-D.ietf-cbor-packed}}.
 
 The notation cri'' introduced in {{I-D.bormann-cbor-edn-literals}} is used to represent CRIs {{I-D.ietf-core-href}}.
 
