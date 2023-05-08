@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 4 November 2023                                      3 May 2023
+Expires: 9 November 2023                                      8 May 2023
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 November 2023.
+   This Internet-Draft will expire on 9 November 2023.
 
 Copyright Notice
 
@@ -69,6 +69,9 @@ Table of Contents
    4.  References
      4.1.  Normative References
      4.2.  Informative References
+   Appendix A.  Shared item tables for Packed CBOR
+     A.1.  Compression of CoRAL predicates
+     A.2.  Compression of Values of the rt= Target Attribute
    Acknowledgments
    Authors' Addresses
 
@@ -293,6 +296,123 @@ Table of Contents
               Datagram Transport Layer Security (DTLS) Protocol Version
               1.3", RFC 9147, DOI 10.17487/RFC9147, April 2022,
               <https://www.rfc-editor.org/rfc/rfc9147>.
+
+Appendix A.  Shared item tables for Packed CBOR
+
+   This appendix defines the two shared item tables that the CoRAL
+   examples refer to for using Packed CBOR [I-D.ietf-cbor-packed].
+
+   The notation cri'' introduced in [I-D.bormann-cbor-edn-literals] is
+   used to represent CRIs [I-D.ietf-core-href].
+
+A.1.  Compression of CoRAL predicates
+
+   The following shared item table is used for compressing CoRAL
+   predicates, as per Section 2.2 of [I-D.ietf-cbor-packed].
+
+    +-------+--------------------------------------------------------+
+    | Index | Item                                                   |
+    +-------+--------------------------------------------------------+
+    | 6     | cri'http://www.iana.org/assignments/linkformat/rt'     |
+    +-------+--------------------------------------------------------+
+    | 50    | cri'http://coreapps.org/core.osc.gcoll#item'           |
+    +-------+--------------------------------------------------------+
+    | 68    | cri'http://coreapps.org/core.osc.gconf#hkdf'           |
+    +-------+--------------------------------------------------------+
+    | 69    | cri'http://coreapps.org/core.osc.gconf#cred_fmt'       |
+    +-------+--------------------------------------------------------+
+    | 70    | cri'http://coreapps.org/core.osc.gconf#group_mode'     |
+    +-------+--------------------------------------------------------+
+    | 71    | cri'http://coreapps.org/core.osc.gconf#sign_enc_alg'   |
+    +-------+--------------------------------------------------------+
+    | 72    | cri'http://coreapps.org/core.osc.gconf#sign_alg'       |
+    +-------+--------------------------------------------------------+
+    | 73    | cri'http://coreapps.org/core.osc.gconf#sign_params'    |
+    +-------+--------------------------------------------------------+
+    | 74    | cri'http://coreapps.org/core.osc.gconf#sign_params     |
+    |       |     .alg_capab.key_type'                               |
+    +-------+--------------------------------------------------------+
+    | 75    | cri'http://coreapps.org/core.osc.gconf#sign_params     |
+    |       |     .key_type_capab.key_type'                          |
+    +-------+--------------------------------------------------------+
+    | 76    | cri'http://coreapps.org/core.osc.gconf#sign_params     |
+    |       |     .key_type_capab.curve'                             |
+    +-------+--------------------------------------------------------+
+    | 77    | cri'http://coreapps.org/core.osc.gconf#pairwise_mode'  |
+    +-------+--------------------------------------------------------+
+    | 78    | cri'http://coreapps.org/core.osc.gconf#alg'            |
+    +-------+--------------------------------------------------------+
+    | 79    | cri'http://coreapps.org/core.osc.gconf#ecdh_alg'       |
+    +-------+--------------------------------------------------------+
+    | 80    | cri'http://coreapps.org/core.osc.gconf#ecdh_params'    |
+    +-------+--------------------------------------------------------+
+    | 81    | cri'http://coreapps.org/core.osc.gconf#ecdh_params     |
+    |       |     .alg_capab.key_type'                               |
+    +-------+--------------------------------------------------------+
+    | 82    | cri'http://coreapps.org/core.osc.gconf#ecdh_params     |
+    |       |     .key_type_capab.key_type'                          |
+    +-------+--------------------------------------------------------+
+    | 83    | cri'http://coreapps.org/core.osc.gconf#ecdh_params     |
+    |       |     .key_type_capab.curve'                             |
+    +-------+--------------------------------------------------------+
+    | 84    | cri'http://coreapps.org/core.osc.gconf#det_req'        |
+    +-------+--------------------------------------------------------+
+    | 85    | cri'http://coreapps.org/core.osc.gconf#det_hash_alg'   |
+    +-------+--------------------------------------------------------+
+    | 86    | cri'http://coreapps.org/core.osc.gconf#rt'             |
+    +-------+--------------------------------------------------------+
+    | 87    | cri'http://coreapps.org/core.osc.gconf#active'         |
+    +-------+--------------------------------------------------------+
+    | 88    | cri'http://coreapps.org/core.osc.gconf#group_name'     |
+    +-------+--------------------------------------------------------+
+    | 89    | cri'http://coreapps.org/core.osc.gconf#group_title'    |
+    +-------+--------------------------------------------------------+
+    | 90    | cri'http://coreapps.org/core.osc.gconf                 |
+    |       |     #ace_groupcomm_profile'                            |
+    +-------+--------------------------------------------------------+
+    | 91    | cri'http://coreapps.org/core.osc.gconf#max_stale_sets' |
+    +-------+--------------------------------------------------------+
+    | 92    | cri'http://coreapps.org/core.osc.gconf#exp'            |
+    +-------+--------------------------------------------------------+
+    | 93    | cri'http://coreapps.org/core.osc.gconf#gid_reuse'      |
+    +-------+--------------------------------------------------------+
+    | 94    | cri'http://coreapps.org/core.osc.gconf#app_group'      |
+    +-------+--------------------------------------------------------+
+    | 95    | cri'http://coreapps.org/core.osc.gconf#app_group_del'  |
+    +-------+--------------------------------------------------------+
+    | 96    | cri'http://coreapps.org/core.osc.gconf#app_group_add'  |
+    +-------+--------------------------------------------------------+
+    | 97    | cri'http://coreapps.org/core.osc.gconf#joining_uri'    |
+    +-------+--------------------------------------------------------+
+    | 98    | cri'http://coreapps.org/core.osc.gconf#app_groups'     |
+    +-------+--------------------------------------------------------+
+    | 99    | cri'http://coreapps.org/core.osc.gconf#group_policies' |
+    +-------+--------------------------------------------------------+
+    | 100   | cri'http://coreapps.org/core.osc.gconf#group_policies  |
+    |       |     .key_update_check_interval'                        |
+    +-------+--------------------------------------------------------+
+    | 101   | cri'http://coreapps.org/core.osc.gconf#group_policies  |
+    |       |     .exp_delta'                                        |
+    +-------+--------------------------------------------------------+
+    | 102   | cri'http://coreapps.org/core.osc.gconf#as_uri'         |
+    +-------+--------------------------------------------------------+
+
+       Figure 1: Shared item table for compressing CoRAL predicates.
+
+A.2.  Compression of Values of the rt= Target Attribute
+
+   The following shared item table is used for compressing values of the
+   rt= target attribute, as per Section 2.2 of [I-D.ietf-cbor-packed].
+
+    +-------+--------------------------------------------------------+
+    | Index | Item                                                   |
+    +-------+--------------------------------------------------------+
+    | 415   | cri'http://www.iana.org/assignments/linkformat/rt      |
+    |       |     /core.osc.gconf'                                   |
+    +-------+--------------------------------------------------------+
+
+       Figure 2: Shared item table for compressing values of the rt=
+                             target attribute.
 
 Acknowledgments
 
