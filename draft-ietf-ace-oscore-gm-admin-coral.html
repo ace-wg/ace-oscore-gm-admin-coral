@@ -1214,11 +1214,37 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
         </h3>
 <p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">Readers are expected to be familiar with the terms and concepts from the following specifications:<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Readers are expected to be familiar with the terms and concepts from the following specifications.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-1.1-3.1">TBD<a href="#section-1.1-3.1" class="pilcrow">¶</a>
+<li class="normal" id="section-1.1-3.1">CBOR <span>[<a href="#RFC8949" class="cite xref">RFC8949</a>]</span>, Packed CBOR <span>[<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>, and COSE <span>[<a href="#RFC9052" class="cite xref">RFC9052</a>]</span><span>[<a href="#RFC9053" class="cite xref">RFC9053</a>]</span>.<a href="#section-1.1-3.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-1.1-3.2">The Constrained RESTful Application Language (CoRAL) <span>[<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span> and Constrained Resource Identifiers (CRIs) defined in <span>[<a href="#I-D.ietf-core-href" class="cite xref">I-D.ietf-core-href</a>]</span>.<a href="#section-1.1-3.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-1.1-3.3">
+            <p id="section-1.1-3.3.1">The CoAP protocol <span>[<a href="#RFC7252" class="cite xref">RFC7252</a>]</span>, also in group communication scenarios <span>[<a href="#I-D.ietf-core-groupcomm-bis" class="cite xref">I-D.ietf-core-groupcomm-bis</a>]</span>. These include the concepts of:<a href="#section-1.1-3.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-3.3.2.1">"application group", as a set of CoAP nodes that share a common set of resources; and of<a href="#section-1.1-3.3.2.1" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-1.1-3.3.2.2">"security group", as a set of CoAP nodes that share the same security material, and use it to protect and verify exchanged messages.<a href="#section-1.1-3.3.2.2" class="pilcrow">¶</a>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-1.1-3.4">
+            <p id="section-1.1-3.4.1">The OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span> and Group OSCORE <span>[<a href="#I-D.ietf-core-oscore-groupcomm" class="cite xref">I-D.ietf-core-oscore-groupcomm</a>]</span> security protocols. These especially include the concepts of:<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.1-3.4.2.1">Group Manager, as the entity responsible for a set of OSCORE groups where communications among members are secured using Group OSCORE. An OSCORE group is used as security group for one or many application groups.<a href="#section-1.1-3.4.2.1" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-1.1-3.4.2.2">Authentication credential, as the set of information associated with an entity, including that entity's public key and parameters associated with the public key. Examples of authentication credentials are CBOR Web Tokens (CWTs) and CWT Claims Sets (CCSs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>, X.509 certificates <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span> and C509 certificates <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>.<a href="#section-1.1-3.4.2.2" class="pilcrow">¶</a>
+</li>
+            </ul>
+</li>
+          <li class="normal" id="section-1.1-3.5">The ACE framework for authentication and authorization <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>. The terminology for entities in the considered architecture is defined in OAuth 2.0 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>. In particular, this includes Client (C), Resource Server (RS), and Authorization Server (AS).<a href="#section-1.1-3.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-1.1-3.6">The management of keying material for groups in ACE <span>[<a href="#I-D.ietf-ace-key-groupcomm" class="cite xref">I-D.ietf-ace-key-groupcomm</a>]</span> and specifically for OSCORE groups <span>[<a href="#I-D.ietf-ace-key-groupcomm-oscore" class="cite xref">I-D.ietf-ace-key-groupcomm-oscore</a>]</span>. These include the concept of group-membership resource hosted by the Group Manager, that new members access to join the OSCORE group, while current members can access to retrieve updated keying material.<a href="#section-1.1-3.6" class="pilcrow">¶</a>
 </li>
         </ul>
+<p id="section-1.1-4">Readers are also expected to be familiar with the terms and concepts used in <span>[<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, wih particular reference to: "Administrator", "Group name", "Group-collection resource", "Group-configuration resource", and "Admin endpoint".<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">Note that, unless otherwise indicated, the term "endpoint" is used here following its OAuth definition, aimed at denoting resources such as /token and /introspect at the AS, and /authz-info at the RS. This document does not use the CoAP definition of "endpoint", which is "An entity participating in the CoAP protocol".<a href="#section-1.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="notation-coral-examples">
