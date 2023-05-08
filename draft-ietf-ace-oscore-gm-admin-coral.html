@@ -1152,13 +1152,16 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
                 <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-notation-and-assumptions-in" class="internal xref">Notation and Assumptions in the Examples</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-tbd" class="internal xref">TBD</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-tbd-2" class="internal xref">TBD</a></p>
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-tbd-2" class="internal xref">TBD</a></p>
 </li>
             </ul>
 </li>
@@ -1203,6 +1206,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">TBD<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">The examples presented in this doccument are expressed in CBOR diagnostic notation, and refer to values from external dictionaries using Packed CBOR <span>[<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>. <a href="#notation-coral-examples" class="auto internal xref">Section 1.2</a> introduces the notation and assumptions used in the examples.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">TBD<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
@@ -1214,6 +1219,40 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <li class="normal" id="section-1.1-3.1">TBD<a href="#section-1.1-3.1" class="pilcrow">¶</a>
 </li>
         </ul>
+</section>
+</div>
+<div id="notation-coral-examples">
+<section id="section-1.2">
+        <h3 id="name-notation-and-assumptions-in">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-notation-and-assumptions-in" class="section-name selfRef">Notation and Assumptions in the Examples</a>
+        </h3>
+<p id="section-1.2-1">As per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-coral-05#section-2.4" class="relref">Section 2.4</a> of [<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>, CoRAL expresses Uniform Resource Identifiers (URIs) <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> as Constrained Resource Identifier (CRI) references <span>[<a href="#I-D.ietf-core-href" class="cite xref">I-D.ietf-core-href</a>]</span>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">The examples in this document use the following notation.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+<p id="section-1.2-3">When using the CURIE syntax <span>[<a href="#CURIE-20101216" class="cite xref">CURIE-20101216</a>]</span>, the following applies.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.2-4.1">'core.osc.gcoll' stands for http://coreapps.org/core.osc.gcoll#<a href="#section-1.2-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-1.2-4.2">'core.osc.gconf' stands for http://coreapps.org/core.osc.gconf#<a href="#section-1.2-4.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-1.2-4.3">
+            <p id="section-1.2-4.3.1">'linkformat' stands for http://www.iana.org/assignments/linkformat<a href="#section-1.2-4.3.1" class="pilcrow">¶</a></p>
+<p id="section-1.2-4.3.2">
+This URI is to be defined with IANA, together with other URIs that build on it through further path segments, e.g., http://www.iana.org/assignments/linkformat/rt<a href="#section-1.2-4.3.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-1.2-5">When using a URI http://www.iana.org/assignments/linkformat/SEG1/SEG2<a href="#section-1.2-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-1.2-6.1">
+            <p id="section-1.2-6.1.1">The path segment SEG1 is the name of a web link target attribute.<a href="#section-1.2-6.1.1" class="pilcrow">¶</a></p>
+<p id="section-1.2-6.1.2">
+Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> are expected to be coordinated through the "Target Attributes" registry defined in <span>[<a href="#I-D.ietf-core-target-attr" class="cite xref">I-D.ietf-core-target-attr</a>]</span>.<a href="#section-1.2-6.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-1.2-6.2">The path segment SEG2 is the value of the target attribute.<a href="#section-1.2-6.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-1.2-7">The notation cri'' introduced in <span>[<a href="#I-D.bormann-cbor-edn-literals" class="cite xref">I-D.bormann-cbor-edn-literals</a>]</span> is used to represent CRIs <span>[<a href="#I-D.ietf-core-href" class="cite xref">I-D.ietf-core-href</a>]</span>. This format is not expected to be sent over the network.<a href="#section-1.2-7" class="pilcrow">¶</a></p>
+<p id="section-1.2-8">Packed CBOR <span>[<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span> is also used, thus reducing representation size. The examples especially refer to the values from the two shared item tables in <a href="#sec-packed-cbor-tables" class="auto internal xref">Appendix A</a>.<a href="#section-1.2-8" class="pilcrow">¶</a></p>
+<p id="section-1.2-9">Finally, the examples consider a Group Manager with address [2001:db8::ab], and use the CoAP Content-Format ID 65087 for the media-type application/coral+cbor.<a href="#section-1.2-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1393,7 +1432,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-shared-item-tables-for-pack">
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-shared-item-tables-for-pack" class="section-name selfRef">Shared item tables for Packed CBOR</a>
       </h2>
-<p id="appendix-A-1">This appendix defines the two shared item tables that the CoRAL examples refer to for using Packed CBOR <span>[<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">This appendix defines the two shared item tables that the examples in this document refer to for using Packed CBOR <span>[<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">The notation cri'' introduced in <span>[<a href="#I-D.bormann-cbor-edn-literals" class="cite xref">I-D.bormann-cbor-edn-literals</a>]</span> is used to represent CRIs <span>[<a href="#I-D.ietf-core-href" class="cite xref">I-D.ietf-core-href</a>]</span>.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <div id="compression-of-coral-predicates">
 <section id="appendix-A.1">
