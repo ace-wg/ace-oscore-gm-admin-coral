@@ -46,6 +46,7 @@ normative:
   I-D.ietf-core-oscore-groupcomm:
   I-D.ietf-ace-key-groupcomm:
   I-D.ietf-ace-key-groupcomm-oscore:
+  I-D.ietf-ace-oscore-gm-admin:
   I-D.ietf-core-coral:
   I-D.ietf-core-groupcomm-bis:
   I-D.bormann-cbor-edn-literals:
@@ -102,7 +103,7 @@ TBD
 
 TBD
 
-The examples presented in this doccument are expressed in CBOR diagnostic notation, and refer to values from external dictionaries using Packed CBOR {{I-D.ietf-cbor-packed}}. {{notation-coral-examples}} introduces the notation and assumptions used in the examples.
+The examples presented in this document are expressed in CBOR diagnostic notation, and refer to values from external dictionaries using Packed CBOR {{I-D.ietf-cbor-packed}}. {{notation-coral-examples}} introduces the notation and assumptions used in the examples.
 
 TBD
 
