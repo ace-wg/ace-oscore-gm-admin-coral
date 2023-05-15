@@ -229,19 +229,161 @@ TBD
 
 # Interactions with the Group Manager # {#interactions}
 
-TBD
+The same as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
+
+* The Content-Format in messages containing a payload is set to application/coral+cbor, defined in {{Section 7.2 of I-D.ietf-core-coral}}.
+
+* The parameters 'sign_params', 'ecdh_params', 'app_groups' and 'group_policies' are referred to as "structured parameters".
+
+* If a message payload specifies a link element corresponding to a structured parameter, then:
+
+   - The payload MUST NOT include any link element corresponding to an inner information element of that structured parameter.
+
+   - The link element MUST have the link target with value "false" (0xf4) for indicating the structured parameter with no elements.
+
+      Editor's note: this should change to using an empty CBOR array or an empty CBOR map as appropriate, once this is made explicitly possible in the binary format of link items in CoRAL (see Section 3.1.4 of {{I-D.ietf-core-coral}}).
+
+* If a message payload specifies an information element of a structured parameter from the group configuration, then that information element MUST be specified by means of the corresponding link element.
 
 ## Retrieve the Full List of Group Configurations ## {#collection-resource-get}
 
-TBD
+The same as defined in {{Section 6.1 of I-D.ietf-ace-oscore-gm-admin}} holds.
+
+An example of message exchange is shown below.
+
+~~~~~~~~~~~
+=> 0.01 GET
+   Uri-Path: manage
+
+<= 2.05 Content
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [1, cri'coap://[2001:db8::ab]/manage'],
+     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp1', [
+       [2, simple(6) / item 6 for linkformat:rt /,
+        6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                   /linkformat/rt/core.osc.gconf' /]
+     ]],
+     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp2', [
+       [2, simple(6) / item 6 for linkformat:rt /,
+        6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                   /linkformat/rt/core.osc.gconf' /]
+     ]],
+     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp3', [
+       [2, simple(6) / item 6 for linkformat:rt /,
+        6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                   /linkformat/rt/core.osc.gconf' /]
+     ]]
+   ]
+~~~~~~~~~~~
 
 ## Retrieve a List of Group Configurations by Filters ## {#collection-resource-fetch}
 
-TBD
+The same as defined in {{Section 6.2 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
+
+* The filter criteria are specified in the request payload with top-level link elements, each of which corresponds to an entry of the group configuration (see {{config-repr}}), with the exception of non-empty structured parameters.
+
+* If names of application groups are used as filter criteria, each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.
+
+* With the exception of the 'app_group' element, a valid request MUST NOT include the same element multiple times. Element values are the ones admitted for the corresponding labels in the POST request for creating a group configuration (see {{collection-resource-post}}).
+
+An example of message exchange is shown below.
+
+~~~~~~~~~~~
+=> 0.05 FETCH
+   Uri-Path: manage
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
+   ]
+
+<= 2.05 Content
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+    [1, cri'coap://[2001:db8::ab]/manage'],
+    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp1', [
+      [2, simple(6) / item 6 for linkformat:rt /,
+       6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                  /linkformat/rt/core.osc.gconf' /]
+    ]],
+    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp2', [
+      [2, simple(6) / item 6 for linkformat:rt /,
+       6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                  /linkformat/rt/core.osc.gconf' /]
+    ]],
+    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp3', [
+      [2, simple(6) / item 6 for linkformat:rt /,
+       6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                  /linkformat/rt/core.osc.gconf' /]
+    ]]
+   ]
+~~~~~~~~~~~
 
 ## Create a New Group Configuration ## {#collection-resource-post}
 
-TBD
+The same as defined in {{Section 6.3 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
+
+* Each link element of the request payload corresponds to an entry of the group configuration (see {{config-repr}}), with the exception of non-empty structured parameters.
+
+* Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
+
+* If the payload of the POST request specifies the 'app_group' link element multiple times, then the Group Manager MUST NOT respond with a 4.00 (Bad Request) response.
+
+* The payload of the response includes one link element for each specified parameter, with the exception of non-empty structured parameters.
+
+* Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
+
+* If the Administrator performs the registration of the group-membership resource, the names of the application groups using the OSCORE group MUST take the values possibly specified by the elements of the different 'app_group' link elements in the POST request.
+
+An example of message exchange is shown below.
+
+~~~~~~~~~~~
+=> 0.02 POST
+   Uri-Path: manage
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
+     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
+     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+      "rooms 1 and 2"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+
+<= 2.01 Created
+   Location-Path: manage
+   Location-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+~~~~~~~~~~~
 
 ## Retrieve a Group Configuration ## {#configuration-resource-get}
 
@@ -414,6 +556,14 @@ The following shared item table is used for compressing values of the rt= target
 +-------+--------------------------------------------------------+
 ~~~~~~~~~~~
 {: #fig-packed-cbor-table-2 title="Shared item table for compressing values of the rt= target attribute." artwork-align="center"}
+
+# Document Updates # {#sec-document-updates}
+
+RFC EDITOR: PLEASE REMOVE THIS SECTION.
+
+## Version -00 ## {#sec-00}
+
+* CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.
 
 # Acknowledgments # {#acknowledgment}
 {: numbered="no"}
