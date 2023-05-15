@@ -1655,7 +1655,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
 </li>
           <li class="normal" id="section-6.3-2.5">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-2.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-2.6">If the Administrator performs the registration of the group-membership resource, the names of the application groups using the OSCORE group MUST take the values possibly specified by the elements of the different 'app_group' link elements in the POST request.<a href="#section-6.3-2.6" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-2.6">If the Administrator performs the registration of the group-membership resource on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.<a href="#section-6.3-2.6" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-6.3-3">An example of message exchange is shown below.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
@@ -1704,7 +1704,66 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-retrieve-a-group-configurat">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-retrieve-a-group-configurat" class="section-name selfRef">Retrieve a Group Configuration</a>
         </h3>
-<p id="section-6.4-1">TBD<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.4" class="relref">Section 6.4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.4-2.1">The response payload includes one link element for each entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty status parameters.<a href="#section-6.4-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.4-2.2">Each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.<a href="#section-6.4-2.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-6.4-3">An example of message exchange is shown below.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.4-4">
+<pre>
+=&gt; 0.01 GET
+   Uri-Path: manage
+   Uri-Path: gp4
+
+&lt;= 2.05 Content
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
+     [2, 6(-27) / item 69 for core.osc.gconf:cred_fmt /, 33],
+     [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(28) / item 72 for core.osc.gconf:sign_alg /, -8],
+     [2, 6(29) / item 74 for
+      core.osc.gconf:sign_params.alg_capab.key_type /, 1],
+     [2, 6(-30) / item 75 for
+      core.osc.gconf:sign_params.key_type_capab.key_type /, 1],
+     [2, 6(30) / item 76 for
+      core.osc.gconf:sign_params.key_type_capab.curve /, 6],
+     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
+     [2, 6(31) / item 78 for core.osc.gconf:alg /, 10],
+     [2, 6(-32) / item 79 for core.osc.gconf:ecdh_alg /, -27],
+     [2, 6(-33) / item 81 for
+      core.osc.gconf:ecdh_params.alg_capab.key_type /, 1],
+     [2, 6(33) / item 82 for
+      core.osc.gconf:ecdh_params.key_type_capab.key_type /, 1],
+     [2, 6(-34) / item 83 for
+      core.osc.gconf:ecdh_params.key_type_capab.curve /, 6],
+     [2, 6(34) / item 84 for core.osc.gconf:det_req /, false],
+     [2, 6(35) / item 86 for core.osc.gconf:rt /, "core.osc.gconf"],
+     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+      "rooms 1 and 2"],
+     [2, 6(37) / item 90 for core.osc.gconf:ace_groupcomm_profile /,
+      "coap_group_oscore_app"],
+     [2, 6(-38) / item 91 for core.osc.gconf:max_stale_sets /, 3],
+     [2, 6(38) / item 92 for core.osc.gconf:exp /, 1360289224],
+     [2, 6(-39) / item 93 for core.osc.gconf:gid_reuse /, false],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"],
+     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+</pre><a href="#section-6.4-4" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="configuration-resource-fetch">
@@ -1712,7 +1771,54 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-retrieve-part-of-a-group-co">
 <a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-retrieve-part-of-a-group-co" class="section-name selfRef">Retrieve Part of a Group Configuration by Filters</a>
         </h3>
-<p id="section-6.5-1">TBD<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.5" class="relref">Section 6.5</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.5-2.1">The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>). All the specified link elements MUST have the link target with value "null".<a href="#section-6.5-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.5-2.2">The request payload MUST NOT include any link element corresponding to an inner information element of a structured parameter.<a href="#section-6.5-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.5-2.3">
+            <p id="section-6.5-2.3.1">The response payload includes the requested configuration parameters and status parameters, and is formatted as in the response payload of a GET request to a group-configuration resource (see <a href="#configuration-resource-get" class="auto internal xref">Section 6.4</a>).<a href="#section-6.5-2.3.1" class="pilcrow">¶</a></p>
+<p id="section-6.5-2.3.2">
+If the request payload specifies a parameter that is not included in the group configuration, then the response payload MUST NOT include a corresponding link element.<a href="#section-6.5-2.3.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-6.5-3">An example of message exchange is shown below.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.5-4">
+<pre>
+=&gt; 0.05 FETCH
+   Uri-Path: manage
+   Uri-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, null],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, null],
+     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, null],
+     [2, 6(-36) / item 87 for core.osc.gconf:active /, null],
+     [2, 6(-37) / item 89 for core.osc.gconf:group_title /, null],
+     [2, 6(41) / item 98 for core.osc.gconf:app_groups /, null]
+   ]
+
+&lt;= 2.05 Content
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
+     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
+     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
+     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+      "rooms 1 and 2"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"]
+   ]
+</pre><a href="#section-6.5-4" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="configuration-resource-put">
@@ -1720,13 +1826,46 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-overwrite-a-group-configura">
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-overwrite-a-group-configura" class="section-name selfRef">Overwrite a Group Configuration</a>
         </h3>
-<p id="section-6.6-1">TBD<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<p id="section-6.6-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.6" class="relref">Section 6.6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following difference.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.6-2.1">If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the PUT request.<a href="#section-6.6-2.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-6.6-3">An example of message exchange is shown below.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.6-4">
+<pre>
+=&gt; 0.03 PUT
+   Uri-Path: manage
+   Uri-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 11],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
+   ]
+
+&lt;= 2.04 Changed
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+</pre><a href="#section-6.6-4" class="pilcrow">¶</a>
+</div>
 <div id="sssec-effects-overwrite-joining-nodes">
 <section id="section-6.6.1">
           <h4 id="name-effects-on-joining-nodes">
 <a href="#section-6.6.1" class="section-number selfRef">6.6.1. </a><a href="#name-effects-on-joining-nodes" class="section-name selfRef">Effects on Joining Nodes</a>
           </h4>
-<p id="section-6.6.1-1">TBD<a href="#section-6.6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.6.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.6.1" class="relref">Section 6.6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sssec-effects-overwrite-group-members">
@@ -1734,7 +1873,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
           <h4 id="name-effects-on-the-group-member">
 <a href="#section-6.6.2" class="section-number selfRef">6.6.2. </a><a href="#name-effects-on-the-group-member" class="section-name selfRef">Effects on the Group Members</a>
           </h4>
-<p id="section-6.6.2-1">TBD<a href="#section-6.6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.6.2-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.6.2" class="relref">Section 6.6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.6.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1744,13 +1883,70 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-selective-update-of-a-group">
 <a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-selective-update-of-a-group" class="section-name selfRef">Selective Update of a Group Configuration</a>
         </h3>
-<p id="section-6.7-1">TBD<a href="#section-6.7-1" class="pilcrow">¶</a></p>
+<p id="section-6.7-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.7" class="relref">Section 6.7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.7-2.1">
+            <p id="section-6.7-2.1.1">If the request payload specifies names of application groups to be removed from or added to the 'app_groups' status parameter, then such names are specified by means of the following top-level link elements.<a href="#section-6.7-2.1.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.7-2.1.2.1">'app_group_del', with value a text string specifying the name of an application group to remove from the 'app_groups' status parameter. This link element can be included multiple times.<a href="#section-6.7-2.1.2.1" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-6.7-2.1.2.2">'app_group_add', with value a text string specifying the name of an application group to add to the 'app_groups' status parameter. This link element can be included multiple times.<a href="#section-6.7-2.1.2.2" class="pilcrow">¶</a>
+</li>
+            </ul>
+<p id="section-6.7-2.1.3">
+The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the request payload includes both any 'app_group' link element as well as any 'app_group_del' and/or 'app_group_add' link element.<a href="#section-6.7-2.1.3" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-6.7-2.2">The Group Manager MUST respond with a 4.00 (Bad Request) response, if the request payload includes no link elements.<a href="#section-6.7-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.7-2.3">When the request uses specifically the iPATCH method, the Group Manager MUST respond with a 4.00 (Bad Request) response, in case any link element 'app_group_del' and/or 'app_group_add' is included.<a href="#section-6.7-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.7-2.4">
+            <p id="section-6.7-2.4.1">When updating the 'app_groups' status parameter by difference, the Group Manager:<a href="#section-6.7-2.4.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.7-2.4.2.1">Deletes from the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_del' link elements.<a href="#section-6.7-2.4.2.1" class="pilcrow">¶</a>
+</li>
+              <li class="normal" id="section-6.7-2.4.2.2">Adds to the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_add' link elements.<a href="#section-6.7-2.4.2.2" class="pilcrow">¶</a>
+</li>
+            </ul>
+</li>
+        </ul>
+<p id="section-6.7-3">An example of message exchange is shown below.<a href="#section-6.7-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.7-4">
+<pre>
+=&gt; 0.06 PATCH
+   Uri-Path: manage
+   Uri-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(-40) / item 95 for core.osc.gconf:app_group_del /, "room1"],
+     [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room3"],
+     [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room4"]
+   ]
+
+&lt;= 2.04 Changed
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+</pre><a href="#section-6.7-4" class="pilcrow">¶</a>
+</div>
 <div id="effects-on-joining-nodes">
 <section id="section-6.7.1">
           <h4 id="name-effects-on-joining-nodes-2">
 <a href="#section-6.7.1" class="section-number selfRef">6.7.1. </a><a href="#name-effects-on-joining-nodes-2" class="section-name selfRef">Effects on Joining Nodes</a>
           </h4>
-<p id="section-6.7.1-1">TBD<a href="#section-6.7.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.7.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.7.1" class="relref">Section 6.7.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.7.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="effects-on-the-group-members">
@@ -1758,7 +1954,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
           <h4 id="name-effects-on-the-group-members">
 <a href="#section-6.7.2" class="section-number selfRef">6.7.2. </a><a href="#name-effects-on-the-group-members" class="section-name selfRef">Effects on the Group Members</a>
           </h4>
-<p id="section-6.7.2-1">TBD<a href="#section-6.7.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.7.2-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.7.2" class="relref">Section 6.7.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1768,13 +1964,13 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-delete-a-group-configuratio">
 <a href="#section-6.8" class="section-number selfRef">6.8. </a><a href="#name-delete-a-group-configuratio" class="section-name selfRef">Delete a Group Configuration</a>
         </h3>
-<p id="section-6.8-1">TBD<a href="#section-6.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.8-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.8" class="relref">Section 6.8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds<a href="#section-6.8-1" class="pilcrow">¶</a></p>
 <div id="effects-on-the-group-members-1">
 <section id="section-6.8.1">
           <h4 id="name-effects-on-the-group-members-2">
 <a href="#section-6.8.1" class="section-number selfRef">6.8.1. </a><a href="#name-effects-on-the-group-members-2" class="section-name selfRef">Effects on the Group Members</a>
           </h4>
-<p id="section-6.8.1-1">TBD<a href="#section-6.8.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.8.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.8.1" class="relref">Section 6.8.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds<a href="#section-6.8.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
