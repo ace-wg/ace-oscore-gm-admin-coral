@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 9 November 2023                                      8 May 2023
+Expires: 16 November 2023                                    15 May 2023
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 November 2023.
+   This Internet-Draft will expire on 16 November 2023.
 
 Copyright Notice
 
@@ -64,12 +64,41 @@ Table of Contents
    1.  Introduction
      1.1.  Terminology
      1.2.  Notation and Assumptions in the Examples
-   2.  TBD
-     2.1.  TBD
-   3.  IANA Considerations
-   4.  References
-     4.1.  Normative References
-     4.2.  Informative References
+   2.  Group Administration
+     2.1.  Managing OSCORE Groups
+     2.2.  Collection Representation
+     2.3.  Discovery
+   3.  Format of Scope
+     3.1.  On Using Group Name Patterns
+   4.  Getting Access to the Group Manager
+     4.1.  Multiple Administrators for the Same OSCORE Group
+   5.  Group Configurations
+     5.1.  Group Configuration Representation
+       5.1.1.  Configuration Properties
+       5.1.2.  Status Properties
+     5.2.  Default Values
+       5.2.1.  Configuration Parameters
+       5.2.2.  Status Parameters
+   6.  Interactions with the Group Manager
+     6.1.  Retrieve the Full List of Group Configurations
+     6.2.  Retrieve a List of Group Configurations by Filters
+     6.3.  Create a New Group Configuration
+     6.4.  Retrieve a Group Configuration
+     6.5.  Retrieve Part of a Group Configuration by Filters
+     6.6.  Overwrite a Group Configuration
+       6.6.1.  Effects on Joining Nodes
+       6.6.2.  Effects on the Group Members
+     6.7.  Selective Update of a Group Configuration
+       6.7.1.  Effects on Joining Nodes
+       6.7.2.  Effects on the Group Members
+     6.8.  Delete a Group Configuration
+       6.8.1.  Effects on the Group Members
+   7.  Supported Top-Level Elements
+   8.  Security Considerations
+   9.  IANA Considerations
+   10. References
+     10.1.  Normative References
+     10.2.  Informative References
    Appendix A.  Shared item tables for Packed CBOR
      A.1.  Compression of CoRAL predicates
      A.2.  Compression of Values of the rt= Target Attribute
@@ -196,19 +225,137 @@ Table of Contents
    [2001:db8::ab], and use the CoAP Content-Format ID 65087 for the
    media-type application/coral+cbor.
 
-2.  TBD
+2.  Group Administration
 
    TBD
 
-2.1.  TBD
+2.1.  Managing OSCORE Groups
 
-3.  IANA Considerations
+   TBD
+
+2.2.  Collection Representation
+
+   TBD
+
+2.3.  Discovery
+
+   TBD
+
+3.  Format of Scope
+
+   TBD
+
+3.1.  On Using Group Name Patterns
+
+   TBD
+
+4.  Getting Access to the Group Manager
+
+   TBD
+
+4.1.  Multiple Administrators for the Same OSCORE Group
+
+   TBD
+
+5.  Group Configurations
+
+   TBD
+
+5.1.  Group Configuration Representation
+
+   TBD
+
+5.1.1.  Configuration Properties
+
+   TBD
+
+5.1.2.  Status Properties
+
+   TBD
+
+5.2.  Default Values
+
+   TBD
+
+5.2.1.  Configuration Parameters
+
+   TBD
+
+5.2.2.  Status Parameters
+
+   TBD
+
+6.  Interactions with the Group Manager
+
+   TBD
+
+6.1.  Retrieve the Full List of Group Configurations
+
+   TBD
+
+6.2.  Retrieve a List of Group Configurations by Filters
+
+   TBD
+
+6.3.  Create a New Group Configuration
+
+   TBD
+
+6.4.  Retrieve a Group Configuration
+
+   TBD
+
+6.5.  Retrieve Part of a Group Configuration by Filters
+
+   TBD
+
+6.6.  Overwrite a Group Configuration
+
+   TBD
+
+6.6.1.  Effects on Joining Nodes
+
+   TBD
+
+6.6.2.  Effects on the Group Members
+
+   TBD
+
+6.7.  Selective Update of a Group Configuration
+
+   TBD
+
+6.7.1.  Effects on Joining Nodes
+
+   TBD
+
+6.7.2.  Effects on the Group Members
+
+   TBD
+
+6.8.  Delete a Group Configuration
+
+   TBD
+
+6.8.1.  Effects on the Group Members
+
+   TBD
+
+7.  Supported Top-Level Elements
+
+   TBD
+
+8.  Security Considerations
+
+   TBD
+
+9.  IANA Considerations
 
    This document has no actions for IANA.
 
-4.  References
+10.  References
 
-4.1.  Normative References
+10.1.  Normative References
 
    [CURIE-20101216]
               Birbeck, M. and S. McCarron, "CURIE Syntax 1.0 - A syntax
@@ -362,7 +509,7 @@ Table of Contents
               Environments (ACE)", RFC 9237, DOI 10.17487/RFC9237,
               August 2022, <https://www.rfc-editor.org/rfc/rfc9237>.
 
-4.2.  Informative References
+10.2.  Informative References
 
    [I-D.hartke-t2trg-coral-reef]
               Hartke, K., "Resource Discovery in Constrained RESTful
