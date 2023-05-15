@@ -344,7 +344,7 @@ The same as defined in {{Section 6.3 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
 
-* If the Administrator performs the registration of the group-membership resource, the names of the application groups using the OSCORE group MUST take the values possibly specified by the elements of the different 'app_group' link elements in the POST request.
+* If the Administrator performs the registration of the group-membership resource on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.
 
 An example of message exchange is shown below.
 
@@ -387,43 +387,224 @@ An example of message exchange is shown below.
 
 ## Retrieve a Group Configuration ## {#configuration-resource-get}
 
-TBD
+The same as defined in {{Section 6.4 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
+
+* The response payload includes one link element for each entry of the group configuration (see {{config-repr}}), with the exception of non-empty status parameters.
+
+* Each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.
+
+An example of message exchange is shown below.
+
+~~~~~~~~~~~
+=> 0.01 GET
+   Uri-Path: manage
+   Uri-Path: gp4
+
+<= 2.05 Content
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
+     [2, 6(-27) / item 69 for core.osc.gconf:cred_fmt /, 33],
+     [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(28) / item 72 for core.osc.gconf:sign_alg /, -8],
+     [2, 6(29) / item 74 for
+      core.osc.gconf:sign_params.alg_capab.key_type /, 1],
+     [2, 6(-30) / item 75 for
+      core.osc.gconf:sign_params.key_type_capab.key_type /, 1],
+     [2, 6(30) / item 76 for
+      core.osc.gconf:sign_params.key_type_capab.curve /, 6],
+     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
+     [2, 6(31) / item 78 for core.osc.gconf:alg /, 10],
+     [2, 6(-32) / item 79 for core.osc.gconf:ecdh_alg /, -27],
+     [2, 6(-33) / item 81 for
+      core.osc.gconf:ecdh_params.alg_capab.key_type /, 1],
+     [2, 6(33) / item 82 for
+      core.osc.gconf:ecdh_params.key_type_capab.key_type /, 1],
+     [2, 6(-34) / item 83 for
+      core.osc.gconf:ecdh_params.key_type_capab.curve /, 6],
+     [2, 6(34) / item 84 for core.osc.gconf:det_req /, false],
+     [2, 6(35) / item 86 for core.osc.gconf:rt /, "core.osc.gconf"],
+     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+      "rooms 1 and 2"],
+     [2, 6(37) / item 90 for core.osc.gconf:ace_groupcomm_profile /,
+      "coap_group_oscore_app"],
+     [2, 6(-38) / item 91 for core.osc.gconf:max_stale_sets /, 3],
+     [2, 6(38) / item 92 for core.osc.gconf:exp /, 1360289224],
+     [2, 6(-39) / item 93 for core.osc.gconf:gid_reuse /, false],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"],
+     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+~~~~~~~~~~~
 
 ## Retrieve Part of a Group Configuration by Filters ## {#configuration-resource-fetch}
 
-TBD
+The same as defined in {{Section 6.5 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
+
+* The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see {{config-repr}}). All the specified link elements MUST have the link target with value "null".
+
+* The request payload MUST NOT include any link element corresponding to an inner information element of a structured parameter.
+
+* The response payload includes the requested configuration parameters and status parameters, and is formatted as in the response payload of a GET request to a group-configuration resource (see {{configuration-resource-get}}).
+
+   If the request payload specifies a parameter that is not included in the group configuration, then the response payload MUST NOT include a corresponding link element.
+
+An example of message exchange is shown below.
+
+~~~~~~~~~~~
+=> 0.05 FETCH
+   Uri-Path: manage
+   Uri-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, null],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, null],
+     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, null],
+     [2, 6(-36) / item 87 for core.osc.gconf:active /, null],
+     [2, 6(-37) / item 89 for core.osc.gconf:group_title /, null],
+     [2, 6(41) / item 98 for core.osc.gconf:app_groups /, null]
+   ]
+
+<= 2.05 Content
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
+     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
+     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
+     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+      "rooms 1 and 2"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"]
+   ]
+~~~~~~~~~~~
 
 ## Overwrite a Group Configuration ## {#configuration-resource-put}
 
-TBD
+The same as defined in {{Section 6.6 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following difference.
+
+* If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the PUT request.
+
+An example of message exchange is shown below.
+
+~~~~~~~~~~~
+=> 0.03 PUT
+   Uri-Path: manage
+   Uri-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 11],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
+   ]
+
+<= 2.04 Changed
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+~~~~~~~~~~~
 
 ### Effects on Joining Nodes ### {#sssec-effects-overwrite-joining-nodes}
 
-TBD
+The same as defined in {{Section 6.6.1 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 ### Effects on the Group Members ### {#sssec-effects-overwrite-group-members}
 
-TBD
+The same as defined in {{Section 6.6.2 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 ## Selective Update of a Group Configuration ## {#configuration-resource-patch}
 
-TBD
+The same as defined in {{Section 6.7 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
+
+* If the request payload specifies names of application groups to be removed from or added to the 'app_groups' status parameter, then such names are specified by means of the following top-level link elements.
+
+   - 'app_group_del', with value a text string specifying the name of an application group to remove from the 'app_groups' status parameter. This link element can be included multiple times.
+
+   - 'app_group_add', with value a text string specifying the name of an application group to add to the 'app_groups' status parameter. This link element can be included multiple times.
+
+   The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the request payload includes both any 'app_group' link element as well as any 'app_group_del' and/or 'app_group_add' link element.
+
+* The Group Manager MUST respond with a 4.00 (Bad Request) response, if the request payload includes no link elements.
+
+* When the request uses specifically the iPATCH method, the Group Manager MUST respond with a 4.00 (Bad Request) response, in case any link element 'app_group_del' and/or 'app_group_add' is included.
+
+* When updating the 'app_groups' status parameter by difference, the Group Manager:
+
+   - Deletes from the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_del' link elements.
+
+   - Adds to the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_add' link elements.
+
+An example of message exchange is shown below.
+
+~~~~~~~~~~~
+=> 0.06 PATCH
+   Uri-Path: manage
+   Uri-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(-40) / item 95 for core.osc.gconf:app_group_del /, "room1"],
+     [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room3"],
+     [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room4"]
+   ]
+
+<= 2.04 Changed
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+~~~~~~~~~~~
 
 ### Effects on Joining Nodes ###
 
-TBD
+The same as defined in {{Section 6.7.1 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 ### Effects on the Group Members ###
 
-TBD
+The same as defined in {{Section 6.7.2 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 ## Delete a Group Configuration ## {#configuration-resource-delete}
 
-TBD
+The same as defined in {{Section 6.8 of I-D.ietf-ace-oscore-gm-admin}} holds
 
 ### Effects on the Group Members ###
 
-TBD
+The same as defined in {{Section 6.8.1 of I-D.ietf-ace-oscore-gm-admin}} holds
 
 # Supported Top-Level Elements
 
