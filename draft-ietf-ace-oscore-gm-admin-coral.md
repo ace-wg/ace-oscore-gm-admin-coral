@@ -167,11 +167,129 @@ Packed CBOR {{I-D.ietf-cbor-packed}} is also used, thus reducing representation 
 
 Finally, the examples consider a Group Manager with address \[2001:db8::ab\], and use the CoAP Content-Format ID 65087 for the media-type application/coral+cbor.
 
-# TBD
+# Group Administration # {#overview}
 
 TBD
 
-## TBD
+## Managing OSCORE Groups ## {#managing-groups}
+
+TBD
+
+## Collection Representation
+
+TBD
+
+## Discovery
+
+TBD
+
+# Format of Scope # {#scope-format}
+
+TBD
+
+## On Using Group Name Patterns
+
+TBD
+
+# Getting Access to the Group Manager # {#getting-access}
+
+TBD
+
+## Multiple Administrators for the Same OSCORE Group
+
+TBD
+
+# Group Configurations # {#group-configurations}
+
+TBD
+
+## Group Configuration Representation ## {#config-repr}
+
+TBD
+
+### Configuration Properties ### {#config-repr-config-properties}
+
+TBD
+
+### Status Properties ### {#config-repr-status-properties}
+
+TBD
+
+## Default Values {#default-values}
+
+TBD
+
+### Configuration Parameters {#default-values-conf}
+
+TBD
+
+### Status Parameters
+
+TBD
+
+# Interactions with the Group Manager # {#interactions}
+
+TBD
+
+## Retrieve the Full List of Group Configurations ## {#collection-resource-get}
+
+TBD
+
+## Retrieve a List of Group Configurations by Filters ## {#collection-resource-fetch}
+
+TBD
+
+## Create a New Group Configuration ## {#collection-resource-post}
+
+TBD
+
+## Retrieve a Group Configuration ## {#configuration-resource-get}
+
+TBD
+
+## Retrieve Part of a Group Configuration by Filters ## {#configuration-resource-fetch}
+
+TBD
+
+## Overwrite a Group Configuration ## {#configuration-resource-put}
+
+TBD
+
+### Effects on Joining Nodes ### {#sssec-effects-overwrite-joining-nodes}
+
+TBD
+
+### Effects on the Group Members ### {#sssec-effects-overwrite-group-members}
+
+TBD
+
+## Selective Update of a Group Configuration ## {#configuration-resource-patch}
+
+TBD
+
+### Effects on Joining Nodes ###
+
+TBD
+
+### Effects on the Group Members ###
+
+TBD
+
+## Delete a Group Configuration ## {#configuration-resource-delete}
+
+TBD
+
+### Effects on the Group Members ###
+
+TBD
+
+# Supported Top-Level Elements
+
+TBD
+
+# Security Considerations # {#sec-security-considerations}
+
+TBD
 
 # IANA Considerations # {#iana}
 
