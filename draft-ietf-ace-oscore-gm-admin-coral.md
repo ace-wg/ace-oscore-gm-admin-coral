@@ -289,7 +289,11 @@ TBD
 
 # Security Considerations # {#sec-security-considerations}
 
-TBD
+Security considerations are inherited from the ACE framework for Authentication and Authorization {{RFC9200}}, and from the specific transport profile of ACE used between the Administrator and the Group Manager, such as {{RFC9202}} and {{RFC9203}}.
+
+The same security considerations from {{I-D.ietf-ace-key-groupcomm}} and {{I-D.ietf-ace-key-groupcomm-oscore}} also apply, with particular reference to the process of rekeying OSCORE groups.
+
+The same security considerations from {{I-D.ietf-ace-oscore-gm-admin}} also apply, as well for the security considerations for CoRAL {{I-D.ietf-core-coral}} and Packed CBOR {{I-D.ietf-cbor-packed}}.
 
 # IANA Considerations # {#iana}
 
