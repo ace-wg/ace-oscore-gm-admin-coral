@@ -1297,10 +1297,18 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-document-updates" class="internal xref">Document Updates</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
+                <p id="section-toc.1-1.12.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-version-00" class="internal xref">Version -00</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1514,13 +1522,64 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
       <h2 id="name-interactions-with-the-group">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-interactions-with-the-group" class="section-name selfRef">Interactions with the Group Manager</a>
       </h2>
-<p id="section-6-1">TBD<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6-2.1">The Content-Format in messages containing a payload is set to application/coral+cbor, defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-coral-05#section-7.2" class="relref">Section 7.2</a> of [<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>.<a href="#section-6-2.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-6-2.2">The parameters 'sign_params', 'ecdh_params', 'app_groups' and 'group_policies' are referred to as "structured parameters".<a href="#section-6-2.2" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-6-2.3">
+          <p id="section-6-2.3.1">If a message payload specifies a link element corresponding to a structured parameter, then:<a href="#section-6-2.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6-2.3.2.1">The payload MUST NOT include any link element corresponding to an inner information element of that structured parameter.<a href="#section-6-2.3.2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-6-2.3.2.2">
+              <p id="section-6-2.3.2.2.1">The link element MUST have the link target with value "false" (0xf4) for indicating the structured parameter with no elements.<a href="#section-6-2.3.2.2.1" class="pilcrow">¶</a></p>
+<p id="section-6-2.3.2.2.2">
+Editor's note: this should change to using an empty CBOR array or an empty CBOR map as appropriate, once this is made explicitly possible in the binary format of link items in CoRAL (see Section 3.1.4 of <span>[<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>).<a href="#section-6-2.3.2.2.2" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</li>
+        <li class="normal" id="section-6-2.4">If a message payload specifies an information element of a structured parameter from the group configuration, then that information element MUST be specified by means of the corresponding link element.<a href="#section-6-2.4" class="pilcrow">¶</a>
+</li>
+      </ul>
 <div id="collection-resource-get">
 <section id="section-6.1">
         <h3 id="name-retrieve-the-full-list-of-g">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-retrieve-the-full-list-of-g" class="section-name selfRef">Retrieve the Full List of Group Configurations</a>
         </h3>
-<p id="section-6.1-1">TBD<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.1" class="relref">Section 6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">An example of message exchange is shown below.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.1-3">
+<pre>
+=&gt; 0.01 GET
+   Uri-Path: manage
+
+&lt;= 2.05 Content
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [1, cri'coap://[2001:db8::ab]/manage'],
+     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp1', [
+       [2, simple(6) / item 6 for linkformat:rt /,
+        6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                   /linkformat/rt/core.osc.gconf' /]
+     ]],
+     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp2', [
+       [2, simple(6) / item 6 for linkformat:rt /,
+        6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                   /linkformat/rt/core.osc.gconf' /]
+     ]],
+     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp3', [
+       [2, simple(6) / item 6 for linkformat:rt /,
+        6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                   /linkformat/rt/core.osc.gconf' /]
+     ]]
+   ]
+</pre><a href="#section-6.1-3" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="collection-resource-fetch">
@@ -1528,7 +1587,55 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
         <h3 id="name-retrieve-a-list-of-group-co">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-retrieve-a-list-of-group-co" class="section-name selfRef">Retrieve a List of Group Configurations by Filters</a>
         </h3>
-<p id="section-6.2-1">TBD<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.2" class="relref">Section 6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2-2.1">The filter criteria are specified in the request payload with top-level link elements, each of which corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.2-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.2-2.2">If names of application groups are used as filter criteria, each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.<a href="#section-6.2-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.2-2.3">With the exception of the 'app_group' element, a valid request MUST NOT include the same element multiple times. Element values are the ones admitted for the corresponding labels in the POST request for creating a group configuration (see <a href="#collection-resource-post" class="auto internal xref">Section 6.3</a>).<a href="#section-6.2-2.3" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-6.2-3">An example of message exchange is shown below.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2-4">
+<pre>
+=&gt; 0.05 FETCH
+   Uri-Path: manage
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
+   ]
+
+&lt;= 2.05 Content
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+    [1, cri'coap://[2001:db8::ab]/manage'],
+    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp1', [
+      [2, simple(6) / item 6 for linkformat:rt /,
+       6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                  /linkformat/rt/core.osc.gconf' /]
+    ]],
+    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp2', [
+      [2, simple(6) / item 6 for linkformat:rt /,
+       6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                  /linkformat/rt/core.osc.gconf' /]
+    ]],
+    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp3', [
+      [2, simple(6) / item 6 for linkformat:rt /,
+       6(-200) / item 415 for cri'http://www.iana.org/assignments
+                                  /linkformat/rt/core.osc.gconf' /]
+    ]]
+   ]
+</pre><a href="#section-6.2-4" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="collection-resource-post">
@@ -1536,7 +1643,60 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
         <h3 id="name-create-a-new-group-configur">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-create-a-new-group-configur" class="section-name selfRef">Create a New Group Configuration</a>
         </h3>
-<p id="section-6.3-1">TBD<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.3" class="relref">Section 6.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.3-2.1">Each link element of the request payload corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.3-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.3-2.2">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-2.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.3-2.3">If the payload of the POST request specifies the 'app_group' link element multiple times, then the Group Manager MUST NOT respond with a 4.00 (Bad Request) response.<a href="#section-6.3-2.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.3-2.4">The payload of the response includes one link element for each specified parameter, with the exception of non-empty structured parameters.<a href="#section-6.3-2.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.3-2.5">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-2.5" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-6.3-2.6">If the Administrator performs the registration of the group-membership resource, the names of the application groups using the OSCORE group MUST take the values possibly specified by the elements of the different 'app_group' link elements in the POST request.<a href="#section-6.3-2.6" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-6.3-3">An example of message exchange is shown below.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-4">
+<pre>
+=&gt; 0.02 POST
+   Uri-Path: manage
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
+     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
+     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+      "rooms 1 and 2"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+
+&lt;= 2.01 Created
+   Location-Path: manage
+   Location-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
+
+   Payload:
+
+   [
+     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+      cri'coap://as.example.com/token']
+   ]
+</pre><a href="#section-6.3-4" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="configuration-resource-get">
@@ -1935,17 +2095,36 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
 </div>
 </section>
 </div>
-<div id="acknowledgment">
+<div id="sec-document-updates">
 <section id="appendix-B">
+      <h2 id="name-document-updates">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-document-updates" class="section-name selfRef">Document Updates</a>
+      </h2>
+<p id="appendix-B-1">RFC EDITOR: PLEASE REMOVE THIS SECTION.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<div id="sec-00">
+<section id="appendix-B.1">
+        <h3 id="name-version-00">
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-version-00" class="section-name selfRef">Version -00</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.1-1.1">CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.<a href="#appendix-B.1-1.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgment">
+<section id="appendix-C">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-B-1">Most of the content in this document was originally specified in draft-ietf-ace-oscore-gm-admin, which is co-authored also by Peter van der Stok and Francesca Palombini, and where Klaus Hartke contributed in the initial definition of the resource model and interactions using CoRAL.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">The authors sincerely thank <span class="contact-name">Christian Amsüss</span>, <span class="contact-name">Carsten Bormann</span> and <span class="contact-name">Jim Schaad</span> for their comments and feedback. The work on this document has been partly supported by VINNOVA and the Celtic-Next project CRITISEC; and by the H2020 project SIFIS-Home (Grant agreement 952652).<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-C-1">Most of the content in this document was originally specified in draft-ietf-ace-oscore-gm-admin, which is co-authored also by Peter van der Stok and Francesca Palombini, and where Klaus Hartke contributed in the initial definition of the resource model and interactions using CoRAL.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-2">The authors sincerely thank <span class="contact-name">Christian Amsüss</span>, <span class="contact-name">Carsten Bormann</span> and <span class="contact-name">Jim Schaad</span> for their comments and feedback. The work on this document has been partly supported by VINNOVA and the Celtic-Next project CRITISEC; and by the H2020 project SIFIS-Home (Grant agreement 952652).<a href="#appendix-C-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-C">
+<section id="appendix-D">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
