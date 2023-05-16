@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 16 November 2023</td>
+<td class="center">Expires 17 November 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-ace-oscore-gm-admin-coral-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-05-15" class="published">15 May 2023</time>
+<time datetime="2023-05-16" class="published">16 May 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-11-16">16 November 2023</time></dd>
+<dd class="expires"><time datetime="2023-11-17">17 November 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1118,7 +1118,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 November 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 November 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1266,7 +1266,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-supported-top-level-element" class="internal xref">Supported Top-Level Elements</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-support-of-top-level-link-e" class="internal xref">Support of Top-Level Link Elements</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1977,12 +1977,35 @@ The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the r
 </div>
 </section>
 </div>
-<div id="supported-top-level-elements">
+<div id="support-of-top-level-link-elements">
 <section id="section-7">
-      <h2 id="name-supported-top-level-element">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-supported-top-level-element" class="section-name selfRef">Supported Top-Level Elements</a>
+      <h2 id="name-support-of-top-level-link-e">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-support-of-top-level-link-e" class="section-name selfRef">Support of Top-Level Link Elements</a>
       </h2>
-<p id="section-7-1">TBD<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">Consistently with Sections <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-7" class="relref">7</a> and <a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-8" class="relref">8</a> of <span>[<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, the following holds for the Group Manager.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-2.1">
+          <p id="section-7-2.1.1">It MUST support the top-level link elements 'error', 'error_description', 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-16#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-ace-key-groupcomm" class="cite xref">I-D.ietf-ace-key-groupcomm</a>]</span>.<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
+<p id="section-7-2.1.2">
+This is consistent with what is defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-16#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-ace-key-groupcomm" class="cite xref">I-D.ietf-ace-key-groupcomm</a>]</span> for the Key Distribution Center, of which the Group Manager defined in <span>[<a href="#I-D.ietf-ace-key-groupcomm-oscore" class="cite xref">I-D.ietf-ace-key-groupcomm-oscore</a>]</span> is a specific instance.<a href="#section-7-2.1.2" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-7-2.2">It MUST support the top-level link elements corresponding to all the parameters listed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with the exception of 'app_groups_diff' that MUST be supported only if the Group Manager supports the selective update of a group configuration (see <a href="#configuration-resource-patch" class="auto internal xref">Section 6.7</a>).<a href="#section-7-2.2" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="section-7-3">The following holds for an Administrator.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-4.1">It MUST support the top-level link elements 'error', 'error_description', 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-16#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-ace-key-groupcomm" class="cite xref">I-D.ietf-ace-key-groupcomm</a>]</span>.<a href="#section-7-4.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-7-4.2">
+          <p id="section-7-4.2.1">It MUST support the top-level link elements corresponding to all the parameters listed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with the following exceptions.<a href="#section-7-4.2.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7-4.2.2.1">'conf_filter', which MUST be supported only if the Administrator supports the partial retrieval of a group configuration by filters (see <a href="#configuration-resource-fetch" class="auto internal xref">Section 6.5</a>).<a href="#section-7-4.2.2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-7-4.2.2.2">'app_groups_diff' parameter, which MUST be supported only if the Administrator supports the selective update of a group configuration (see <a href="#configuration-resource-patch" class="auto internal xref">Section 6.7</a>).<a href="#section-7-4.2.2.2" class="pilcrow">¶</a>
+</li>
+          </ul>
+</li>
+      </ul>
 </section>
 </div>
 <div id="sec-security-considerations">
