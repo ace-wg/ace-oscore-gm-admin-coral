@@ -1405,13 +1405,14 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
       <h2 id="name-group-administration">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-group-administration" class="section-name selfRef">Group Administration</a>
       </h2>
-<p id="section-2-1">TBD<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">The group administration is enforced as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-2" class="relref">Section 2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div id="managing-groups">
 <section id="section-2.1">
         <h3 id="name-managing-oscore-groups">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-managing-oscore-groups" class="section-name selfRef">Managing OSCORE Groups</a>
         </h3>
-<p id="section-2.1-1">TBD<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">The same resource model defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-2.1" class="relref">Section 2.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> as based on a group-collection resource and multiple group-configuration resources is used in this document.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">When accessing such resources, the Administrator relies on the same interface defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, for which differences that apply when using CoRAL are compiled in <a href="#interactions" class="auto internal xref">Section 6</a> of this document.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="collection-representation">
@@ -1419,7 +1420,8 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
         <h3 id="name-collection-representation">
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-collection-representation" class="section-name selfRef">Collection Representation</a>
         </h3>
-<p id="section-2.2-1">TBD<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">A list of group configurations is represented as a CoRAL document, which contains the list of corresponding group-configuration resources.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">Each group configuration resource is represented as a top-level link element, with the URI of the group-configuration resource as link target, and with http://coreapps.org/core.osc.gcoll#item as relation type.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="discovery">
