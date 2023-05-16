@@ -626,7 +626,7 @@ The following holds for an Administrator.
 
    - 'app_groups_diff' parameter, which MUST be supported only if the Administrator supports the selective update of a group configuration (see {{configuration-resource-patch}}).
 
-# Support of Error Identifiers
+# Error Identifiers
 
 If the Group Manager sends an error response including the link element 'error', this can specify any of the values defined in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}}.
 
