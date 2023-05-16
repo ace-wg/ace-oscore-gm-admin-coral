@@ -94,11 +94,12 @@ Table of Contents
      6.8.  Delete a Group Configuration
        6.8.1.  Effects on the Group Members
    7.  Support of Top-Level Link Elements
-   8.  Security Considerations
-   9.  IANA Considerations
-   10. References
-     10.1.  Normative References
-     10.2.  Informative References
+   8.  Support of Error Identifiers
+   9.  Security Considerations
+   10. IANA Considerations
+   11. References
+     11.1.  Normative References
+     11.2.  Informative References
    Appendix A.  Shared item tables for Packed CBOR
      A.1.  Compression of CoRAL predicates
      A.2.  Compression of Values of the rt= Target Attribute
@@ -737,8 +738,8 @@ Table of Contents
 
 7.  Support of Top-Level Link Elements
 
-   Consistently with Sections 7 and 8 of [I-D.ietf-ace-oscore-gm-admin],
-   the following holds for the Group Manager.
+   Consistently with Section 7 of [I-D.ietf-ace-oscore-gm-admin], the
+   following holds for the Group Manager.
 
    *  It MUST support the top-level link elements 'error',
       'error_description', 'ace_groupcomm_profile', 'exp', and
@@ -776,7 +777,16 @@ Table of Contents
          the Administrator supports the selective update of a group
          configuration (see Section 6.7).
 
-8.  Security Considerations
+8.  Support of Error Identifiers
+
+   If the Group Manager sends an error response including the link
+   element 'error', this can specify any of the values defined in
+   Section 8 of [I-D.ietf-ace-oscore-gm-admin].
+
+   The same guidelines in Section 8 of [I-D.ietf-ace-oscore-gm-admin]
+   for the Administrator to handle such error identifiers holds.
+
+9.  Security Considerations
 
    Security considerations are inherited from the ACE framework for
    Authentication and Authorization [RFC9200], and from the specific
@@ -791,13 +801,13 @@ Table of Contents
    also apply, as well for the security considerations for CoRAL
    [I-D.ietf-core-coral] and Packed CBOR [I-D.ietf-cbor-packed].
 
-9.  IANA Considerations
+10.  IANA Considerations
 
    This document has no actions for IANA.
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [CURIE-20101216]
               Birbeck, M. and S. McCarron, "CURIE Syntax 1.0 - A syntax
@@ -951,7 +961,7 @@ Table of Contents
               Environments (ACE)", RFC 9237, DOI 10.17487/RFC9237,
               August 2022, <https://www.rfc-editor.org/rfc/rfc9237>.
 
-10.2.  Informative References
+11.2.  Informative References
 
    [I-D.hartke-t2trg-coral-reef]
               Hartke, K., "Resource Discovery in Constrained RESTful
