@@ -606,9 +606,25 @@ The same as defined in {{Section 6.8 of I-D.ietf-ace-oscore-gm-admin}} holds
 
 The same as defined in {{Section 6.8.1 of I-D.ietf-ace-oscore-gm-admin}} holds
 
-# Supported Top-Level Elements
+# Support of Top-Level Link Elements
 
-TBD
+Consistently with {{Sections 7 and 8 of I-D.ietf-ace-oscore-gm-admin}}, the following holds for the Group Manager.
+
+* It MUST support the top-level link elements 'error', 'error_description', 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
+
+   This is consistent with what is defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}} for the Key Distribution Center, of which the Group Manager defined in {{I-D.ietf-ace-key-groupcomm-oscore}} is a specific instance.
+
+* It MUST support the top-level link elements corresponding to all the parameters listed in {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, with the exception of 'app_groups_diff' that MUST be supported only if the Group Manager supports the selective update of a group configuration (see {{configuration-resource-patch}}).
+
+The following holds for an Administrator.
+
+* It MUST support the top-level link elements 'error', 'error_description', 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
+
+* It MUST support the top-level link elements corresponding to all the parameters listed in {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, with the following exceptions.
+
+   - 'conf_filter', which MUST be supported only if the Administrator supports the partial retrieval of a group configuration by filters (see {{configuration-resource-fetch}}).
+
+   - 'app_groups_diff' parameter, which MUST be supported only if the Administrator supports the selective update of a group configuration (see {{configuration-resource-patch}}).
 
 # Security Considerations # {#sec-security-considerations}
 
