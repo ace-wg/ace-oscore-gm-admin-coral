@@ -94,7 +94,7 @@ Table of Contents
      6.8.  Delete a Group Configuration
        6.8.1.  Effects on the Group Members
    7.  Support of Top-Level Link Elements
-   8.  Support of Error Identifiers
+   8.  Error Identifiers
    9.  Security Considerations
    10. IANA Considerations
    11. References
@@ -777,7 +777,7 @@ Table of Contents
          the Administrator supports the selective update of a group
          configuration (see Section 6.7).
 
-8.  Support of Error Identifiers
+8.  Error Identifiers
 
    If the Group Manager sends an error response including the link
    element 'error', this can specify any of the values defined in
