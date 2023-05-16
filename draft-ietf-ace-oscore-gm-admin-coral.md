@@ -169,15 +169,19 @@ Finally, the examples consider a Group Manager with address \[2001:db8::ab\], an
 
 # Group Administration # {#overview}
 
-TBD
+The group administration is enforced as defined in {{Section 2 of I-D.ietf-ace-oscore-gm-admin}}.
 
 ## Managing OSCORE Groups ## {#managing-groups}
 
-TBD
+The same resource model defined in {{Section 2.1 of I-D.ietf-ace-oscore-gm-admin}} as based on a group-collection resource and multiple group-configuration resources is used in this document.
+
+When accessing such resources, the Administrator relies on the same interface defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}}, for which differences that apply when using CoRAL are compiled in {{interactions}} of this document.
 
 ## Collection Representation
 
-TBD
+A list of group configurations is represented as a CoRAL document, which contains the list of corresponding group-configuration resources.
+
+Each group configuration resource is represented as a top-level link element, with the URI of the group-configuration resource as link target, and with http://coreapps.org/core.osc.gcoll#item as relation type.
 
 ## Discovery
 
