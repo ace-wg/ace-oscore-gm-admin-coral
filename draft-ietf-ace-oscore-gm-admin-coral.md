@@ -179,9 +179,9 @@ When accessing such resources, the Administrator relies on the same interface de
 
 ## Collection Representation
 
-A list of group configurations is represented as a CoRAL document, which contains the list of corresponding group-configuration resources.
+A list of group configurations is represented as a CoRAL document containing the list of corresponding group-configuration resources.
 
-Each group configuration resource is represented as a top-level link element, with the URI of the group-configuration resource as link target, and with http://coreapps.org/core.osc.gcoll#item as relation type.
+Each group configuration is represented as a top-level link element, with the URI of the group-configuration resource as link target, and with http://coreapps.org/core.osc.gcoll#item as relation type.
 
 ## Discovery
 
