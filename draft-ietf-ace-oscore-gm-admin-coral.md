@@ -608,7 +608,7 @@ The same as defined in {{Section 6.8.1 of I-D.ietf-ace-oscore-gm-admin}} holds
 
 # Support of Top-Level Link Elements
 
-Consistently with {{Sections 7 and 8 of I-D.ietf-ace-oscore-gm-admin}}, the following holds for the Group Manager.
+Consistently with {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, the following holds for the Group Manager.
 
 * It MUST support the top-level link elements 'error', 'error_description', 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
 
@@ -625,6 +625,12 @@ The following holds for an Administrator.
    - 'conf_filter', which MUST be supported only if the Administrator supports the partial retrieval of a group configuration by filters (see {{configuration-resource-fetch}}).
 
    - 'app_groups_diff' parameter, which MUST be supported only if the Administrator supports the selective update of a group configuration (see {{configuration-resource-patch}}).
+
+# Support of Error Identifiers
+
+If the Group Manager sends an error response including the link element 'error', this can specify any of the values defined in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}}.
+
+The same guidelines in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}} for the Administrator to handle such error identifiers holds.
 
 # Security Considerations # {#sec-security-considerations}
 
