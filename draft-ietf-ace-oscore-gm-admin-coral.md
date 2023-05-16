@@ -185,7 +185,9 @@ Each group configuration is represented as a top-level link element, with the UR
 
 ## Discovery
 
-TBD
+The Administrator can discover the group-collection resource from a Resource Directory (see, for instance {{I-D.hartke-t2trg-coral-reef}}) or from .well-known/core, by using the resource type "core.osc.gcoll" defined in {{Section 10.3 of I-D.ietf-ace-oscore-gm-admin}}.
+
+The Administrator can discover group-configuration resources for the group-collection resource as specified in {{collection-resource-get}} and {{collection-resource-fetch}}.
 
 # Format of Scope # {#scope-format}
 
