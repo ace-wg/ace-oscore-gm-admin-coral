@@ -1347,8 +1347,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <li class="normal" id="section-1.1-3.6">The management of keying material for groups in ACE <span>[<a href="#I-D.ietf-ace-key-groupcomm" class="cite xref">I-D.ietf-ace-key-groupcomm</a>]</span> and specifically for OSCORE groups <span>[<a href="#I-D.ietf-ace-key-groupcomm-oscore" class="cite xref">I-D.ietf-ace-key-groupcomm-oscore</a>]</span>. These include the concept of group-membership resource hosted by the Group Manager, that new members access to join the OSCORE group, while current members can access to retrieve updated keying material.<a href="#section-1.1-3.6" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-1.1-4">Readers are also expected to be familiar with the terms and concepts used in <span>[<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, wih particular reference to: "Administrator", "Group name", "Group-collection resource", "Group-configuration resource", and "Admin endpoint".<a href="#section-1.1-4" class="pilcrow">¶</a></p>
-<p id="section-1.1-5">Note that, unless otherwise indicated, the term "endpoint" is used here following its OAuth definition, aimed at denoting resources such as /token and /introspect at the AS, and /authz-info at the RS. This document does not use the CoAP definition of "endpoint", which is "An entity participating in the CoAP protocol".<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">Readers are also expected to be familiar with the terms and concepts used in <span>[<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with particular reference to: "Administrator", "Group name", "Group-collection resource", "Group-configuration resource", and "Admin endpoint".<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+<p id="section-1.1-5">Like in <span>[<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, the url-path to a group-configuration resource has GROUPNAME as last segment, with GROUPNAME the invariant group name assigned upon its creation. Building on the considered url-path of the group-collection resource, this document uses /manage/GROUPNAME as the url-path of a group-configuration resource; implementations are not required to use this name, and can define their own instead.<a href="#section-1.1-5" class="pilcrow">¶</a></p>
+<p id="section-1.1-6">Note that, unless otherwise indicated, the term "endpoint" is used here following its OAuth definition, aimed at denoting resources such as /token and /introspect at the AS, and /authz-info at the RS. This document does not use the CoAP definition of "endpoint", which is "An entity participating in the CoAP protocol".<a href="#section-1.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="notation-coral-examples">
@@ -1519,9 +1520,11 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-retrieve-the-full-list-of-g">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-retrieve-the-full-list-of-g" class="section-name selfRef">Retrieve the Full List of Group Configurations</a>
         </h3>
-<p id="section-6.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.1" class="relref">Section 6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">An example of message exchange is shown below.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.1-3">
+<p id="section-6.1-1">This operation MUST be supported by the Group Manager and an Administrator.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">The Administrator can send a GET request to the group-collection resource, in order to retrieve a list of the existing OSCORE groups at the Group Manager.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.1" class="relref">Section 6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-4">An example of message exchange is shown below.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.1-5">
 <pre>
 =&gt; 0.01 GET
    Uri-Path: manage
@@ -1549,7 +1552,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
                                    /linkformat/rt/core.osc.gconf' /]
      ]]
    ]
-</pre><a href="#section-6.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-6.1-5" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1558,17 +1561,19 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-retrieve-a-list-of-group-co">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-retrieve-a-list-of-group-co" class="section-name selfRef">Retrieve a List of Group Configurations by Filters</a>
         </h3>
-<p id="section-6.2-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.2" class="relref">Section 6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">This operation MUST be supported by the Group Manager and MAY be supported by an Administrator.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">The Administrator can send a FETCH request to the group-collection resource, in order to retrieve a list of the existing OSCORE groups that fully match a set of specified filter criteria.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.2" class="relref">Section 6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.2-2.1">The filter criteria are specified in the request payload with top-level link elements, each of which corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.2-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.2-4.1">The filter criteria are specified in the request payload with top-level link elements, each of which corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.2-4.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.2-2.2">If names of application groups are used as filter criteria, each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.<a href="#section-6.2-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.2-4.2">If names of application groups are used as filter criteria, each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.<a href="#section-6.2-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.2-2.3">With the exception of the 'app_group' element, a valid request MUST NOT include the same element multiple times. Element values are the ones admitted for the corresponding labels in the POST request for creating a group configuration (see <a href="#collection-resource-post" class="auto internal xref">Section 6.3</a>).<a href="#section-6.2-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.2-4.3">With the exception of the 'app_group' element, a valid request MUST NOT include the same element multiple times. Element values are the ones admitted for the corresponding labels in the POST request for creating a group configuration (see <a href="#collection-resource-post" class="auto internal xref">Section 6.3</a>).<a href="#section-6.2-4.3" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-6.2-3">An example of message exchange is shown below.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.2-4">
+<p id="section-6.2-5">An example of message exchange is shown below.<a href="#section-6.2-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.2-6">
 <pre>
 =&gt; 0.05 FETCH
    Uri-Path: manage
@@ -1605,7 +1610,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
                                   /linkformat/rt/core.osc.gconf' /]
     ]]
    ]
-</pre><a href="#section-6.2-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.2-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1614,23 +1619,25 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-create-a-new-group-configur">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-create-a-new-group-configur" class="section-name selfRef">Create a New Group Configuration</a>
         </h3>
-<p id="section-6.3-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.3" class="relref">Section 6.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">This operation MUST be supported by the Group Manager and an Administrator.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-2">The Administrator can send a POST request to the group-collection resource, in order to create a new OSCORE group at the Group Manager.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
+<p id="section-6.3-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.3" class="relref">Section 6.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.3-2.1">Each link element of the request payload corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.3-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.3-4.1">Each link element of the request payload corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.3-4.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-2.2">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.2">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-2.3">If the payload of the POST request specifies the 'app_group' link element multiple times, then the Group Manager MUST NOT respond with a 4.00 (Bad Request) response.<a href="#section-6.3-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.3">If the payload of the POST request specifies the 'app_group' link element multiple times, then the Group Manager MUST NOT respond with a 4.00 (Bad Request) response.<a href="#section-6.3-4.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-2.4">The payload of the response includes one link element for each specified parameter, with the exception of non-empty structured parameters.<a href="#section-6.3-2.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.4">The payload of the response includes one link element for each specified parameter, with the exception of non-empty structured parameters.<a href="#section-6.3-4.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-2.5">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-2.5" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.5">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-4.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-2.6">If the Administrator performs the registration of the group-membership resource to a Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.<a href="#section-6.3-2.6" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.6">If the Administrator performs the registration of the group-membership resource to a Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.<a href="#section-6.3-4.6" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-6.3-3">An example of message exchange is shown below.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.3-4">
+<p id="section-6.3-5">An example of message exchange is shown below.<a href="#section-6.3-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.3-6">
 <pre>
 =&gt; 0.02 POST
    Uri-Path: manage
@@ -1666,7 +1673,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
      [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
       cri'coap://as.example.com/token']
    ]
-</pre><a href="#section-6.3-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.3-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1675,15 +1682,17 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-retrieve-a-group-configurat">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-retrieve-a-group-configurat" class="section-name selfRef">Retrieve a Group Configuration</a>
         </h3>
-<p id="section-6.4-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.4" class="relref">Section 6.4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">This operation MUST be supported by the Group Manager and an Administrator.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-2">The Administrator can send a GET request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve the complete current configuration of that group.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
+<p id="section-6.4-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.4" class="relref">Section 6.4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.4-2.1">The response payload includes one link element for each entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty status parameters.<a href="#section-6.4-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.4-4.1">The response payload includes one link element for each entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty status parameters.<a href="#section-6.4-4.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.4-2.2">Each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.<a href="#section-6.4-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.4-4.2">Each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.<a href="#section-6.4-4.2" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-6.4-3">An example of message exchange is shown below.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.4-4">
+<p id="section-6.4-5">An example of message exchange is shown below.<a href="#section-6.4-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.4-6">
 <pre>
 =&gt; 0.01 GET
    Uri-Path: manage
@@ -1733,7 +1742,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
      [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
       cri'coap://as.example.com/token']
    ]
-</pre><a href="#section-6.4-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.4-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1742,20 +1751,22 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-retrieve-part-of-a-group-co">
 <a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-retrieve-part-of-a-group-co" class="section-name selfRef">Retrieve Part of a Group Configuration by Filters</a>
         </h3>
-<p id="section-6.5-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.5" class="relref">Section 6.5</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-1">This operation MUST be supported by the Group Manager and MAY be supported by an Administrator.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-2">The Administrator can send a FETCH request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve part of the current configuration of that group.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
+<p id="section-6.5-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.5" class="relref">Section 6.5</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.5-2.1">The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>). All the specified link elements MUST have the link target with value "null".<a href="#section-6.5-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.5-4.1">The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>). All the specified link elements MUST have the link target with value "null".<a href="#section-6.5-4.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.5-2.2">The request payload MUST NOT include any link element corresponding to an inner information element of a structured parameter.<a href="#section-6.5-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.5-4.2">The request payload MUST NOT include any link element corresponding to an inner information element of a structured parameter.<a href="#section-6.5-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.5-2.3">
-            <p id="section-6.5-2.3.1">The response payload includes the requested configuration parameters and status parameters, and is formatted as in the response payload of a GET request to a group-configuration resource (see <a href="#configuration-resource-get" class="auto internal xref">Section 6.4</a>).<a href="#section-6.5-2.3.1" class="pilcrow">¶</a></p>
-<p id="section-6.5-2.3.2">
-If the request payload specifies a parameter that is not included in the group configuration, then the response payload MUST NOT include a corresponding link element.<a href="#section-6.5-2.3.2" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-6.5-4.3">
+            <p id="section-6.5-4.3.1">The response payload includes the requested configuration parameters and status parameters, and is formatted as in the response payload of a GET request to a group-configuration resource (see <a href="#configuration-resource-get" class="auto internal xref">Section 6.4</a>).<a href="#section-6.5-4.3.1" class="pilcrow">¶</a></p>
+<p id="section-6.5-4.3.2">
+If the request payload specifies a parameter that is not included in the group configuration, then the response payload MUST NOT include a corresponding link element.<a href="#section-6.5-4.3.2" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-6.5-3">An example of message exchange is shown below.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.5-4">
+<p id="section-6.5-5">An example of message exchange is shown below.<a href="#section-6.5-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.5-6">
 <pre>
 =&gt; 0.05 FETCH
    Uri-Path: manage
@@ -1788,7 +1799,7 @@ If the request payload specifies a parameter that is not included in the group c
      [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
      [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"]
    ]
-</pre><a href="#section-6.5-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.5-6" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1797,13 +1808,15 @@ If the request payload specifies a parameter that is not included in the group c
         <h3 id="name-overwrite-a-group-configura">
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-overwrite-a-group-configura" class="section-name selfRef">Overwrite a Group Configuration</a>
         </h3>
-<p id="section-6.6-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.6" class="relref">Section 6.6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following difference.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<p id="section-6.6-1">This operation MAY be supported by the Group Manager and an Administrator.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<p id="section-6.6-2">The Administrator can send a PUT request to the group-configuration resource associated with an OSCORE group, in order to overwrite the current configuration of that group with a new one.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
+<p id="section-6.6-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.6" class="relref">Section 6.6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following difference.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.6-2.1">If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the PUT request.<a href="#section-6.6-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.6-4.1">If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the PUT request.<a href="#section-6.6-4.1" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-6.6-3">An example of message exchange is shown below.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.6-4">
+<p id="section-6.6-5">An example of message exchange is shown below.<a href="#section-6.6-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.6-6">
 <pre>
 =&gt; 0.03 PUT
    Uri-Path: manage
@@ -1829,7 +1842,7 @@ If the request payload specifies a parameter that is not included in the group c
      [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
       cri'coap://as.example.com/token']
    ]
-</pre><a href="#section-6.6-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.6-6" class="pilcrow">¶</a>
 </div>
 <div id="sssec-effects-overwrite-joining-nodes">
 <section id="section-6.6.1">
@@ -1854,35 +1867,37 @@ If the request payload specifies a parameter that is not included in the group c
         <h3 id="name-selective-update-of-a-group">
 <a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-selective-update-of-a-group" class="section-name selfRef">Selective Update of a Group Configuration</a>
         </h3>
-<p id="section-6.7-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.7" class="relref">Section 6.7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
+<p id="section-6.7-1">This operation MAY be supported by the Group Manager and an Administrator.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
+<p id="section-6.7-2">The Administrator can send a PATCH/iPATCH request <span>[<a href="#RFC8132" class="cite xref">RFC8132</a>]</span> to the group-configuration resource associated with an OSCORE group, in order to update the value of only part of the group configuration.<a href="#section-6.7-2" class="pilcrow">¶</a></p>
+<p id="section-6.7-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.7" class="relref">Section 6.7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.7-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.7-2.1">
-            <p id="section-6.7-2.1.1">If the request payload specifies names of application groups to be removed from or added to the 'app_groups' status parameter, then such names are specified by means of the following top-level link elements.<a href="#section-6.7-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.7-4.1">
+            <p id="section-6.7-4.1.1">If the request payload specifies names of application groups to be removed from or added to the 'app_groups' status parameter, then such names are specified by means of the following top-level link elements.<a href="#section-6.7-4.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.7-2.1.2.1">'app_group_del', with value a text string specifying the name of an application group to remove from the 'app_groups' status parameter. This link element can be included multiple times.<a href="#section-6.7-2.1.2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.7-4.1.2.1">'app_group_del', with value a text string specifying the name of an application group to remove from the 'app_groups' status parameter. This link element can be included multiple times.<a href="#section-6.7-4.1.2.1" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-6.7-2.1.2.2">'app_group_add', with value a text string specifying the name of an application group to add to the 'app_groups' status parameter. This link element can be included multiple times.<a href="#section-6.7-2.1.2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-6.7-4.1.2.2">'app_group_add', with value a text string specifying the name of an application group to add to the 'app_groups' status parameter. This link element can be included multiple times.<a href="#section-6.7-4.1.2.2" class="pilcrow">¶</a>
 </li>
             </ul>
-<p id="section-6.7-2.1.3">
-The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the request payload includes both any 'app_group' link element as well as any 'app_group_del' and/or 'app_group_add' link element.<a href="#section-6.7-2.1.3" class="pilcrow">¶</a></p>
+<p id="section-6.7-4.1.3">
+The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the request payload includes both any 'app_group' link element as well as any 'app_group_del' and/or 'app_group_add' link element.<a href="#section-6.7-4.1.3" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-6.7-2.2">The Group Manager MUST respond with a 4.00 (Bad Request) response, if the request payload includes no link elements.<a href="#section-6.7-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.7-4.2">The Group Manager MUST respond with a 4.00 (Bad Request) response, if the request payload includes no link elements.<a href="#section-6.7-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.7-2.3">When the request uses specifically the iPATCH method, the Group Manager MUST respond with a 4.00 (Bad Request) response, in case any link element 'app_group_del' and/or 'app_group_add' is included.<a href="#section-6.7-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.7-4.3">When the request uses specifically the iPATCH method, the Group Manager MUST respond with a 4.00 (Bad Request) response, in case any link element 'app_group_del' and/or 'app_group_add' is included.<a href="#section-6.7-4.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.7-2.4">
-            <p id="section-6.7-2.4.1">When updating the 'app_groups' status parameter by difference, the Group Manager:<a href="#section-6.7-2.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-6.7-4.4">
+            <p id="section-6.7-4.4.1">When updating the 'app_groups' status parameter by difference, the Group Manager:<a href="#section-6.7-4.4.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.7-2.4.2.1">Deletes from the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_del' link elements.<a href="#section-6.7-2.4.2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.7-4.4.2.1">Deletes from the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_del' link elements.<a href="#section-6.7-4.4.2.1" class="pilcrow">¶</a>
 </li>
-              <li class="normal" id="section-6.7-2.4.2.2">Adds to the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_add' link elements.<a href="#section-6.7-2.4.2.2" class="pilcrow">¶</a>
+              <li class="normal" id="section-6.7-4.4.2.2">Adds to the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_add' link elements.<a href="#section-6.7-4.4.2.2" class="pilcrow">¶</a>
 </li>
             </ul>
 </li>
         </ul>
-<p id="section-6.7-3">An example of message exchange is shown below.<a href="#section-6.7-3" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-6.7-4">
+<p id="section-6.7-5">An example of message exchange is shown below.<a href="#section-6.7-5" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-6.7-6">
 <pre>
 =&gt; 0.06 PATCH
    Uri-Path: manage
@@ -1910,7 +1925,7 @@ The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the r
      [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
       cri'coap://as.example.com/token']
    ]
-</pre><a href="#section-6.7-4" class="pilcrow">¶</a>
+</pre><a href="#section-6.7-6" class="pilcrow">¶</a>
 </div>
 <div id="effects-on-joining-nodes">
 <section id="section-6.7.1">
@@ -1935,7 +1950,9 @@ The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the r
         <h3 id="name-delete-a-group-configuratio">
 <a href="#section-6.8" class="section-number selfRef">6.8. </a><a href="#name-delete-a-group-configuratio" class="section-name selfRef">Delete a Group Configuration</a>
         </h3>
-<p id="section-6.8-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.8" class="relref">Section 6.8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds<a href="#section-6.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.8-1">This operation MUST be supported by the Group Manager and an Administrator.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.8-2">The Administrator can send a DELETE request to the group-configuration resource, in order to delete that OSCORE group.<a href="#section-6.8-2" class="pilcrow">¶</a></p>
+<p id="section-6.8-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.8" class="relref">Section 6.8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.8-3" class="pilcrow">¶</a></p>
 <div id="effects-on-the-group-members-1">
 <section id="section-6.8.1">
           <h4 id="name-effects-on-the-group-members-2">

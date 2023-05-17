@@ -173,9 +173,17 @@ Table of Contents
       access to retrieve updated keying material.
 
    Readers are also expected to be familiar with the terms and concepts
-   used in [I-D.ietf-ace-oscore-gm-admin], wih particular reference to:
+   used in [I-D.ietf-ace-oscore-gm-admin], with particular reference to:
    "Administrator", "Group name", "Group-collection resource", "Group-
    configuration resource", and "Admin endpoint".
+
+   Like in [I-D.ietf-ace-oscore-gm-admin], the url-path to a group-
+   configuration resource has GROUPNAME as last segment, with GROUPNAME
+   the invariant group name assigned upon its creation.  Building on the
+   considered url-path of the group-collection resource, this document
+   uses /manage/GROUPNAME as the url-path of a group-configuration
+   resource; implementations are not required to use this name, and can
+   define their own instead.
 
    Note that, unless otherwise indicated, the term "endpoint" is used
    here following its OAuth definition, aimed at denoting resources such
@@ -351,6 +359,13 @@ Table of Contents
 
 6.1.  Retrieve the Full List of Group Configurations
 
+   This operation MUST be supported by the Group Manager and an
+   Administrator.
+
+   The Administrator can send a GET request to the group-collection
+   resource, in order to retrieve a list of the existing OSCORE groups
+   at the Group Manager.
+
    The same as defined in Section 6.1 of [I-D.ietf-ace-oscore-gm-admin]
    holds.
 
@@ -384,6 +399,13 @@ Table of Contents
       ]
 
 6.2.  Retrieve a List of Group Configurations by Filters
+
+   This operation MUST be supported by the Group Manager and MAY be
+   supported by an Administrator.
+
+   The Administrator can send a FETCH request to the group-collection
+   resource, in order to retrieve a list of the existing OSCORE groups
+   that fully match a set of specified filter criteria.
 
    The same as defined in Section 6.2 of [I-D.ietf-ace-oscore-gm-admin]
    holds, with the following differences.
@@ -441,6 +463,12 @@ Table of Contents
       ]
 
 6.3.  Create a New Group Configuration
+
+   This operation MUST be supported by the Group Manager and an
+   Administrator.
+
+   The Administrator can send a POST request to the group-collection
+   resource, in order to create a new OSCORE group at the Group Manager.
 
    The same as defined in Section 6.3 of [I-D.ietf-ace-oscore-gm-admin]
    holds, with the following differences.
@@ -508,6 +536,14 @@ Table of Contents
 
 6.4.  Retrieve a Group Configuration
 
+   This operation MUST be supported by the Group Manager and an
+   Administrator.
+
+   The Administrator can send a GET request to the group-configuration
+   resource manage/GROUPNAME associated with an OSCORE group with group
+   name GROUPNAME, in order to retrieve the complete current
+   configuration of that group.
+
    The same as defined in Section 6.4 of [I-D.ietf-ace-oscore-gm-admin]
    holds, with the following differences.
 
@@ -571,6 +607,14 @@ Table of Contents
 
 6.5.  Retrieve Part of a Group Configuration by Filters
 
+   This operation MUST be supported by the Group Manager and MAY be
+   supported by an Administrator.
+
+   The Administrator can send a FETCH request to the group-configuration
+   resource manage/GROUPNAME associated with an OSCORE group with group
+   name GROUPNAME, in order to retrieve part of the current
+   configuration of that group.
+
    The same as defined in Section 6.5 of [I-D.ietf-ace-oscore-gm-admin]
    holds, with the following differences.
 
@@ -628,6 +672,13 @@ Table of Contents
 
 6.6.  Overwrite a Group Configuration
 
+   This operation MAY be supported by the Group Manager and an
+   Administrator.
+
+   The Administrator can send a PUT request to the group-configuration
+   resource associated with an OSCORE group, in order to overwrite the
+   current configuration of that group with a new one.
+
    The same as defined in Section 6.6 of [I-D.ietf-ace-oscore-gm-admin]
    holds, with the following difference.
 
@@ -675,6 +726,13 @@ Table of Contents
    [I-D.ietf-ace-oscore-gm-admin] holds.
 
 6.7.  Selective Update of a Group Configuration
+
+   This operation MAY be supported by the Group Manager and an
+   Administrator.
+
+   The Administrator can send a PATCH/iPATCH request [RFC8132] to the
+   group-configuration resource associated with an OSCORE group, in
+   order to update the value of only part of the group configuration.
 
    The same as defined in Section 6.7 of [I-D.ietf-ace-oscore-gm-admin]
    holds, with the following differences.
@@ -757,8 +815,14 @@ Table of Contents
 
 6.8.  Delete a Group Configuration
 
+   This operation MUST be supported by the Group Manager and an
+   Administrator.
+
+   The Administrator can send a DELETE request to the group-
+   configuration resource, in order to delete that OSCORE group.
+
    The same as defined in Section 6.8 of [I-D.ietf-ace-oscore-gm-admin]
-   holds
+   holds.
 
 6.8.1.  Effects on the Group Members
 
