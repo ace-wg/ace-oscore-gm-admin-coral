@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 17 November 2023                                    16 May 2023
+Expires: 18 November 2023                                    17 May 2023
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 November 2023.
+   This Internet-Draft will expire on 18 November 2023.
 
 Copyright Notice
 
@@ -267,7 +267,12 @@ Table of Contents
 
 3.  Format of Scope
 
-   TBD
+   In order to express authorization information for the Administrator
+   (see Section 4), the same format and encoding of scope defined in
+   Section 3 of [I-D.ietf-ace-oscore-gm-admin] is used, as relying on
+   the Authorization Information Format (AIF) [RFC9237] and the extended
+   AIF data model AIF-OSCORE-GROUPCOMM defined in Section 3 of
+   [I-D.ietf-ace-key-groupcomm-oscore].
 
 3.1.  On Using Group Name Patterns
 
