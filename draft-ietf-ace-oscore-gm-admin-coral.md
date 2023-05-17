@@ -191,7 +191,7 @@ The Administrator can discover group-configuration resources for the group-colle
 
 # Format of Scope # {#scope-format}
 
-TBD
+In order to express authorization information for the Administrator (see {{getting-access}}), the same format and encoding of scope defined in {{Section 3 of I-D.ietf-ace-oscore-gm-admin}} is used, as relying on the Authorization Information Format (AIF) {{RFC9237}} and the extended AIF data model AIF-OSCORE-GROUPCOMM defined in {{Section 3 of I-D.ietf-ace-key-groupcomm-oscore}}.
 
 ## On Using Group Name Patterns
 
