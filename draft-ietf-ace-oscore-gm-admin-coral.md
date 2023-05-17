@@ -57,7 +57,6 @@ normative:
   RFC6690:
   RFC6749:
   RFC7252:
-  RFC7641:
   RFC8132:
   RFC8174:
   RFC8613:
@@ -81,13 +80,11 @@ normative:
     target: http://www.w3.org/TR/2010/NOTE-curie-20101216
 
 informative:
-  I-D.tiloca-core-oscore-discovery:
   I-D.hartke-t2trg-coral-reef:
   I-D.ietf-cose-cbor-encoded-cert:
   I-D.ietf-core-target-attr:
   RFC5280:
   RFC8392:
-  RFC9147:
   RFC9147:
 
 entity:
@@ -342,7 +339,7 @@ The same as defined in {{Section 6.3 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
 
-* If the Administrator performs the registration of the group-membership resource on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.
+* If the Administrator performs the registration of the group-membership resource to a Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.
 
 An example of message exchange is shown below.
 
