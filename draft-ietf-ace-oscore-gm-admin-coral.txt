@@ -464,10 +464,10 @@ Table of Contents
       is included as a separate element with name 'app_group'.
 
    *  If the Administrator performs the registration of the group-
-      membership resource on behalf of the Group Manager, then the names
-      of the application groups using the OSCORE group MUST take the
-      values possibly specified by the different 'app_group' link
-      elements in the POST request.
+      membership resource to a Resource Directory on behalf of the Group
+      Manager, then the names of the application groups using the OSCORE
+      group MUST take the values possibly specified by the different
+      'app_group' link elements in the POST request.
 
    An example of message exchange is shown below.
 
@@ -932,11 +932,6 @@ Table of Contents
               DOI 10.17487/RFC7252, June 2014,
               <https://www.rfc-editor.org/rfc/rfc7252>.
 
-   [RFC7641]  Hartke, K., "Observing Resources in the Constrained
-              Application Protocol (CoAP)", RFC 7641,
-              DOI 10.17487/RFC7641, September 2015,
-              <https://www.rfc-editor.org/rfc/rfc7641>.
-
    [RFC8132]  van der Stok, P., Bormann, C., and A. Sehgal, "PATCH and
               FETCH Methods for the Constrained Application Protocol
               (CoAP)", RFC 8132, DOI 10.17487/RFC8132, April 2017,
@@ -1013,14 +1008,6 @@ Table of Contents
               ietf-cose-cbor-encoded-cert-05, 10 January 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
               cbor-encoded-cert-05>.
-
-   [I-D.tiloca-core-oscore-discovery]
-              Tiloca, M., Amsüss, C., and P. Van der Stok, "Discovery of
-              OSCORE Groups with the CoRE Resource Directory", Work in
-              Progress, Internet-Draft, draft-tiloca-core-oscore-
-              discovery-13, 8 March 2023,
-              <https://datatracker.ietf.org/doc/html/draft-tiloca-core-
-              oscore-discovery-13>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
