@@ -515,7 +515,7 @@ An example of message exchange is shown below.
 
 This operation MAY be supported by the Group Manager and an Administrator.
 
-The Administrator can send a PUT request to the group-configuration resource associated with an OSCORE group, in order to overwrite the current configuration of that group with a new one.
+The Administrator can send a PUT request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.
 
 The same as defined in {{Section 6.6 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following difference.
 
@@ -562,7 +562,7 @@ The same as defined in {{Section 6.6.2 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 This operation MAY be supported by the Group Manager and an Administrator.
 
-The Administrator can send a PATCH/iPATCH request {{RFC8132}} to the group-configuration resource associated with an OSCORE group, in order to update the value of only part of the group configuration.
+The Administrator can send a PATCH/iPATCH request {{RFC8132}} to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to update the value of only part of the group configuration.
 
 The same as defined in {{Section 6.7 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
 
@@ -627,7 +627,7 @@ The same as defined in {{Section 6.7.2 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 This operation MUST be supported by the Group Manager and an Administrator.
 
-The Administrator can send a DELETE request to the group-configuration resource, in order to delete that OSCORE group.
+The Administrator can send a DELETE request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to delete that OSCORE group.
 
 The same as defined in {{Section 6.8 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
