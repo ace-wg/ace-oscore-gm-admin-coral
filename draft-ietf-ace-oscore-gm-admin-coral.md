@@ -193,17 +193,17 @@ The Administrator can discover group-configuration resources for the group-colle
 
 In order to express authorization information for the Administrator (see {{getting-access}}), the same format and encoding of scope defined in {{Section 3 of I-D.ietf-ace-oscore-gm-admin}} is used, as relying on the Authorization Information Format (AIF) {{RFC9237}} and the extended AIF data model AIF-OSCORE-GROUPCOMM defined in {{Section 3 of I-D.ietf-ace-key-groupcomm-oscore}}.
 
-## On Using Group Name Patterns
-
-TBD
-
 # Getting Access to the Group Manager # {#getting-access}
 
-TBD
+The Administrator requests access to the Group Manager as defined in {{Section 4 of I-D.ietf-ace-oscore-gm-admin}}, with the following difference.
+
+The Administrator performs administrative operations at the Group Manager not as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}}, but instead as defined in {{interactions}} of this document.
 
 ## Multiple Administrators for the Same OSCORE Group
 
-TBD
+What is defined in {{Section 4.1 of I-D.ietf-ace-oscore-gm-admin}} holds for this document, with the following difference.
+
+The Administrator performs administrative operations at the Group Manager not as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}}, but instead as defined in {{interactions}} of this document.
 
 # Group Configurations # {#group-configurations}
 
