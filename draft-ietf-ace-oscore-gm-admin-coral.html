@@ -1809,7 +1809,7 @@ If the request payload specifies a parameter that is not included in the group c
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-overwrite-a-group-configura" class="section-name selfRef">Overwrite a Group Configuration</a>
         </h3>
 <p id="section-6.6-1">This operation MAY be supported by the Group Manager and an Administrator.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
-<p id="section-6.6-2">The Administrator can send a PUT request to the group-configuration resource associated with an OSCORE group, in order to overwrite the current configuration of that group with a new one.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
+<p id="section-6.6-2">The Administrator can send a PUT request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
 <p id="section-6.6-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.6" class="relref">Section 6.6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following difference.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.6-4.1">If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the PUT request.<a href="#section-6.6-4.1" class="pilcrow">¶</a>
@@ -1868,7 +1868,7 @@ If the request payload specifies a parameter that is not included in the group c
 <a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-selective-update-of-a-group" class="section-name selfRef">Selective Update of a Group Configuration</a>
         </h3>
 <p id="section-6.7-1">This operation MAY be supported by the Group Manager and an Administrator.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
-<p id="section-6.7-2">The Administrator can send a PATCH/iPATCH request <span>[<a href="#RFC8132" class="cite xref">RFC8132</a>]</span> to the group-configuration resource associated with an OSCORE group, in order to update the value of only part of the group configuration.<a href="#section-6.7-2" class="pilcrow">¶</a></p>
+<p id="section-6.7-2">The Administrator can send a PATCH/iPATCH request <span>[<a href="#RFC8132" class="cite xref">RFC8132</a>]</span> to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to update the value of only part of the group configuration.<a href="#section-6.7-2" class="pilcrow">¶</a></p>
 <p id="section-6.7-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.7" class="relref">Section 6.7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.7-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.7-4.1">
@@ -1951,7 +1951,7 @@ The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the r
 <a href="#section-6.8" class="section-number selfRef">6.8. </a><a href="#name-delete-a-group-configuratio" class="section-name selfRef">Delete a Group Configuration</a>
         </h3>
 <p id="section-6.8-1">This operation MUST be supported by the Group Manager and an Administrator.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
-<p id="section-6.8-2">The Administrator can send a DELETE request to the group-configuration resource, in order to delete that OSCORE group.<a href="#section-6.8-2" class="pilcrow">¶</a></p>
+<p id="section-6.8-2">The Administrator can send a DELETE request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to delete that OSCORE group.<a href="#section-6.8-2" class="pilcrow">¶</a></p>
 <p id="section-6.8-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.8" class="relref">Section 6.8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.8-3" class="pilcrow">¶</a></p>
 <div id="effects-on-the-group-members-1">
 <section id="section-6.8.1">
