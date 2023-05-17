@@ -69,7 +69,6 @@ Table of Contents
      2.2.  Collection Representation
      2.3.  Discovery
    3.  Format of Scope
-     3.1.  On Using Group Name Patterns
    4.  Getting Access to the Group Manager
      4.1.  Multiple Administrators for the Same OSCORE Group
    5.  Group Configurations
@@ -274,17 +273,26 @@ Table of Contents
    AIF data model AIF-OSCORE-GROUPCOMM defined in Section 3 of
    [I-D.ietf-ace-key-groupcomm-oscore].
 
-3.1.  On Using Group Name Patterns
-
-   TBD
-
 4.  Getting Access to the Group Manager
 
-   TBD
+   The Administrator requests access to the Group Manager as defined in
+   Section 4 of [I-D.ietf-ace-oscore-gm-admin], with the following
+   difference.
+
+   The Administrator performs administrative operations at the Group
+   Manager not as defined in Section 6 of
+   [I-D.ietf-ace-oscore-gm-admin], but instead as defined in Section 6
+   of this document.
 
 4.1.  Multiple Administrators for the Same OSCORE Group
 
-   TBD
+   What is defined in Section 4.1 of [I-D.ietf-ace-oscore-gm-admin]
+   holds for this document, with the following difference.
+
+   The Administrator performs administrative operations at the Group
+   Manager not as defined in Section 6 of
+   [I-D.ietf-ace-oscore-gm-admin], but instead as defined in Section 6
+   of this document.
 
 5.  Group Configurations
 
