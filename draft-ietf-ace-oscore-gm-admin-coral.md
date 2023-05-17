@@ -207,31 +207,23 @@ The Administrator performs administrative operations at the Group Manager not as
 
 # Group Configurations # {#group-configurations}
 
-TBD
+A group configuration consists of a set of parameters.
 
 ## Group Configuration Representation ## {#config-repr}
 
-TBD
+The same group configuration representation defined in {{Section 5.1 of I-D.ietf-ace-oscore-gm-admin}} is used, as including configuration properties and status properties.
 
 ### Configuration Properties ### {#config-repr-config-properties}
 
-TBD
+The same configuration properties defined in {{Section 5.1.1 of I-D.ietf-ace-oscore-gm-admin}} are used.
 
 ### Status Properties ### {#config-repr-status-properties}
 
-TBD
+The same status properties defined in {{Section 5.1.2 of I-D.ietf-ace-oscore-gm-admin}} are used.
 
 ## Default Values {#default-values}
 
-TBD
-
-### Configuration Parameters {#default-values-conf}
-
-TBD
-
-### Status Parameters
-
-TBD
+The Group manager refers to the same default values defined in {{Section 5.2 of I-D.ietf-ace-oscore-gm-admin}}.
 
 # Interactions with the Group Manager # {#interactions}
 
