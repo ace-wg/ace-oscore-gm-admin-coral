@@ -145,7 +145,7 @@ Table of Contents
 
    *  The Constrained RESTful Application Language (CoRAL)
       [I-D.ietf-core-coral] and Constrained Resource Identifiers (CRIs)
-      defined in [I-D.ietf-core-href].
+      [I-D.ietf-core-href].
 
    *  The CoAP protocol [RFC7252], also in group communication scenarios
       [I-D.ietf-core-groupcomm-bis].  These include the concepts of:
@@ -862,7 +862,7 @@ Table of Contents
 6.8.1.  Effects on the Group Members
 
    The same as defined in Section 6.8.1 of
-   [I-D.ietf-ace-oscore-gm-admin] holds
+   [I-D.ietf-ace-oscore-gm-admin] holds.
 
 7.  Support of Top-Level Link Elements
 
