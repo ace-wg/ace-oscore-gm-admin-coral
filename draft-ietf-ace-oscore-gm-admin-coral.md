@@ -112,7 +112,7 @@ Readers are expected to be familiar with the terms and concepts from the followi
 
 * CBOR {{RFC8949}}, Packed CBOR {{I-D.ietf-cbor-packed}}, and COSE {{RFC9052}}{{RFC9053}}.
 
-* The Constrained RESTful Application Language (CoRAL) {{I-D.ietf-core-coral}} and Constrained Resource Identifiers (CRIs) defined in {{I-D.ietf-core-href}}.
+* The Constrained RESTful Application Language (CoRAL) {{I-D.ietf-core-coral}} and Constrained Resource Identifiers (CRIs) {{I-D.ietf-core-href}}.
 
 * The CoAP protocol {{RFC7252}}, also in group communication scenarios {{I-D.ietf-core-groupcomm-bis}}. These include the concepts of:
 
@@ -639,7 +639,7 @@ The same as defined in {{Section 6.8 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 ### Effects on the Group Members ###
 
-The same as defined in {{Section 6.8.1 of I-D.ietf-ace-oscore-gm-admin}} holds
+The same as defined in {{Section 6.8.1 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 # Support of Top-Level Link Elements
 
