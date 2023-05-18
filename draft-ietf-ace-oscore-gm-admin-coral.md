@@ -98,11 +98,19 @@ Group communication for CoAP can be secured using Group Object Security for Cons
 
 # Introduction # {#intro}
 
-TBD
+The Constrained Application Protocol (CoAP) {{RFC7252}} can also be used for group communication {{I-D.ietf-core-groupcomm-bis}}, where messages are exchanged between members of a group, e.g., over IP multicast. Applications relying on CoAP can achieve end-to-end security at the application layer by using Object Security for Constrained RESTful Environments (OSCORE) {{RFC8613}}, and especially Group OSCORE {{I-D.ietf-core-oscore-groupcomm}} in group communication scenarios.
 
-The examples presented in this document are expressed in CBOR diagnostic notation, and refer to values from external dictionaries using Packed CBOR {{I-D.ietf-cbor-packed}}. {{notation-coral-examples}} introduces the notation and assumptions used in the examples.
+When group communication for CoAP is protected with Group OSCORE, nodes are required to explicitly join the correct OSCORE group. To this end, a joining node interacts with a Group Manager (GM) entity responsible for that group, and retrieves the required keying material to securely communicate with other group members using Group OSCORE.
 
-TBD
+The method in {{I-D.ietf-ace-key-groupcomm-oscore}} specifies how nodes can join an OSCORE group through the respective Group Manager. Such a method builds on the ACE framework for Authentication and Authorization {{RFC9200}}, so ensuring a secure joining process as well as authentication and authorization of joining nodes (clients) at the Group Manager (resource server).
+
+{{I-D.ietf-ace-oscore-gm-admin}} specifies a RESTful admin interface at the Group Manager, intended for an Administrator as a separate entity external to the Group Manager and its application. The interface allows the Administrator to create and delete OSCORE groups, as well as to configure and update their configuration.
+
+This document builds on {{I-D.ietf-ace-oscore-gm-admin}}, and specifies how an Administrator interacts with the same RESTful admin interface by using the Constrained RESTful Application Language (CoRAL) {{I-D.ietf-core-coral}}. Compared to {{I-D.ietf-ace-oscore-gm-admin}}, there is no change in the admin interface and its operations, nor in the way the group configurations are organized and represented.
+
+Interaction examples using Packed CBOR {{I-D.ietf-cbor-packed}} are provided, and are expressed in CBOR diagnostic notation {{RFC8949}}. {{notation-coral-examples}} provides the notation and assumptions used in the examples.
+
+The ACE framework is used to ensure authentication and authorization of the Administrator (client) at the Group Manager (resource server). In order to achieve communication security, proof-of-possession and server authentication, the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE, such as {{RFC9202}}{{RFC9203}}. These include also possible forthcoming transport profiles that comply with the requirements in {{Section C of RFC9200}}.
 
 ## Terminology ## {#terminology}
 
