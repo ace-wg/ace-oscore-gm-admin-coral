@@ -194,9 +194,15 @@ In order to express authorization information for the Administrator (see {{getti
 
 # Getting Access to the Group Manager # {#getting-access}
 
-The Administrator requests access to the Group Manager as defined in {{Section 4 of I-D.ietf-ace-oscore-gm-admin}}, with the following difference.
+All communications between the involved entities rely on the CoAP protocol and MUST be secured.
 
-The Administrator performs administrative operations at the Group Manager not as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}}, but instead as defined in {{interactions}} of this document.
+In particular, communications between the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE to achieve communication security, proof-of-possession and server authentication. To this end, the AS may explicitly signal the specific transport profile to use, consistently with requirements and assumptions defined in the ACE framework {{RFC9200}}.
+
+With reference to the AS, communications between the Administrator and the AS (/token endpoint) as well as between the Group Manager and the AS (/introspect endpoint) can be secured by different means, for instance using DTLS {{RFC9147}} or OSCORE {{RFC8613}}. Further details on how the AS secures communications (with the Administrator and the Group Manager) depend on the specifically used transport profile of ACE, and are out of the scope of this document.
+
+The Administrator requests access to the Group Manager as per Steps 1-3 in {{Section 4 of I-D.ietf-ace-oscore-gm-admin}}.
+
+The Administrator accesses the admin interface at the Group Manager as per Step 4 in {{Section 4 of I-D.ietf-ace-oscore-gm-admin}}, with the difference that administrative operations are performed not as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}}, but instead as defined in {{interactions}} of this document.
 
 ## Multiple Administrators for the Same OSCORE Group
 
