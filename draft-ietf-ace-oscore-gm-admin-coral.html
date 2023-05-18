@@ -8,14 +8,14 @@
 <meta content="Marco Tiloca" name="author">
 <meta content="Rikard Höglund" name="author">
 <meta content="
-       TBD 
+       Group communication for CoAP can be secured using Group Object Security for Constrained RESTful Environments (Group OSCORE). A Group Manager is responsible to handle the joining of new group members, as well as to manage and distribute the group keying material. The Group Manager can provide a RESTful admin interface that allows an Administrator entity to create and delete OSCORE groups, as well as to retrieve and update their configuration. This document specifies how an Administrator entity interacts with the admin interface at the Group Manager by using the Constrained RESTful Application Language (CoRAL). The ACE framework for Authentication and Authorization is used to enforce authentication and authorization of the Administrator at the Group Manager. Protocol-specific transport profiles of ACE are used to achieve communication security, proof-of-possession and server authentication. 
     " name="description">
 <meta content="xml2rfc 3.17.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-ace-oscore-gm-admin-coral-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.17.1
-    Python 3.10.11
+    Python 3.11.3
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
@@ -24,8 +24,8 @@
     lxml 4.9.2
     pycountry 22.3.5
     PyYAML 6.0
-    requests 2.28.1
-    setuptools 65.6.0
+    requests 2.30.0
+    setuptools 67.7.2
     six 1.16.0
     wcwidth 0.2.6
 -->
@@ -1051,7 +1051,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 18 November 2023</td>
+<td class="center">Expires 19 November 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1064,12 +1064,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-ace-oscore-gm-admin-coral-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-05-17" class="published">17 May 2023</time>
+<time datetime="2023-05-18" class="published">18 May 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-11-18">18 November 2023</time></dd>
+<dd class="expires"><time datetime="2023-11-19">19 November 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1086,7 +1086,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Using the Constrained RESTful Application Language (CoRAL) with the Admin Interface for the OSCORE Group Manager</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">TBD<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Group communication for CoAP can be secured using Group Object Security for Constrained RESTful Environments (Group OSCORE). A Group Manager is responsible to handle the joining of new group members, as well as to manage and distribute the group keying material. The Group Manager can provide a RESTful admin interface that allows an Administrator entity to create and delete OSCORE groups, as well as to retrieve and update their configuration. This document specifies how an Administrator entity interacts with the admin interface at the Group Manager by using the Constrained RESTful Application Language (CoRAL). The ACE framework for Authentication and Authorization is used to enforce authentication and authorization of the Administrator at the Group Manager. Protocol-specific transport profiles of ACE are used to achieve communication security, proof-of-possession and server authentication.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1118,7 +1118,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 November 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 November 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
