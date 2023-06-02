@@ -1630,15 +1630,15 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
 <p id="section-6.3-2">The Administrator can send a POST request to the group-collection resource, in order to create a new OSCORE group at the Group Manager.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-08#section-6.3" class="relref">Section 6.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-6.3-4.1">Each link element of the request payload corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.3-4.1" class="pilcrow">¶</a>
+<li class="normal" id="section-6.3-4.1">In the request payload, each link element corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.3-4.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-4.2">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-4.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.2">In the request payload, each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-4.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-4.3">If the payload of the POST request specifies the 'app_group' link element multiple times, then the Group Manager MUST NOT respond with a 4.00 (Bad Request) response.<a href="#section-6.3-4.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.3">The Group Manager MUST respond with a 4.00 (Bad Request) response if any link element is specified multiple times in the payload of the POST request, with the exception of the 'app_group' link element.<a href="#section-6.3-4.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-4.4">The payload of the response includes one link element for each specified parameter, with the exception of non-empty structured parameters.<a href="#section-6.3-4.4" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.4">The response payload includes one link element for each specified parameter, with the exception of non-empty structured parameters.<a href="#section-6.3-4.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="section-6.3-4.5">Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-4.5" class="pilcrow">¶</a>
+          <li class="normal" id="section-6.3-4.5">In the response payload, each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.<a href="#section-6.3-4.5" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="section-6.3-4.6">If the Administrator performs the registration of the group-membership resource to a Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.<a href="#section-6.3-4.6" class="pilcrow">¶</a>
 </li>
