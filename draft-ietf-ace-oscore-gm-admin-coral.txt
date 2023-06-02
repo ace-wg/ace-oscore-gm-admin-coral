@@ -228,8 +228,8 @@ Table of Contents
 
    Readers are also expected to be familiar with the terms and concepts
    used in [I-D.ietf-ace-oscore-gm-admin], with particular reference to:
-   "Administrator", "Group name", "Group-collection resource", "Group-
-   configuration resource", and "Admin endpoint".
+   "Administrator", "group name", "group-collection resource", and
+   "group-configuration resource".
 
    Like in [I-D.ietf-ace-oscore-gm-admin], the url-path to a group-
    configuration resource has GROUPNAME as last segment, with GROUPNAME
