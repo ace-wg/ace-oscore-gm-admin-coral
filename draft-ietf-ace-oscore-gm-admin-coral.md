@@ -9,7 +9,7 @@ docname: draft-ietf-ace-oscore-gm-admin-coral-latest
 # stand_alone: true
 
 ipr: trust200902
-area: Internet
+area: Security
 wg: ACE Working Group
 kw: Internet-Draft
 cat: std
@@ -138,7 +138,7 @@ Readers are expected to be familiar with the terms and concepts from the followi
 
 * The management of keying material for groups in ACE {{I-D.ietf-ace-key-groupcomm}} and specifically for OSCORE groups {{I-D.ietf-ace-key-groupcomm-oscore}}. These include the concept of group-membership resource hosted by the Group Manager, that new members access to join the OSCORE group, while current members can access to retrieve updated keying material.
 
-Readers are also expected to be familiar with the terms and concepts used in {{I-D.ietf-ace-oscore-gm-admin}}, with particular reference to: "Administrator", "Group name", "Group-collection resource", "Group-configuration resource", and "Admin endpoint".
+Readers are also expected to be familiar with the terms and concepts used in {{I-D.ietf-ace-oscore-gm-admin}}, with particular reference to: "Administrator", "group name", "group-collection resource", and "group-configuration resource".
 
 Like in {{I-D.ietf-ace-oscore-gm-admin}}, the url-path to a group-configuration resource has GROUPNAME as last segment, with GROUPNAME the invariant group name assigned upon its creation. Building on the considered url-path of the group-collection resource, this document uses /manage/GROUPNAME as the url-path of a group-configuration resource; implementations are not required to use this name, and can define their own instead.
 
