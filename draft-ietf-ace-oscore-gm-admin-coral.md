@@ -357,15 +357,15 @@ The Administrator can send a POST request to the group-collection resource, in o
 
 The same as defined in {{Section 6.3 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
 
-* Each link element of the request payload corresponds to an entry of the group configuration (see {{config-repr}}), with the exception of non-empty structured parameters.
+* In the request payload, each link element corresponds to an entry of the group configuration (see {{config-repr}}), with the exception of non-empty structured parameters.
 
-* Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
+* In the request payload, each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
 
-* If the payload of the POST request specifies the 'app_group' link element multiple times, then the Group Manager MUST NOT respond with a 4.00 (Bad Request) response.
+* The Group Manager MUST respond with a 4.00 (Bad Request) response if any link element is specified multiple times in the payload of the POST request, with the exception of the 'app_group' link element.
 
-* The payload of the response includes one link element for each specified parameter, with the exception of non-empty structured parameters.
+* The response payload includes one link element for each specified parameter, with the exception of non-empty structured parameters.
 
-* Each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
+* In the response payload, each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
 
 * If the Administrator performs the registration of the group-membership resource to a Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.
 
