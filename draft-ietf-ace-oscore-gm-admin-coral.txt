@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 19 November 2023                                    18 May 2023
+Expires: 4 December 2023                                     2 June 2023
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 November 2023.
+   This Internet-Draft will expire on 4 December 2023.
 
 Copyright Notice
 
@@ -306,8 +306,9 @@ Table of Contents
 
 2.2.  Collection Representation
 
-   A list of group configurations is represented as a CoRAL document
-   containing the list of corresponding group-configuration resources.
+   A collection of group configurations is represented as a CoRAL
+   document containing the list of corresponding group-configuration
+   resources.
 
    Each group configuration is represented as a top-level link element,
    with the URI of the group-configuration resource as link target, and
