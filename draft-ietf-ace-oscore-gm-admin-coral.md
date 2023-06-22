@@ -49,7 +49,7 @@ normative:
   I-D.ietf-ace-oscore-gm-admin:
   I-D.ietf-core-coral:
   I-D.ietf-core-groupcomm-bis:
-  I-D.bormann-cbor-edn-literals:
+  I-D.ietf-cbor-edn-literals:
   I-D.ietf-cbor-packed:
   I-D.ietf-core-href:
   RFC2119:
@@ -168,7 +168,7 @@ When using a URI http://www.iana.org/assignments/linkformat/SEG1/SEG2
 
 * The path segment SEG2 is the value of the target attribute.
 
-The notation cri'' introduced in {{I-D.bormann-cbor-edn-literals}} is used to represent CRIs {{I-D.ietf-core-href}}. This format is not expected to be sent over the network.
+The notation cri'' introduced in {{I-D.ietf-cbor-edn-literals}} is used to represent CRIs {{I-D.ietf-core-href}}. This format is not expected to be sent over the network.
 
 Packed CBOR {{I-D.ietf-cbor-packed}} is also used, thus reducing representation size. The examples especially refer to the values from the two shared item tables in {{sec-packed-cbor-tables}}.
 
@@ -693,7 +693,7 @@ This document has no actions for IANA.
 
 This appendix defines the two shared item tables that the examples in this document refer to for using Packed CBOR {{I-D.ietf-cbor-packed}}.
 
-The notation cri'' introduced in {{I-D.bormann-cbor-edn-literals}} is used to represent CRIs {{I-D.ietf-core-href}}.
+The notation cri'' introduced in {{I-D.ietf-cbor-edn-literals}} is used to represent CRIs {{I-D.ietf-core-href}}.
 
 ## Compression of CoRAL predicates
 
