@@ -320,7 +320,7 @@ An example of message exchange is shown below.
 
    [
      [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
-     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
      [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
    ]
 
@@ -379,7 +379,7 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
      [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
      [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
      [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
@@ -436,7 +436,7 @@ An example of message exchange is shown below.
      [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
      [2, 6(-27) / item 69 for core.osc.gconf:cred_fmt /, 33],
      [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
-     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
      [2, 6(28) / item 72 for core.osc.gconf:sign_alg /, -8],
      [2, 6(29) / item 74 for
       core.osc.gconf:sign_params.alg_capab.key_type /, 1],
@@ -500,7 +500,7 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, null],
+     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, null],
      [2, 6(26) / item 68 for core.osc.gconf:hkdf /, null],
      [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, null],
      [2, 6(-36) / item 87 for core.osc.gconf:active /, null],
@@ -514,7 +514,7 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
      [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
      [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
      [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
@@ -546,7 +546,7 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 11],
+     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 11],
      [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
    ]
 
@@ -609,7 +609,7 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
      [2, 6(-40) / item 95 for core.osc.gconf:app_group_del /, "room1"],
      [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room3"],
      [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room4"]
@@ -713,7 +713,7 @@ The following shared item table is used for compressing CoRAL predicates, as per
 +-------+--------------------------------------------------------+
 | 70    | cri'http://coreapps.org/core.osc.gconf#group_mode'     |
 +-------+--------------------------------------------------------+
-| 71    | cri'http://coreapps.org/core.osc.gconf#sign_enc_alg'   |
+| 71    | cri'http://coreapps.org/core.osc.gconf#gp_enc_alg'     |
 +-------+--------------------------------------------------------+
 | 72    | cri'http://coreapps.org/core.osc.gconf#sign_alg'       |
 +-------+--------------------------------------------------------+
