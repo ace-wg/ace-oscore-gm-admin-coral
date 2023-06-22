@@ -275,9 +275,9 @@ Table of Contents
 
    *  The path segment SEG2 is the value of the target attribute.
 
-   The notation cri'' introduced in [I-D.bormann-cbor-edn-literals] is
-   used to represent CRIs [I-D.ietf-core-href].  This format is not
-   expected to be sent over the network.
+   The notation cri'' introduced in [I-D.ietf-cbor-edn-literals] is used
+   to represent CRIs [I-D.ietf-core-href].  This format is not expected
+   to be sent over the network.
 
    Packed CBOR [I-D.ietf-cbor-packed] is also used, thus reducing
    representation size.  The examples especially refer to the values
@@ -987,13 +987,6 @@ Table of Contents
               December 2010,
               <http://www.w3.org/TR/2010/NOTE-curie-20101216>.
 
-   [I-D.bormann-cbor-edn-literals]
-              Bormann, C., "Application-Oriented Literals in CBOR
-              Extended Diagnostic Notation", Work in Progress, Internet-
-              Draft, draft-bormann-cbor-edn-literals-02, 28 March 2023,
-              <https://datatracker.ietf.org/doc/html/draft-bormann-cbor-
-              edn-literals-02>.
-
    [I-D.ietf-ace-key-groupcomm]
               Palombini, F. and M. Tiloca, "Key Provisioning for Group
               Communication using ACE", Work in Progress, Internet-
@@ -1015,6 +1008,13 @@ Table of Contents
               gm-admin-08, 13 March 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
               oscore-gm-admin-08>.
+
+   [I-D.ietf-cbor-edn-literals]
+              Bormann, C., "Application-Oriented Literals in CBOR
+              Extended Diagnostic Notation", Work in Progress, Internet-
+              Draft, draft-ietf-cbor-edn-literals-00, 14 June 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
+              edn-literals-00>.
 
    [I-D.ietf-cbor-packed]
               Bormann, C., "Packed CBOR", Work in Progress, Internet-
@@ -1172,8 +1172,8 @@ Appendix A.  Shared item tables for Packed CBOR
    This appendix defines the two shared item tables that the examples in
    this document refer to for using Packed CBOR [I-D.ietf-cbor-packed].
 
-   The notation cri'' introduced in [I-D.bormann-cbor-edn-literals] is
-   used to represent CRIs [I-D.ietf-core-href].
+   The notation cri'' introduced in [I-D.ietf-cbor-edn-literals] is used
+   to represent CRIs [I-D.ietf-core-href].
 
 A.1.  Compression of CoRAL predicates
 
