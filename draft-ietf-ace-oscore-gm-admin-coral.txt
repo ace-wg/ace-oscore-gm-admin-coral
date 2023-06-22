@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 4 December 2023                                     2 June 2023
+Expires: 24 December 2023                                   22 June 2023
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 December 2023.
+   This Internet-Draft will expire on 24 December 2023.
 
 Copyright Notice
 
@@ -507,7 +507,7 @@ Table of Contents
 
       [
         [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
-        [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
         [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
       ]
 
@@ -581,7 +581,7 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
         [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
         [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
         [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
@@ -644,7 +644,7 @@ Table of Contents
         [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
         [2, 6(-27) / item 69 for core.osc.gconf:cred_fmt /, 33],
         [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
-        [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
         [2, 6(28) / item 72 for core.osc.gconf:sign_alg /, -8],
         [2, 6(29) / item 74 for
          core.osc.gconf:sign_params.alg_capab.key_type /, 1],
@@ -721,7 +721,7 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, null],
+        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, null],
         [2, 6(26) / item 68 for core.osc.gconf:hkdf /, null],
         [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, null],
         [2, 6(-36) / item 87 for core.osc.gconf:active /, null],
@@ -735,7 +735,7 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
         [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
         [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
         [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
@@ -774,7 +774,7 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 11],
+        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 11],
         [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
       ]
 
@@ -861,7 +861,7 @@ Table of Contents
     Payload:
 
     [
-      [2, 6(-28) / item 71 for core.osc.gconf:sign_enc_alg /, 10],
+      [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
       [2, 6(-40) / item 95 for core.osc.gconf:app_group_del /, "room1"],
       [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room3"],
       [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room4"]
@@ -1046,11 +1046,11 @@ Table of Contents
 
    [I-D.ietf-core-oscore-groupcomm]
               Tiloca, M., Selander, G., Palombini, F., Mattsson, J. P.,
-              and J. Park, "Group OSCORE - Secure Group Communication
-              for CoAP", Work in Progress, Internet-Draft, draft-ietf-
-              core-oscore-groupcomm-17, 20 December 2022,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              oscore-groupcomm-17>.
+              and J. Park, "Group Object Security for Constrained
+              RESTful Environments (Group OSCORE)", Work in Progress,
+              Internet-Draft, draft-ietf-core-oscore-groupcomm-18, 22
+              June 2023, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-core-oscore-groupcomm-18>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1193,7 +1193,7 @@ A.1.  Compression of CoRAL predicates
     +-------+--------------------------------------------------------+
     | 70    | cri'http://coreapps.org/core.osc.gconf#group_mode'     |
     +-------+--------------------------------------------------------+
-    | 71    | cri'http://coreapps.org/core.osc.gconf#sign_enc_alg'   |
+    | 71    | cri'http://coreapps.org/core.osc.gconf#gp_enc_alg'     |
     +-------+--------------------------------------------------------+
     | 72    | cri'http://coreapps.org/core.osc.gconf#sign_alg'       |
     +-------+--------------------------------------------------------+
