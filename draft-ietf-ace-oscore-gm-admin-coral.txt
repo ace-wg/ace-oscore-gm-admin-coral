@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 24 December 2023                                   22 June 2023
+Expires: 1 January 2024                                     30 June 2023
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 December 2023.
+   This Internet-Draft will expire on 1 January 2024.
 
 Copyright Notice
 
@@ -1300,11 +1300,11 @@ Acknowledgments
    contributed in the initial definition of the resource model and
    interactions using CoRAL.
 
-   The authors sincerely thank Christian Amsüss, Carsten Bormann and Jim
-   Schaad for their comments and feedback.  The work on this document
-   has been partly supported by VINNOVA and the Celtic-Next project
-   CRITISEC; and by the H2020 project SIFIS-Home (Grant agreement
-   952652).
+   The authors sincerely thank Christian Amsüss, Carsten Bormann, and
+   Jim Schaad for their comments and feedback.  The work on this
+   document has been partly supported by VINNOVA and the Celtic-Next
+   project CRITISEC; and by the H2020 project SIFIS-Home (Grant
+   agreement 952652).
 
 Authors' Addresses
 
