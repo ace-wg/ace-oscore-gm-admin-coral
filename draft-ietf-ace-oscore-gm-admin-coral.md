@@ -49,7 +49,6 @@ normative:
   I-D.ietf-ace-oscore-gm-admin:
   I-D.ietf-core-coral:
   I-D.ietf-core-groupcomm-bis:
-  I-D.ietf-cbor-edn-literals:
   I-D.ietf-cbor-packed:
   I-D.ietf-core-href:
   RFC2119:
@@ -168,7 +167,7 @@ When using a URI http://www.iana.org/assignments/linkformat/SEG1/SEG2
 
 * The path segment SEG2 is the value of the target attribute.
 
-The notation cri'' introduced in {{I-D.ietf-cbor-edn-literals}} is used to represent CRIs {{I-D.ietf-core-href}}. This format is not expected to be sent over the network.
+The application-extension identifier "cri" defined in {{Section C of I-D.ietf-core-href}} is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI or CRI reference. This format is not expected to be sent over the network.
 
 Packed CBOR {{I-D.ietf-cbor-packed}} is also used, thus reducing representation size. The examples especially refer to the values from the two shared item tables in {{sec-packed-cbor-tables}}.
 
@@ -693,7 +692,7 @@ This document has no actions for IANA.
 
 This appendix defines the two shared item tables that the examples in this document refer to for using Packed CBOR {{I-D.ietf-cbor-packed}}.
 
-The notation cri'' introduced in {{I-D.ietf-cbor-edn-literals}} is used to represent CRIs {{I-D.ietf-core-href}}.
+The application-extension identifier "cri" defined in {{Section C of I-D.ietf-core-href}} is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI.
 
 ## Compression of CoRAL predicates
 
@@ -807,6 +806,10 @@ The following shared item table is used for compressing values of the rt= target
 
 RFC EDITOR: PLEASE REMOVE THIS SECTION.
 
+## Version -00 to -01 ## {#sec-00-01}
+
+* Updated reference and introductory text for the CBOR EDN application-extension identifier "cri".
+
 ## Version -00 ## {#sec-00}
 
 * CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.
@@ -816,4 +819,4 @@ RFC EDITOR: PLEASE REMOVE THIS SECTION.
 
 Most of the content in this document was originally specified in draft-ietf-ace-oscore-gm-admin, which is co-authored also by Peter van der Stok and Francesca Palombini, and where Klaus Hartke contributed in the initial definition of the resource model and interactions using CoRAL.
 
-The authors sincerely thank {{{Christian Amsüss}}}, {{{Carsten Bormann}}}, and {{{Jim Schaad}} for their comments and feedback. The work on this document has been partly supported by VINNOVA and the Celtic-Next project CRITISEC; and by the H2020 project SIFIS-Home (Grant agreement 952652).
+The authors sincerely thank {{{Christian Amsüss}}}, {{{Carsten Bormann}}}, and {{{Jim Schaad}}} for their comments and feedback. The work on this document has been partly supported by VINNOVA and the Celtic-Next project CRITISEC; and by the H2020 project SIFIS-Home (Grant agreement 952652).
