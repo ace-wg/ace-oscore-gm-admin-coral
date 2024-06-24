@@ -811,4 +811,4 @@ The following shared item table is used for compressing values of the rt= target
 
 Most of the content in this document was originally specified in draft-ietf-ace-oscore-gm-admin, which is co-authored also by Peter van der Stok and Francesca Palombini, and where Klaus Hartke contributed in the initial definition of the resource model and interactions using CoRAL.
 
-The authors sincerely thank {{{Christian Amsüss}}}, {{{Carsten Bormann}}}, and {{{Jim Schaad}}} for their comments and feedback. The work on this document has been partly supported by VINNOVA and the Celtic-Next project CRITISEC; and by the H2020 project SIFIS-Home (Grant agreement 952652).
+The authors sincerely thank {{{Christian Amsüss}}}, {{{Carsten Bormann}}}, and {{{Jim Schaad}}} for their comments and feedback. This work was supported by the Sweden's Innovation Agency VINNOVA within the EUREKA CELTIC-NEXT projects CRITISEC and CYPRESS; and by the H2020 project SIFIS-Home (Grant agreement 952652).
