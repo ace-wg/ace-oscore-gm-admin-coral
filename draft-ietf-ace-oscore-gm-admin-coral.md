@@ -519,20 +519,20 @@ An example of message exchange is shown below.
    ]
 ~~~~~~~~~~~
 
-## Overwrite a Group Configuration ## {#configuration-resource-put}
+## Overwrite a Group Configuration ## {#configuration-resource-post}
 
 This operation MAY be supported by the Group Manager and an Administrator.
 
-The Administrator can send a PUT request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.
+The Administrator can send a POST request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.
 
 The same as defined in {{Section 6.6 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following difference.
 
-* If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the PUT request.
+* If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.
 
 An example of message exchange is shown below.
 
 ~~~~~~~~~~~
-=> 0.03 PUT
+=> 0.02 POST
    Uri-Path: manage
    Uri-Path: gp4
    Content-Format: 65087 (application/coral+cbor)
@@ -753,6 +753,8 @@ The following shared item table is used for compressing values of the rt= target
 * Fixed use of CURIEs that result in a URI with the fragment component.
 
 * Renamed 'group_title' as 'group_description'.
+
+* POST (instead of PUT) for overwriting a group-configuration resource.
 
 * Remove reference to the abandoned, custom format for error messages.
 
