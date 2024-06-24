@@ -691,109 +691,53 @@ The application-extension identifier "cri" defined in {{Section C of I-D.ietf-co
 
 The following shared item table is used for compressing CoRAL predicates, as per {{Section 2.2 of I-D.ietf-cbor-packed}}.
 
-~~~~~~~~~~~
-+-------+--------------------------------------------------------+
-| Index | Item                                                   |
-+-------+--------------------------------------------------------+
-| 6     | cri'http://www.iana.org/assignments/linkformat/rt'     |
-+-------+--------------------------------------------------------+
-| 50    | cri'http://coreapps.org/core.osc.gcoll#item'           |
-+-------+--------------------------------------------------------+
-| 68    | cri'http://coreapps.org/core.osc.gconf#hkdf'           |
-+-------+--------------------------------------------------------+
-| 69    | cri'http://coreapps.org/core.osc.gconf#cred_fmt'       |
-+-------+--------------------------------------------------------+
-| 70    | cri'http://coreapps.org/core.osc.gconf#group_mode'     |
-+-------+--------------------------------------------------------+
-| 71    | cri'http://coreapps.org/core.osc.gconf#gp_enc_alg'     |
-+-------+--------------------------------------------------------+
-| 72    | cri'http://coreapps.org/core.osc.gconf#sign_alg'       |
-+-------+--------------------------------------------------------+
-| 73    | cri'http://coreapps.org/core.osc.gconf#sign_params'    |
-+-------+--------------------------------------------------------+
-| 74    | cri'http://coreapps.org/core.osc.gconf#sign_params     |
-|       |     .alg_capab.key_type'                               |
-+-------+--------------------------------------------------------+
-| 75    | cri'http://coreapps.org/core.osc.gconf#sign_params     |
-|       |     .key_type_capab.key_type'                          |
-+-------+--------------------------------------------------------+
-| 76    | cri'http://coreapps.org/core.osc.gconf#sign_params     |
-|       |     .key_type_capab.curve'                             |
-+-------+--------------------------------------------------------+
-| 77    | cri'http://coreapps.org/core.osc.gconf#pairwise_mode'  |
-+-------+--------------------------------------------------------+
-| 78    | cri'http://coreapps.org/core.osc.gconf#alg'            |
-+-------+--------------------------------------------------------+
-| 79    | cri'http://coreapps.org/core.osc.gconf#ecdh_alg'       |
-+-------+--------------------------------------------------------+
-| 80    | cri'http://coreapps.org/core.osc.gconf#ecdh_params'    |
-+-------+--------------------------------------------------------+
-| 81    | cri'http://coreapps.org/core.osc.gconf#ecdh_params     |
-|       |     .alg_capab.key_type'                               |
-+-------+--------------------------------------------------------+
-| 82    | cri'http://coreapps.org/core.osc.gconf#ecdh_params     |
-|       |     .key_type_capab.key_type'                          |
-+-------+--------------------------------------------------------+
-| 83    | cri'http://coreapps.org/core.osc.gconf#ecdh_params     |
-|       |     .key_type_capab.curve'                             |
-+-------+--------------------------------------------------------+
-| 84    | cri'http://coreapps.org/core.osc.gconf#det_req'        |
-+-------+--------------------------------------------------------+
-| 85    | cri'http://coreapps.org/core.osc.gconf#det_hash_alg'   |
-+-------+--------------------------------------------------------+
-| 86    | cri'http://coreapps.org/core.osc.gconf#rt'             |
-+-------+--------------------------------------------------------+
-| 87    | cri'http://coreapps.org/core.osc.gconf#active'         |
-+-------+--------------------------------------------------------+
-| 88    | cri'http://coreapps.org/core.osc.gconf#group_name'     |
-+-------+--------------------------------------------------------+
-| 89    | cri'http://coreapps.org/core.osc.gconf#group_title'    |
-+-------+--------------------------------------------------------+
-| 90    | cri'http://coreapps.org/core.osc.gconf                 |
-|       |     #ace_groupcomm_profile'                            |
-+-------+--------------------------------------------------------+
-| 91    | cri'http://coreapps.org/core.osc.gconf#max_stale_sets' |
-+-------+--------------------------------------------------------+
-| 92    | cri'http://coreapps.org/core.osc.gconf#exp'            |
-+-------+--------------------------------------------------------+
-| 93    | cri'http://coreapps.org/core.osc.gconf#gid_reuse'      |
-+-------+--------------------------------------------------------+
-| 94    | cri'http://coreapps.org/core.osc.gconf#app_group'      |
-+-------+--------------------------------------------------------+
-| 95    | cri'http://coreapps.org/core.osc.gconf#app_group_del'  |
-+-------+--------------------------------------------------------+
-| 96    | cri'http://coreapps.org/core.osc.gconf#app_group_add'  |
-+-------+--------------------------------------------------------+
-| 97    | cri'http://coreapps.org/core.osc.gconf#joining_uri'    |
-+-------+--------------------------------------------------------+
-| 98    | cri'http://coreapps.org/core.osc.gconf#app_groups'     |
-+-------+--------------------------------------------------------+
-| 99    | cri'http://coreapps.org/core.osc.gconf#group_policies' |
-+-------+--------------------------------------------------------+
-| 100   | cri'http://coreapps.org/core.osc.gconf#group_policies  |
-|       |     .key_update_check_interval'                        |
-+-------+--------------------------------------------------------+
-| 101   | cri'http://coreapps.org/core.osc.gconf#group_policies  |
-|       |     .exp_delta'                                        |
-+-------+--------------------------------------------------------+
-| 102   | cri'http://coreapps.org/core.osc.gconf#as_uri'         |
-+-------+--------------------------------------------------------+
-~~~~~~~~~~~
-{: #fig-packed-cbor-table-1 title="Shared item table for compressing CoRAL predicates." artwork-align="center"}
+| Index | Item                                                                                                                       |
+| 6     | cri'http://www.iana.org/assignments/linkformat/rt'                                                                         |
+| 50    | cri'http://coreapps.org/core.osc.gcoll#item'                                                                               |
+| 68    | cri'http://coreapps.org/core.osc.gconf#hkdf'                                                                               |
+| 69    | cri'http://coreapps.org/core.osc.gconf#cred_fmt'                                                                           |
+| 70    | cri'http://coreapps.org/core.osc.gconf#group_mode'                                                                         |
+| 71    | cri'http://coreapps.org/core.osc.gconf#gp_enc_alg'                                                                         |
+| 72    | cri'http://coreapps.org/core.osc.gconf#sign_alg'                                                                           |
+| 73    | cri'http://coreapps.org/core.osc.gconf#sign_params'                                                                        |
+| 74    | cri'http://coreapps.org/core.osc.gconf#sign_params <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.alg_capab.key_type'           |
+| 75    | cri'http://coreapps.org/core.osc.gconf#sign_params <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.key_type_capab.key_type'      |
+| 76    | cri'http://coreapps.org/core.osc.gconf#sign_params <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.key_type_capab.curve'         |
+| 77    | cri'http://coreapps.org/core.osc.gconf#pairwise_mode'                                                                      |
+| 78    | cri'http://coreapps.org/core.osc.gconf#alg'                                                                                |
+| 79    | cri'http://coreapps.org/core.osc.gconf#ecdh_alg'                                                                           |
+| 80    | cri'http://coreapps.org/core.osc.gconf#ecdh_params'                                                                        |
+| 81    | cri'http://coreapps.org/core.osc.gconf#ecdh_params <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.alg_capab.key_type'           |
+| 82    | cri'http://coreapps.org/core.osc.gconf#ecdh_params <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.key_type_capab.key_type'      |
+| 83    | cri'http://coreapps.org/core.osc.gconf#ecdh_params <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.key_type_capab.curve'         |
+| 84    | cri'http://coreapps.org/core.osc.gconf#det_req'                                                                            |
+| 85    | cri'http://coreapps.org/core.osc.gconf#det_hash_alg'                                                                       |
+| 86    | cri'http://coreapps.org/core.osc.gconf#rt'                                                                                 |
+| 87    | cri'http://coreapps.org/core.osc.gconf#active'                                                                             |
+| 88    | cri'http://coreapps.org/core.osc.gconf#group_name'                                                                         |
+| 89    | cri'http://coreapps.org/core.osc.gconf#group_title'                                                                        |
+| 90    | cri'http://coreapps.org/core.osc.gconf <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#ace_groupcomm_profile'                    |
+| 91    | cri'http://coreapps.org/core.osc.gconf#max_stale_sets'                                                                     |
+| 92    | cri'http://coreapps.org/core.osc.gconf#exp'                                                                                |
+| 93    | cri'http://coreapps.org/core.osc.gconf#gid_reuse'                                                                          |
+| 94    | cri'http://coreapps.org/core.osc.gconf#app_group'                                                                          |
+| 95    | cri'http://coreapps.org/core.osc.gconf#app_group_del'                                                                      |
+| 96    | cri'http://coreapps.org/core.osc.gconf#app_group_add'                                                                      |
+| 97    | cri'http://coreapps.org/core.osc.gconf#joining_uri'                                                                        |
+| 98    | cri'http://coreapps.org/core.osc.gconf#app_groups'                                                                         |
+| 99    | cri'http://coreapps.org/core.osc.gconf#group_policies'                                                                     |
+| 100   | cri'http://coreapps.org/core.osc.gconf#group_policies <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.key_update_check_interval' |
+| 101   | cri'http://coreapps.org/core.osc.gconf#group_policies <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.exp_delta'                 |
+| 102   | cri'http://coreapps.org/core.osc.gconf#as_uri'                                                                             |
+{: #table-packed-cbor-table-1 title="Shared item table for compressing CoRAL predicates." align="center"}
 
 ## Compression of Values of the rt= Target Attribute
 
 The following shared item table is used for compressing values of the rt= target attribute, as per {{Section 2.2 of I-D.ietf-cbor-packed}}.
 
-~~~~~~~~~~~
-+-------+--------------------------------------------------------+
-| Index | Item                                                   |
-+-------+--------------------------------------------------------+
-| 415   | cri'http://www.iana.org/assignments/linkformat/rt      |
-|       |     /core.osc.gconf'                                   |
-+-------+--------------------------------------------------------+
-~~~~~~~~~~~
-{: #fig-packed-cbor-table-2 title="Shared item table for compressing values of the rt= target attribute." artwork-align="center"}
+| Index | Item                                                                                                        |
+| 415   | cri'http://www.iana.org/assignments/linkformat/rt <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/core.osc.gconf' |
+{: #table-packed-cbor-table-2 title="Shared item table for compressing values of the rt= target attribute." align="center"}
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
