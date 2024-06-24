@@ -59,6 +59,7 @@ normative:
   RFC9202:
   RFC9203:
   RFC9237:
+  RFC9290:
   CURIE-20101216:
     author:
       -
@@ -645,7 +646,7 @@ The same as defined in {{Section 6.8.1 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 Consistently with {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, the following holds for the Group Manager.
 
-* It MUST support the top-level link elements 'error', 'error_description', 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
+* It MUST support the top-level link elements 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
 
   This is consistent with what is defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}} for the Key Distribution Center, of which the Group Manager defined in {{I-D.ietf-ace-key-groupcomm-oscore}} is a specific instance.
 
@@ -653,7 +654,7 @@ Consistently with {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, the following h
 
 The following holds for an Administrator.
 
-* It MUST support the top-level link elements 'error', 'error_description', 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
+* It MUST support the top-level link elements 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
 
 * It MUST support the top-level link elements corresponding to all the parameters listed in {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, with the following exceptions.
 
@@ -663,7 +664,7 @@ The following holds for an Administrator.
 
 # Error Identifiers
 
-If the Group Manager sends an error response including the link element 'error', this can specify any of the values defined in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}}.
+If the Group Manager sends an error response with Content-Format application/concise-problem-details+cbor {{RFC9290}} as defined in {{Section 4.1.2 of I-D.ietf-ace-key-groupcomm}}, then the 'error-id' field within the Custom Problem Detail entry 'ace-groupcomm-error' takes value from those defined in {{Section 4.1.2 of I-D.ietf-ace-key-groupcomm}} and in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}}.
 
 The same guidelines in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}} for the Administrator to handle such error identifiers holds.
 
@@ -749,6 +750,8 @@ The following shared item table is used for compressing values of the rt= target
 * Fixed use of 'linkformat' in the CURIE syntax.
 
 * Fixed use of CURIEs that result in a URI with the fragment component.
+
+* Remove reference to the abandoned, custom format for error messages.
 
 * Editorial improvements.
 
