@@ -242,7 +242,7 @@ The same as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}} holds, with
 
    - The payload MUST NOT include any link element corresponding to an inner information element of that structured parameter.
 
-   - The link element MUST have the link target with value `false` (0xf4) for indicating the structured parameter with no elements.
+   - The link element MUST have the link target with value the CBOR simple value `false` (0xf4) for indicating the structured parameter with no elements.
 
       Editor's note: this should change to using an empty CBOR array or an empty CBOR map as appropriate, once this is made explicitly possible in the binary format of link items in CoRAL (see Section 3.1.4 of {{I-D.ietf-core-coral}}).
 
@@ -473,7 +473,7 @@ The Administrator can send a FETCH request to the group-configuration resource m
 
 The same as defined in {{Section 6.5 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
 
-* The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see {{config-repr}}). All the specified link elements MUST have the link target with value "null".
+* The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see {{config-repr}}). All the specified link elements MUST have the link target with value the CBOR simple value `null` (0xf6).
 
 * The request payload MUST NOT include any link element corresponding to an inner information element of a structured parameter.
 
