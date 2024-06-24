@@ -21,13 +21,13 @@ Abstract
    material.  The Group Manager can provide a RESTful admin interface
    that allows an Administrator entity to create and delete OSCORE
    groups, as well as to retrieve and update their configuration.  This
-   document specifies how an Administrator entity interacts with the
-   admin interface at the Group Manager by using the Constrained RESTful
+   document specifies how an Administrator interacts with the admin
+   interface at the Group Manager by using the Constrained RESTful
    Application Language (CoRAL).  The ACE framework for Authentication
    and Authorization is used to enforce authentication and authorization
    of the Administrator at the Group Manager.  Protocol-specific
    transport profiles of ACE are used to achieve communication security,
-   proof-of-possession and server authentication.
+   proof-of-possession, and server authentication.
 
 Discussion Venues
 
@@ -159,13 +159,13 @@ Table of Contents
    the way the group configurations are organized and represented.
 
    Interaction examples using Packed CBOR [I-D.ietf-cbor-packed] are
-   provided, and are expressed in CBOR diagnostic notation [RFC8949].
-   Section 1.2 provides the notation and assumptions used in the
-   examples.
+   provided, and are expressed in CBOR diagnostic notation as defined in
+   Section 8 of [RFC8949] and Appendix G of [RFC8610].  Section 1.2
+   provides the notation and assumptions used in the examples.
 
    The ACE framework is used to ensure authentication and authorization
    of the Administrator (client) at the Group Manager (resource server).
-   In order to achieve communication security, proof-of-possession and
+   In order to achieve communication security, proof-of-possession, and
    server authentication, the Administrator and the Group Manager
    leverage protocol-specific transport profiles of ACE, such as
    [RFC9202][RFC9203].  These include also possible forthcoming
@@ -191,10 +191,11 @@ Table of Contents
       [I-D.ietf-core-href].
 
    *  CoAP [RFC7252], also in group communication scenarios
-      [I-D.ietf-core-groupcomm-bis].  These include the concepts of:
+      [I-D.ietf-core-groupcomm-bis].  These especially include the
+      concepts below:
 
       -  "application group", as a set of CoAP nodes that share a common
-         set of resources; and of
+         set of resources.
 
       -  "security group", as a set of CoAP nodes that share the same
          security material, and use it to protect and verify exchanged
@@ -202,7 +203,7 @@ Table of Contents
 
    *  The OSCORE [RFC8613] and Group OSCORE
       [I-D.ietf-core-oscore-groupcomm] security protocols.  These
-      especially include the concepts of:
+      especially include the concepts below:
 
       -  Group Manager, as the entity responsible for a set of OSCORE
          groups where communications among members are secured using
@@ -213,10 +214,10 @@ Table of Contents
          with an entity, including that entity's public key and
          parameters associated with the public key.  Examples of
          authentication credentials are CBOR Web Tokens (CWTs) and CWT
-         Claims Sets (CCSs) [RFC8392], X.509 certificates [RFC5280] and
+         Claims Sets (CCSs) [RFC8392], X.509 certificates [RFC5280], and
          C509 certificates [I-D.ietf-cose-cbor-encoded-cert].
 
-   *  The ACE framework for authentication and authorization [RFC9200].
+   *  The ACE framework for Authentication and Authorization [RFC9200].
       The terminology for entities in the considered architecture is
       defined in OAuth 2.0 [RFC6749].  In particular, this includes
       Client (C), Resource Server (RS), and Authorization Server (AS).
@@ -322,7 +323,7 @@ Table of Contents
    The Administrator can discover the group-collection resource from a
    Resource Directory (see, for instance [I-D.hartke-t2trg-coral-reef])
    or from .well-known/core, by using the resource type "core.osc.gcoll"
-   defined in Section 10.3 of [I-D.ietf-ace-oscore-gm-admin].
+   registered in Section 10.3 of [I-D.ietf-ace-oscore-gm-admin].
 
    The Administrator can discover group-configuration resources for the
    group-collection resource as specified in Section 6.1 and
@@ -344,7 +345,7 @@ Table of Contents
 
    In particular, communications between the Administrator and the Group
    Manager leverage protocol-specific transport profiles of ACE to
-   achieve communication security, proof-of-possession and server
+   achieve communication security, proof-of-possession, and server
    authentication.  To this end, the AS may explicitly signal the
    specific transport profile to use, consistently with requirements and
    assumptions defined in the ACE framework [RFC9200].
@@ -407,10 +408,10 @@ Table of Contents
    holds, with the following differences.
 
    *  The Content-Format in messages containing a payload is set to
-      application/coral+cbor, defined in Section 7.2 of
+      application/coral+cbor, registered in Section 7.2 of
       [I-D.ietf-core-coral].
 
-   *  The parameters 'sign_params', 'ecdh_params', 'app_groups' and
+   *  The parameters 'sign_params', 'ecdh_params', 'app_groups', and
       'group_policies' are referred to as "structured parameters".
 
    *  If a message payload specifies a link element corresponding to a
@@ -618,7 +619,7 @@ Table of Contents
    Administrator.
 
    The Administrator can send a GET request to the group-configuration
-   resource manage/GROUPNAME associated with an OSCORE group with group
+   resource /manage/GROUPNAME associated with an OSCORE group with group
    name GROUPNAME, in order to retrieve the complete current
    configuration of that group.
 
@@ -689,7 +690,7 @@ Table of Contents
    supported by an Administrator.
 
    The Administrator can send a FETCH request to the group-configuration
-   resource manage/GROUPNAME associated with an OSCORE group with group
+   resource /manage/GROUPNAME associated with an OSCORE group with group
    name GROUPNAME, in order to retrieve part of the current
    configuration of that group.
 
@@ -756,7 +757,7 @@ Table of Contents
    Administrator.
 
    The Administrator can send a POST request to the group-configuration
-   resource manage/GROUPNAME associated with an OSCORE group with group
+   resource /manage/GROUPNAME associated with an OSCORE group with group
    name GROUPNAME, in order to overwrite the current configuration of
    that group with a new one.
 
@@ -812,7 +813,7 @@ Table of Contents
    Administrator.
 
    The Administrator can send a PATCH/iPATCH request [RFC8132] to the
-   group-configuration resource manage/GROUPNAME associated with an
+   group-configuration resource /manage/GROUPNAME associated with an
    OSCORE group with group name GROUPNAME, in order to update the value
    of only part of the group configuration.
 
@@ -833,8 +834,8 @@ Table of Contents
          parameter.  This link element can be included multiple times.
 
       The Group Manager MUST respond with a 4.00 (Bad Request) response,
-      in case the request payload includes both any 'app_group' link
-      element as well as any 'app_group_del' and/or 'app_group_add' link
+      in case the request payload includes any 'app_group' link element
+      together with any 'app_group_del' and/or 'app_group_add' link
       element.
 
    *  The Group Manager MUST respond with a 4.00 (Bad Request) response,
@@ -901,7 +902,7 @@ Table of Contents
    Administrator.
 
    The Administrator can send a DELETE request to the group-
-   configuration resource manage/GROUPNAME associated with an OSCORE
+   configuration resource /manage/GROUPNAME associated with an OSCORE
    group with group name GROUPNAME, in order to delete that OSCORE
    group.
 
@@ -1084,6 +1085,12 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8610]  Birkholz, H., Vigano, C., and C. Bormann, "Concise Data
+              Definition Language (CDDL): A Notational Convention to
+              Express Concise Binary Object Representation (CBOR) and
+              JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
+              June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
 
    [RFC8613]  Selander, G., Mattsson, J., Palombini, F., and L. Seitz,
               "Object Security for Constrained RESTful Environments
