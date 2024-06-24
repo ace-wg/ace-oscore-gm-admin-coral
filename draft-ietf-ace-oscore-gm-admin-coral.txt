@@ -1301,10 +1301,10 @@ Acknowledgments
    interactions using CoRAL.
 
    The authors sincerely thank Christian Amsüss, Carsten Bormann, and
-   Jim Schaad for their comments and feedback.  The work on this
-   document has been partly supported by VINNOVA and the Celtic-Next
-   project CRITISEC; and by the H2020 project SIFIS-Home (Grant
-   agreement 952652).
+   Jim Schaad for their comments and feedback.  This work was supported
+   by the Sweden's Innovation Agency VINNOVA within the EUREKA CELTIC-
+   NEXT projects CRITISEC and CYPRESS; and by the H2020 project SIFIS-
+   Home (Grant agreement 952652).
 
 Authors' Addresses
 
