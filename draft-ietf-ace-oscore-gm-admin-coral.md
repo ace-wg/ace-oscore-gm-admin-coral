@@ -133,7 +133,7 @@ Readers are expected to be familiar with the terms and concepts from the followi
 
 Readers are also expected to be familiar with the terms and concepts used in {{I-D.ietf-ace-oscore-gm-admin}}, with particular reference to: "Administrator", "group name", "group-collection resource", and "group-configuration resource".
 
-Like in {{I-D.ietf-ace-oscore-gm-admin}}, the url-path to a group-configuration resource has GROUPNAME as last segment, with GROUPNAME the invariant group name assigned upon its creation. Building on the considered url-path of the group-collection resource, this document uses /manage/GROUPNAME as the url-path of a group-configuration resource; implementations are not required to use this name, and can define their own instead.
+Like in {{I-D.ietf-ace-oscore-gm-admin}}, this document uses /manage as the url-path of the group-collection resource at the Group Manager when providing examples; implementations can use a different url-path. Building on that, this document uses /manage/GROUPNAME as the url-path of a group-configuration resource; implementations are not required to use this name, and can define their own instead.
 
 Note that, unless otherwise indicated, the term "endpoint" is used here following its OAuth definition, aimed at denoting resources such as /token and /introspect at the AS, and /authz-info at the RS. This document does not use the CoAP definition of "endpoint", which is "An entity participating in the CoAP protocol".
 
