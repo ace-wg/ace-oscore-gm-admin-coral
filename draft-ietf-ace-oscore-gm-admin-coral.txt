@@ -86,8 +86,8 @@ Table of Contents
      4.1.  Multiple Administrators for the Same OSCORE Group
    5.  Group Configurations
      5.1.  Group Configuration Representation
-       5.1.1.  Configuration Properties
-       5.1.2.  Status Properties
+       5.1.1.  Configuration Parameters
+       5.1.2.  Status Parameters
      5.2.  Default Values
    6.  Interactions with the Group Manager
      6.1.  Retrieve the Full List of Group Configurations
@@ -384,16 +384,16 @@ Table of Contents
 
    The same group configuration representation defined in Section 5.1 of
    [I-D.ietf-ace-oscore-gm-admin] is used, as including configuration
-   properties and status properties.
+   parameters and status parameters.
 
-5.1.1.  Configuration Properties
+5.1.1.  Configuration Parameters
 
-   The same configuration properties defined in Section 5.1.1 of
+   The same configuration parameters defined in Section 5.1.1 of
    [I-D.ietf-ace-oscore-gm-admin] are used.
 
-5.1.2.  Status Properties
+5.1.2.  Status Parameters
 
-   The same status properties defined in Section 5.1.2 of
+   The same status parameters defined in Section 5.1.2 of
    [I-D.ietf-ace-oscore-gm-admin] are used.
 
 5.2.  Default Values
@@ -492,7 +492,7 @@ Table of Contents
       empty structured parameters.
 
    *  If names of application groups are used as filter criteria, each
-      element of the 'app_groups' array from the status properties is
+      element of the 'app_groups' array from the status parameters is
       included as a separate link element with name 'app_group'.
 
    *  With the exception of the 'app_group' element, a valid request
@@ -554,7 +554,7 @@ Table of Contents
       of non-empty structured parameters.
 
    *  In the request payload, each element of the 'app_groups' array
-      from the status properties is included as a separate element with
+      from the status parameters is included as a separate element with
       name 'app_group'.
 
    *  The Group Manager MUST respond with a 4.00 (Bad Request) response
@@ -566,7 +566,7 @@ Table of Contents
       parameter, with the exception of non-empty structured parameters.
 
    *  In the response payload, each element of the 'app_groups' array
-      from the status properties is included as a separate element with
+      from the status parameters is included as a separate element with
       name 'app_group'.
 
    *  If the Administrator performs the registration of the group-
@@ -629,7 +629,7 @@ Table of Contents
       the group configuration (see Section 5.1), with the exception of
       non-empty status parameters.
 
-   *  Each element of the 'app_groups' array from the status properties
+   *  Each element of the 'app_groups' array from the status parameters
       is included as a separate link element with name 'app_group'.
 
    An example of message exchange is shown below.
@@ -1307,6 +1307,8 @@ B.1.  Version -01 to -02
       component.
 
    *  Renamed 'group_title' as 'group_description'.
+
+   *  Status/Configuration "properties" renamed as "parameters".
 
    *  POST (instead of PUT) for overwriting a group-configuration
       resource.
