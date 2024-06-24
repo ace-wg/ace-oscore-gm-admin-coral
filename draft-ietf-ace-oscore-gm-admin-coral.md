@@ -148,7 +148,7 @@ When using the CURIE syntax {{CURIE-20101216}}, the following applies.
 
 * 'core.osc.gconf' stands for http://coreapps.org/core.osc.gconf#
 
-* 'linkformat' stands for http://www.iana.org/assignments/linkformat
+* 'linkformat' stands for http://www.iana.org/assignments/linkformat/
 
    This URI is to be defined with IANA, together with other URIs that build on it through further path segments, e.g., http://www.iana.org/assignments/linkformat/rt
 
@@ -745,6 +745,8 @@ The following shared item table is used for compressing values of the rt= target
 ## Version -01 to -02 ## {#sec-01-02}
 
 * Avoid quotation marks for CBOR simple values.
+
+* Fixed use of 'linkformat' in the CURIE syntax.
 
 * Editorial improvements.
 
