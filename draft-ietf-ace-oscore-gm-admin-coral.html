@@ -1827,23 +1827,23 @@ If the request payload specifies a parameter that is not included in the group c
 </div>
 </section>
 </div>
-<div id="configuration-resource-put">
+<div id="configuration-resource-post">
 <section id="section-6.6">
         <h3 id="name-overwrite-a-group-configura">
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-overwrite-a-group-configura" class="section-name selfRef">Overwrite a Group Configuration</a>
         </h3>
 <p id="section-6.6-1">This operation <span class="bcp14">MAY</span> be supported by the Group Manager and an Administrator.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
-<p id="section-6.6-2">The Administrator can send a PUT request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
+<p id="section-6.6-2">The Administrator can send a POST request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
 <p id="section-6.6-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-11#section-6.6" class="relref">Section 6.6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following difference.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.6-4.1">
-            <p id="section-6.6-4.1.1">If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group <span class="bcp14">MUST</span> take the values possibly specified by the different 'app_group' link elements in the PUT request.<a href="#section-6.6-4.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.6-4.1.1">If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group <span class="bcp14">MUST</span> take the values possibly specified by the different 'app_group' link elements in the POST request.<a href="#section-6.6-4.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-6.6-5">An example of message exchange is shown below.<a href="#section-6.6-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.6-6">
 <pre>
-=&gt; 0.03 PUT
+=&gt; 0.02 POST
    Uri-Path: manage
    Uri-Path: gp4
    Content-Format: 65087 (application/coral+cbor)
@@ -2439,10 +2439,13 @@ This is consistent with what is defined in <span><a href="https://datatracker.ie
             <p id="appendix-B.1-1.4.1">Renamed 'group_title' as 'group_description'.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Remove reference to the abandoned, custom format for error messages.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.5.1">POST (instead of PUT) for overwriting a group-configuration resource.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.6">
-            <p id="appendix-B.1-1.6.1">Editorial improvements.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.6.1">Remove reference to the abandoned, custom format for error messages.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.7">
+            <p id="appendix-B.1-1.7.1">Editorial improvements.<a href="#appendix-B.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>

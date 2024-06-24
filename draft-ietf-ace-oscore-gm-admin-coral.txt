@@ -755,7 +755,7 @@ Table of Contents
    This operation MAY be supported by the Group Manager and an
    Administrator.
 
-   The Administrator can send a PUT request to the group-configuration
+   The Administrator can send a POST request to the group-configuration
    resource manage/GROUPNAME associated with an OSCORE group with group
    name GROUPNAME, in order to overwrite the current configuration of
    that group with a new one.
@@ -767,11 +767,11 @@ Table of Contents
       membership resource in the Resource Directory on behalf of the
       Group Manager, then the names of the application groups using the
       OSCORE group MUST take the values possibly specified by the
-      different 'app_group' link elements in the PUT request.
+      different 'app_group' link elements in the POST request.
 
    An example of message exchange is shown below.
 
-   => 0.03 PUT
+   => 0.02 POST
       Uri-Path: manage
       Uri-Path: gp4
       Content-Format: 65087 (application/coral+cbor)
@@ -1307,6 +1307,9 @@ B.1.  Version -01 to -02
       component.
 
    *  Renamed 'group_title' as 'group_description'.
+
+   *  POST (instead of PUT) for overwriting a group-configuration
+      resource.
 
    *  Remove reference to the abandoned, custom format for error
       messages.
