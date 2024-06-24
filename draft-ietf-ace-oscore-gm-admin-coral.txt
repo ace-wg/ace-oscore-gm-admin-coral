@@ -257,9 +257,9 @@ Table of Contents
 
    When using the CURIE syntax [CURIE-20101216], the following applies.
 
-   *  'core.osc.gcoll' stands for http://coreapps.org/core.osc.gcoll#
+   *  'core.osc.gcoll' stands for http://coreapps.org/core.osc.gcoll
 
-   *  'core.osc.gconf' stands for http://coreapps.org/core.osc.gconf#
+   *  'core.osc.gconf' stands for http://coreapps.org/core.osc.gconf
 
    *  'linkformat' stands for http://www.iana.org/assignments/
       linkformat/
@@ -458,17 +458,17 @@ Table of Contents
 
       [
         [1, cri'coap://[2001:db8::ab]/manage'],
-        [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp1', [
+        [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp1', [
           [2, simple(6) / item 6 for linkformat:rt /,
            6(-200) / item 415 for cri'http://www.iana.org/assignments
                                       /linkformat/rt/core.osc.gconf' /]
         ]],
-        [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp2', [
+        [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp2', [
           [2, simple(6) / item 6 for linkformat:rt /,
            6(-200) / item 415 for cri'http://www.iana.org/assignments
                                       /linkformat/rt/core.osc.gconf' /]
         ]],
-        [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp3', [
+        [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp3', [
           [2, simple(6) / item 6 for linkformat:rt /,
            6(-200) / item 415 for cri'http://www.iana.org/assignments
                                       /linkformat/rt/core.osc.gconf' /]
@@ -510,9 +510,9 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
-        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-        [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
+        [2, 6(27) / item 70 for core.osc.gconf:#group_mode /, true],
+        [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+        [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5]
       ]
 
    <= 2.05 Content
@@ -522,17 +522,17 @@ Table of Contents
 
       [
        [1, cri'coap://[2001:db8::ab]/manage'],
-       [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp1', [
+       [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp1', [
          [2, simple(6) / item 6 for linkformat:rt /,
           6(-200) / item 415 for cri'http://www.iana.org/assignments
                                      /linkformat/rt/core.osc.gconf' /]
        ]],
-       [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp2', [
+       [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp2', [
          [2, simple(6) / item 6 for linkformat:rt /,
           6(-200) / item 415 for cri'http://www.iana.org/assignments
                                      /linkformat/rt/core.osc.gconf' /]
        ]],
-       [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp3', [
+       [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp3', [
          [2, simple(6) / item 6 for linkformat:rt /,
           6(-200) / item 415 for cri'http://www.iana.org/assignments
                                      /linkformat/rt/core.osc.gconf' /]
@@ -585,16 +585,16 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-        [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
-        [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
-        [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
-        [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-        [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+        [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+        [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5],
+        [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
+        [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
+        [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+        [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
          "rooms 1 and 2"],
-        [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
-        [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"],
-        [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+        [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
+        [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"],
+        [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
          cri'coap://as.example.com/token']
       ]
 
@@ -606,10 +606,10 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-        [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+        [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+        [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
          cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-        [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+        [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
          cri'coap://as.example.com/token']
       ]
 
@@ -645,42 +645,42 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
-        [2, 6(-27) / item 69 for core.osc.gconf:cred_fmt /, 33],
-        [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
-        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-        [2, 6(28) / item 72 for core.osc.gconf:sign_alg /, -8],
+        [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5],
+        [2, 6(-27) / item 69 for core.osc.gconf:#cred_fmt /, 33],
+        [2, 6(27) / item 70 for core.osc.gconf:#group_mode /, true],
+        [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+        [2, 6(28) / item 72 for core.osc.gconf:#sign_alg /, -8],
         [2, 6(29) / item 74 for
-         core.osc.gconf:sign_params.alg_capab.key_type /, 1],
+         core.osc.gconf:#sign_params.alg_capab.key_type /, 1],
         [2, 6(-30) / item 75 for
-         core.osc.gconf:sign_params.key_type_capab.key_type /, 1],
+         core.osc.gconf:#sign_params.key_type_capab.key_type /, 1],
         [2, 6(30) / item 76 for
-         core.osc.gconf:sign_params.key_type_capab.curve /, 6],
-        [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
-        [2, 6(31) / item 78 for core.osc.gconf:alg /, 10],
-        [2, 6(-32) / item 79 for core.osc.gconf:ecdh_alg /, -27],
+         core.osc.gconf:#sign_params.key_type_capab.curve /, 6],
+        [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
+        [2, 6(31) / item 78 for core.osc.gconf:#alg /, 10],
+        [2, 6(-32) / item 79 for core.osc.gconf:#ecdh_alg /, -27],
         [2, 6(-33) / item 81 for
-         core.osc.gconf:ecdh_params.alg_capab.key_type /, 1],
+         core.osc.gconf:#ecdh_params.alg_capab.key_type /, 1],
         [2, 6(33) / item 82 for
-         core.osc.gconf:ecdh_params.key_type_capab.key_type /, 1],
+         core.osc.gconf:#ecdh_params.key_type_capab.key_type /, 1],
         [2, 6(-34) / item 83 for
-         core.osc.gconf:ecdh_params.key_type_capab.curve /, 6],
-        [2, 6(34) / item 84 for core.osc.gconf:det_req /, false],
-        [2, 6(35) / item 86 for core.osc.gconf:rt /, "core.osc.gconf"],
-        [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
-        [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-        [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+         core.osc.gconf:#ecdh_params.key_type_capab.curve /, 6],
+        [2, 6(34) / item 84 for core.osc.gconf:#det_req /, false],
+        [2, 6(35) / item 86 for core.osc.gconf:#rt /, "core.osc.gconf"],
+        [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
+        [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+        [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
          "rooms 1 and 2"],
-        [2, 6(37) / item 90 for core.osc.gconf:ace_groupcomm_profile /,
+        [2, 6(37) / item 90 for core.osc.gconf:#ace_groupcomm_profile /,
          "coap_group_oscore_app"],
-        [2, 6(-38) / item 91 for core.osc.gconf:max_stale_sets /, 3],
-        [2, 6(38) / item 92 for core.osc.gconf:exp /, 1360289224],
-        [2, 6(-39) / item 93 for core.osc.gconf:gid_reuse /, false],
-        [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
-        [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"],
-        [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+        [2, 6(-38) / item 91 for core.osc.gconf:#max_stale_sets /, 3],
+        [2, 6(38) / item 92 for core.osc.gconf:#exp /, 1360289224],
+        [2, 6(-39) / item 93 for core.osc.gconf:#gid_reuse /, false],
+        [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
+        [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"],
+        [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
          cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-        [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+        [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
          cri'coap://as.example.com/token']
       ]
 
@@ -726,12 +726,12 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, null],
-        [2, 6(26) / item 68 for core.osc.gconf:hkdf /, null],
-        [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, null],
-        [2, 6(-36) / item 87 for core.osc.gconf:active /, null],
-        [2, 6(-37) / item 89 for core.osc.gconf:group_title /, null],
-        [2, 6(41) / item 98 for core.osc.gconf:app_groups /, null]
+        [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, null],
+        [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, null],
+        [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, null],
+        [2, 6(-36) / item 87 for core.osc.gconf:#active /, null],
+        [2, 6(-37) / item 89 for core.osc.gconf:#group_title /, null],
+        [2, 6(41) / item 98 for core.osc.gconf:#app_groups /, null]
       ]
 
    <= 2.05 Content
@@ -740,14 +740,14 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-        [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
-        [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
-        [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
-        [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+        [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+        [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5],
+        [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
+        [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
+        [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
          "rooms 1 and 2"],
-        [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
-        [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"]
+        [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
+        [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"]
       ]
 
 6.6.  Overwrite a Group Configuration
@@ -779,8 +779,8 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 11],
-        [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
+        [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 11],
+        [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5]
       ]
 
    <= 2.04 Changed
@@ -789,10 +789,10 @@ Table of Contents
       Payload:
 
       [
-        [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-        [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+        [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+        [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
          cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-        [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+        [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
          cri'coap://as.example.com/token']
       ]
 
@@ -858,32 +858,32 @@ Table of Contents
 
    An example of message exchange is shown below.
 
- => 0.06 PATCH
-    Uri-Path: manage
-    Uri-Path: gp4
-    Content-Format: 65087 (application/coral+cbor)
+=> 0.06 PATCH
+   Uri-Path: manage
+   Uri-Path: gp4
+   Content-Format: 65087 (application/coral+cbor)
 
-    Payload:
+   Payload:
 
-    [
-      [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-      [2, 6(-40) / item 95 for core.osc.gconf:app_group_del /, "room1"],
-      [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room3"],
-      [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room4"]
-    ]
+   [
+     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+     [2, 6(-40) / item 95 for core.osc.gconf:#app_group_del /, "room1"],
+     [2, 6(40) / item 96 for core.osc.gconf:#app_group_add /, "room3"],
+     [2, 6(40) / item 96 for core.osc.gconf:#app_group_add /, "room4"]
+   ]
 
- <= 2.04 Changed
-    Content-Format: 65087 (application/coral+cbor)
+<= 2.04 Changed
+   Content-Format: 65087 (application/coral+cbor)
 
-    Payload:
+   Payload:
 
-    [
-      [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-      [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
-       cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-      [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
-       cri'coap://as.example.com/token']
-    ]
+   [
+     [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
+      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+     [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
+      cri'coap://as.example.com/token']
+   ]
 
 6.7.1.  Effects on Joining Nodes
 
@@ -1292,6 +1292,9 @@ B.1.  Version -01 to -02
    *  Avoid quotation marks for CBOR simple values.
 
    *  Fixed use of 'linkformat' in the CURIE syntax.
+
+   *  Fixed use of CURIEs that result in a URI with the fragment
+      component.
 
    *  Editorial improvements.
 
