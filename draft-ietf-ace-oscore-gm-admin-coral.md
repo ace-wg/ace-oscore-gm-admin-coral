@@ -116,15 +116,15 @@ Readers are expected to be familiar with the terms and concepts from the followi
 
 * The CoAP protocol {{RFC7252}}, also in group communication scenarios {{I-D.ietf-core-groupcomm-bis}}. These include the concepts of:
 
-   - "application group", as a set of CoAP nodes that share a common set of resources; and of
+  - "application group", as a set of CoAP nodes that share a common set of resources; and of
 
-   - "security group", as a set of CoAP nodes that share the same security material, and use it to protect and verify exchanged messages.
+  - "security group", as a set of CoAP nodes that share the same security material, and use it to protect and verify exchanged messages.
 
 * The OSCORE {{RFC8613}} and Group OSCORE {{I-D.ietf-core-oscore-groupcomm}} security protocols. These especially include the concepts of:
 
-   - Group Manager, as the entity responsible for a set of OSCORE groups where communications among members are secured using Group OSCORE. An OSCORE group is used as security group for one or many application groups.
+  - Group Manager, as the entity responsible for a set of OSCORE groups where communications among members are secured using Group OSCORE. An OSCORE group is used as security group for one or many application groups.
 
-   - Authentication credential, as the set of information associated with an entity, including that entity's public key and parameters associated with the public key. Examples of authentication credentials are CBOR Web Tokens (CWTs) and CWT Claims Sets (CCSs) {{RFC8392}}, X.509 certificates {{RFC5280}} and C509 certificates {{I-D.ietf-cose-cbor-encoded-cert}}.
+  - Authentication credential, as the set of information associated with an entity, including that entity's public key and parameters associated with the public key. Examples of authentication credentials are CBOR Web Tokens (CWTs) and CWT Claims Sets (CCSs) {{RFC8392}}, X.509 certificates {{RFC5280}} and C509 certificates {{I-D.ietf-cose-cbor-encoded-cert}}.
 
 * The ACE framework for authentication and authorization {{RFC9200}}. The terminology for entities in the considered architecture is defined in OAuth 2.0 {{RFC6749}}. In particular, this includes Client (C), Resource Server (RS), and Authorization Server (AS).
 
@@ -144,19 +144,19 @@ The examples in this document use the following notation.
 
 When using the CURIE syntax {{CURIE-20101216}}, the following applies.
 
-* 'core.osc.gcoll' stands for http://coreapps.org/core.osc.gcoll#
+* 'core.osc.gcoll' stands for http://coreapps.org/core.osc.gcoll
 
-* 'core.osc.gconf' stands for http://coreapps.org/core.osc.gconf#
+* 'core.osc.gconf' stands for http://coreapps.org/core.osc.gconf
 
 * 'linkformat' stands for http://www.iana.org/assignments/linkformat/
 
-   This URI is to be defined with IANA, together with other URIs that build on it through further path segments, e.g., http://www.iana.org/assignments/linkformat/rt
+  This URI is to be defined with IANA, together with other URIs that build on it through further path segments, e.g., http://www.iana.org/assignments/linkformat/rt
 
 When using a URI http://www.iana.org/assignments/linkformat/SEG1/SEG2
 
 * The path segment SEG1 is the name of a web link target attribute.
 
-   Names of target attributes used in Link Format {{RFC6690}} are expected to be coordinated through the "Target Attributes" registry defined in {{RFC9423}}.
+  Names of target attributes used in Link Format {{RFC6690}} are expected to be coordinated through the "Target Attributes" registry defined in {{RFC9423}}.
 
 * The path segment SEG2 is the value of the target attribute.
 
@@ -240,11 +240,11 @@ The same as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}} holds, with
 
 * If a message payload specifies a link element corresponding to a structured parameter, then:
 
-   - The payload MUST NOT include any link element corresponding to an inner information element of that structured parameter.
+  - The payload MUST NOT include any link element corresponding to an inner information element of that structured parameter.
 
-   - The link element MUST have the link target with value the CBOR simple value `false` (0xf4) for indicating the structured parameter with no elements.
+  - The link element MUST have the link target with value the CBOR simple value `false` (0xf4) for indicating the structured parameter with no elements.
 
-      Editor's note: this should change to using an empty CBOR array or an empty CBOR map as appropriate, once this is made explicitly possible in the binary format of link items in CoRAL (see Section 3.1.4 of {{I-D.ietf-core-coral}}).
+    Editor's note: this should change to using an empty CBOR array or an empty CBOR map as appropriate, once this is made explicitly possible in the binary format of link items in CoRAL (see Section 3.1.4 of {{I-D.ietf-core-coral}}).
 
 * If a message payload specifies an information element of a structured parameter from the group configuration, then that information element MUST be specified by means of the corresponding link element.
 
@@ -269,17 +269,17 @@ An example of message exchange is shown below.
 
    [
      [1, cri'coap://[2001:db8::ab]/manage'],
-     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp1', [
+     [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp1', [
        [2, simple(6) / item 6 for linkformat:rt /,
         6(-200) / item 415 for cri'http://www.iana.org/assignments
                                    /linkformat/rt/core.osc.gconf' /]
      ]],
-     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp2', [
+     [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp2', [
        [2, simple(6) / item 6 for linkformat:rt /,
         6(-200) / item 415 for cri'http://www.iana.org/assignments
                                    /linkformat/rt/core.osc.gconf' /]
      ]],
-     [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp3', [
+     [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp3', [
        [2, simple(6) / item 6 for linkformat:rt /,
         6(-200) / item 415 for cri'http://www.iana.org/assignments
                                    /linkformat/rt/core.osc.gconf' /]
@@ -311,9 +311,9 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
-     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
+     [2, 6(27) / item 70 for core.osc.gconf:#group_mode /, true],
+     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5]
    ]
 
 <= 2.05 Content
@@ -323,17 +323,17 @@ An example of message exchange is shown below.
 
    [
     [1, cri'coap://[2001:db8::ab]/manage'],
-    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp1', [
+    [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp1', [
       [2, simple(6) / item 6 for linkformat:rt /,
        6(-200) / item 415 for cri'http://www.iana.org/assignments
                                   /linkformat/rt/core.osc.gconf' /]
     ]],
-    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp2', [
+    [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp2', [
       [2, simple(6) / item 6 for linkformat:rt /,
        6(-200) / item 415 for cri'http://www.iana.org/assignments
                                   /linkformat/rt/core.osc.gconf' /]
     ]],
-    [2, 6(17) / item 50 for core.osc.gcoll:item /, cri'/gp3', [
+    [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp3', [
       [2, simple(6) / item 6 for linkformat:rt /,
        6(-200) / item 415 for cri'http://www.iana.org/assignments
                                   /linkformat/rt/core.osc.gconf' /]
@@ -371,16 +371,16 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
-     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
-     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
-     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5],
+     [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
+     [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
+     [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
       "rooms 1 and 2"],
-     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
-     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"],
-     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+     [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"],
+     [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
       cri'coap://as.example.com/token']
    ]
 
@@ -392,10 +392,10 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+     [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
       cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+     [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
       cri'coap://as.example.com/token']
    ]
 ~~~~~~~~~~~
@@ -425,42 +425,42 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
-     [2, 6(-27) / item 69 for core.osc.gconf:cred_fmt /, 33],
-     [2, 6(27) / item 70 for core.osc.gconf:group_mode /, true],
-     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-     [2, 6(28) / item 72 for core.osc.gconf:sign_alg /, -8],
+     [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5],
+     [2, 6(-27) / item 69 for core.osc.gconf:#cred_fmt /, 33],
+     [2, 6(27) / item 70 for core.osc.gconf:#group_mode /, true],
+     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+     [2, 6(28) / item 72 for core.osc.gconf:#sign_alg /, -8],
      [2, 6(29) / item 74 for
-      core.osc.gconf:sign_params.alg_capab.key_type /, 1],
+      core.osc.gconf:#sign_params.alg_capab.key_type /, 1],
      [2, 6(-30) / item 75 for
-      core.osc.gconf:sign_params.key_type_capab.key_type /, 1],
+      core.osc.gconf:#sign_params.key_type_capab.key_type /, 1],
      [2, 6(30) / item 76 for
-      core.osc.gconf:sign_params.key_type_capab.curve /, 6],
-     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
-     [2, 6(31) / item 78 for core.osc.gconf:alg /, 10],
-     [2, 6(-32) / item 79 for core.osc.gconf:ecdh_alg /, -27],
+      core.osc.gconf:#sign_params.key_type_capab.curve /, 6],
+     [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
+     [2, 6(31) / item 78 for core.osc.gconf:#alg /, 10],
+     [2, 6(-32) / item 79 for core.osc.gconf:#ecdh_alg /, -27],
      [2, 6(-33) / item 81 for
-      core.osc.gconf:ecdh_params.alg_capab.key_type /, 1],
+      core.osc.gconf:#ecdh_params.alg_capab.key_type /, 1],
      [2, 6(33) / item 82 for
-      core.osc.gconf:ecdh_params.key_type_capab.key_type /, 1],
+      core.osc.gconf:#ecdh_params.key_type_capab.key_type /, 1],
      [2, 6(-34) / item 83 for
-      core.osc.gconf:ecdh_params.key_type_capab.curve /, 6],
-     [2, 6(34) / item 84 for core.osc.gconf:det_req /, false],
-     [2, 6(35) / item 86 for core.osc.gconf:rt /, "core.osc.gconf"],
-     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
-     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+      core.osc.gconf:#ecdh_params.key_type_capab.curve /, 6],
+     [2, 6(34) / item 84 for core.osc.gconf:#det_req /, false],
+     [2, 6(35) / item 86 for core.osc.gconf:#rt /, "core.osc.gconf"],
+     [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
+     [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
       "rooms 1 and 2"],
-     [2, 6(37) / item 90 for core.osc.gconf:ace_groupcomm_profile /,
+     [2, 6(37) / item 90 for core.osc.gconf:#ace_groupcomm_profile /,
       "coap_group_oscore_app"],
-     [2, 6(-38) / item 91 for core.osc.gconf:max_stale_sets /, 3],
-     [2, 6(38) / item 92 for core.osc.gconf:exp /, 1360289224],
-     [2, 6(-39) / item 93 for core.osc.gconf:gid_reuse /, false],
-     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
-     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"],
-     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+     [2, 6(-38) / item 91 for core.osc.gconf:#max_stale_sets /, 3],
+     [2, 6(38) / item 92 for core.osc.gconf:#exp /, 1360289224],
+     [2, 6(-39) / item 93 for core.osc.gconf:#gid_reuse /, false],
+     [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"],
+     [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
       cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+     [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
       cri'coap://as.example.com/token']
    ]
 ~~~~~~~~~~~
@@ -479,7 +479,7 @@ The same as defined in {{Section 6.5 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * The response payload includes the requested configuration parameters and status parameters, and is formatted as in the response payload of a GET request to a group-configuration resource (see {{configuration-resource-get}}).
 
-   If the request payload specifies a parameter that is not included in the group configuration, then the response payload MUST NOT include a corresponding link element.
+  If the request payload specifies a parameter that is not included in the group configuration, then the response payload MUST NOT include a corresponding link element.
 
 An example of message exchange is shown below.
 
@@ -492,12 +492,12 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, null],
-     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, null],
-     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, null],
-     [2, 6(-36) / item 87 for core.osc.gconf:active /, null],
-     [2, 6(-37) / item 89 for core.osc.gconf:group_title /, null],
-     [2, 6(41) / item 98 for core.osc.gconf:app_groups /, null]
+     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, null],
+     [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, null],
+     [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, null],
+     [2, 6(-36) / item 87 for core.osc.gconf:#active /, null],
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /, null],
+     [2, 6(41) / item 98 for core.osc.gconf:#app_groups /, null]
    ]
 
 <= 2.05 Content
@@ -506,14 +506,14 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5],
-     [2, 6(-31) / item 77 for core.osc.gconf:pairwise_mode /, true],
-     [2, 6(-36) / item 87 for core.osc.gconf:active /, true],
-     [2, 6(-37) / item 89 for core.osc.gconf:group_title /,
+     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+     [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5],
+     [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
+     [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
       "rooms 1 and 2"],
-     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 1"],
-     [2, 6(39) / item 94 for core.osc.gconf:app_group /, "room 2"]
+     [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
+     [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"]
    ]
 ~~~~~~~~~~~
 
@@ -538,8 +538,8 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 11],
-     [2, 6(26) / item 68 for core.osc.gconf:hkdf /, 5]
+     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 11],
+     [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5]
    ]
 
 <= 2.04 Changed
@@ -548,10 +548,10 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+     [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
       cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+     [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
       cri'coap://as.example.com/token']
    ]
 ~~~~~~~~~~~
@@ -574,11 +574,11 @@ The same as defined in {{Section 6.7 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * If the request payload specifies names of application groups to be removed from or added to the 'app_groups' status parameter, then such names are specified by means of the following top-level link elements.
 
-   - 'app_group_del', with value a text string specifying the name of an application group to remove from the 'app_groups' status parameter. This link element can be included multiple times.
+  - 'app_group_del', with value a text string specifying the name of an application group to remove from the 'app_groups' status parameter. This link element can be included multiple times.
 
-   - 'app_group_add', with value a text string specifying the name of an application group to add to the 'app_groups' status parameter. This link element can be included multiple times.
+  - 'app_group_add', with value a text string specifying the name of an application group to add to the 'app_groups' status parameter. This link element can be included multiple times.
 
-   The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the request payload includes both any 'app_group' link element as well as any 'app_group_del' and/or 'app_group_add' link element.
+  The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the request payload includes both any 'app_group' link element as well as any 'app_group_del' and/or 'app_group_add' link element.
 
 * The Group Manager MUST respond with a 4.00 (Bad Request) response, if the request payload includes no link elements.
 
@@ -586,9 +586,9 @@ The same as defined in {{Section 6.7 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * When updating the 'app_groups' status parameter by difference, the Group Manager:
 
-   - Deletes from the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_del' link elements.
+  - Deletes from the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_del' link elements.
 
-   - Adds to the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_add' link elements.
+  - Adds to the 'app_groups' status parameter the names of the application groups specified in the different 'app_group_add' link elements.
 
 An example of message exchange is shown below.
 
@@ -601,10 +601,10 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(-28) / item 71 for core.osc.gconf:gp_enc_alg /, 10],
-     [2, 6(-40) / item 95 for core.osc.gconf:app_group_del /, "room1"],
-     [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room3"],
-     [2, 6(40) / item 96 for core.osc.gconf:app_group_add /, "room4"]
+     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+     [2, 6(-40) / item 95 for core.osc.gconf:#app_group_del /, "room1"],
+     [2, 6(40) / item 96 for core.osc.gconf:#app_group_add /, "room3"],
+     [2, 6(40) / item 96 for core.osc.gconf:#app_group_add /, "room4"]
    ]
 
 <= 2.04 Changed
@@ -613,10 +613,10 @@ An example of message exchange is shown below.
    Payload:
 
    [
-     [2, 6(36) / item 88 for core.osc.gconf:group_name /, "gp4"],
-     [2, 6(-41) / item 97 for core.osc.gconf:joining_uri /,
+     [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+     [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
       cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-     [2, 6(43) / item 102 for core.osc.gconf:as_uri /,
+     [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
       cri'coap://as.example.com/token']
    ]
 ~~~~~~~~~~~
@@ -647,7 +647,7 @@ Consistently with {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, the following h
 
 * It MUST support the top-level link elements 'error', 'error_description', 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
 
-   This is consistent with what is defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}} for the Key Distribution Center, of which the Group Manager defined in {{I-D.ietf-ace-key-groupcomm-oscore}} is a specific instance.
+  This is consistent with what is defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}} for the Key Distribution Center, of which the Group Manager defined in {{I-D.ietf-ace-key-groupcomm-oscore}} is a specific instance.
 
 * It MUST support the top-level link elements corresponding to all the parameters listed in {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, with the exception of 'app_groups_diff' that MUST be supported only if the Group Manager supports the selective update of a group configuration (see {{configuration-resource-patch}}).
 
@@ -657,9 +657,9 @@ The following holds for an Administrator.
 
 * It MUST support the top-level link elements corresponding to all the parameters listed in {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, with the following exceptions.
 
-   - 'conf_filter', which MUST be supported only if the Administrator supports the partial retrieval of a group configuration by filters (see {{configuration-resource-fetch}}).
+  - 'conf_filter', which MUST be supported only if the Administrator supports the partial retrieval of a group configuration by filters (see {{configuration-resource-fetch}}).
 
-   - 'app_groups_diff' parameter, which MUST be supported only if the Administrator supports the selective update of a group configuration (see {{configuration-resource-patch}}).
+  - 'app_groups_diff' parameter, which MUST be supported only if the Administrator supports the selective update of a group configuration (see {{configuration-resource-patch}}).
 
 # Error Identifiers
 
@@ -747,6 +747,8 @@ The following shared item table is used for compressing values of the rt= target
 * Avoid quotation marks for CBOR simple values.
 
 * Fixed use of 'linkformat' in the CURIE syntax.
+
+* Fixed use of CURIEs that result in a URI with the fragment component.
 
 * Editorial improvements.
 
