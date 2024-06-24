@@ -717,7 +717,7 @@ The following shared item table is used for compressing CoRAL predicates, as per
 | 86    | cri'http://coreapps.org/core.osc.gconf#rt'                                                                                 |
 | 87    | cri'http://coreapps.org/core.osc.gconf#active'                                                                             |
 | 88    | cri'http://coreapps.org/core.osc.gconf#group_name'                                                                         |
-| 89    | cri'http://coreapps.org/core.osc.gconf#group_description'                                                                        |
+| 89    | cri'http://coreapps.org/core.osc.gconf#group_description'                                                                  |
 | 90    | cri'http://coreapps.org/core.osc.gconf <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#ace_groupcomm_profile'                    |
 | 91    | cri'http://coreapps.org/core.osc.gconf#max_stale_sets'                                                                     |
 | 92    | cri'http://coreapps.org/core.osc.gconf#exp'                                                                                |
