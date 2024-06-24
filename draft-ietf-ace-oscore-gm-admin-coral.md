@@ -16,11 +16,6 @@ cat: std
 submissiontype: IETF
 
 coding: utf-8
-pi:    # can use array (if all yes) or hash here
-
-  toc: yes
-  sortrefs:   # defaults to yes
-  symrefs: yes
 
 author:
       -
@@ -51,13 +46,11 @@ normative:
   I-D.ietf-core-groupcomm-bis:
   I-D.ietf-cbor-packed:
   I-D.ietf-core-href:
-  RFC2119:
   RFC3986:
   RFC6690:
   RFC6749:
   RFC7252:
   RFC8132:
-  RFC8174:
   RFC8613:
   RFC8949:
   RFC9052:
@@ -113,7 +106,7 @@ The ACE framework is used to ensure authentication and authorization of the Admi
 
 ## Terminology ## {#terminology}
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when, and only when, they appear in all capitals, as shown here.
+{::boilerplate bcp14-tagged}
 
 Readers are expected to be familiar with the terms and concepts from the following specifications.
 
@@ -803,8 +796,7 @@ The following shared item table is used for compressing values of the rt= target
 {: #fig-packed-cbor-table-2 title="Shared item table for compressing values of the rt= target attribute." artwork-align="center"}
 
 # Document Updates # {#sec-document-updates}
-
-RFC EDITOR: PLEASE REMOVE THIS SECTION.
+{:removeinrfc}
 
 ## Version -00 to -01 ## {#sec-00-01}
 
@@ -815,7 +807,7 @@ RFC EDITOR: PLEASE REMOVE THIS SECTION.
 * CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.
 
 # Acknowledgments # {#acknowledgment}
-{: numbered="no"}
+{:numbered="false"}
 
 Most of the content in this document was originally specified in draft-ietf-ace-oscore-gm-admin, which is co-authored also by Peter van der Stok and Francesca Palombini, and where Klaus Hartke contributed in the initial definition of the resource model and interactions using CoRAL.
 
