@@ -51,6 +51,7 @@ normative:
   RFC6749:
   RFC7252:
   RFC8132:
+  RFC8610:
   RFC8613:
   RFC8949:
   RFC9052:
@@ -85,7 +86,7 @@ entity:
 
 --- abstract
 
-Group communication for CoAP can be secured using Group Object Security for Constrained RESTful Environments (Group OSCORE). A Group Manager is responsible to handle the joining of new group members, as well as to manage and distribute the group keying material. The Group Manager can provide a RESTful admin interface that allows an Administrator entity to create and delete OSCORE groups, as well as to retrieve and update their configuration. This document specifies how an Administrator entity interacts with the admin interface at the Group Manager by using the Constrained RESTful Application Language (CoRAL). The ACE framework for Authentication and Authorization is used to enforce authentication and authorization of the Administrator at the Group Manager. Protocol-specific transport profiles of ACE are used to achieve communication security, proof-of-possession and server authentication.
+Group communication for CoAP can be secured using Group Object Security for Constrained RESTful Environments (Group OSCORE). A Group Manager is responsible to handle the joining of new group members, as well as to manage and distribute the group keying material. The Group Manager can provide a RESTful admin interface that allows an Administrator entity to create and delete OSCORE groups, as well as to retrieve and update their configuration. This document specifies how an Administrator interacts with the admin interface at the Group Manager by using the Constrained RESTful Application Language (CoRAL). The ACE framework for Authentication and Authorization is used to enforce authentication and authorization of the Administrator at the Group Manager. Protocol-specific transport profiles of ACE are used to achieve communication security, proof-of-possession, and server authentication.
 
 --- middle
 
@@ -101,9 +102,9 @@ The method in {{I-D.ietf-ace-key-groupcomm-oscore}} specifies how nodes can join
 
 This document builds on {{I-D.ietf-ace-oscore-gm-admin}}, and specifies how an Administrator interacts with the same RESTful admin interface by using the Constrained RESTful Application Language (CoRAL) {{I-D.ietf-core-coral}}. Compared to {{I-D.ietf-ace-oscore-gm-admin}}, there is no change in the admin interface and its operations, nor in the way the group configurations are organized and represented.
 
-Interaction examples using Packed CBOR {{I-D.ietf-cbor-packed}} are provided, and are expressed in CBOR diagnostic notation {{RFC8949}}. {{notation-coral-examples}} provides the notation and assumptions used in the examples.
+Interaction examples using Packed CBOR {{I-D.ietf-cbor-packed}} are provided, and are expressed in CBOR diagnostic notation as defined in {{Section 8 of RFC8949}} and {{Section G of RFC8610}}. {{notation-coral-examples}} provides the notation and assumptions used in the examples.
 
-The ACE framework is used to ensure authentication and authorization of the Administrator (client) at the Group Manager (resource server). In order to achieve communication security, proof-of-possession and server authentication, the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE, such as {{RFC9202}}{{RFC9203}}. These include also possible forthcoming transport profiles that comply with the requirements in {{Section C of RFC9200}}.
+The ACE framework is used to ensure authentication and authorization of the Administrator (client) at the Group Manager (resource server). In order to achieve communication security, proof-of-possession, and server authentication, the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE, such as {{RFC9202}}{{RFC9203}}. These include also possible forthcoming transport profiles that comply with the requirements in {{Section C of RFC9200}}.
 
 ## Terminology ## {#terminology}
 
@@ -115,19 +116,19 @@ Readers are expected to be familiar with the terms and concepts from the followi
 
 * The Constrained RESTful Application Language (CoRAL) {{I-D.ietf-core-coral}} and Constrained Resource Identifiers (CRIs) {{I-D.ietf-core-href}}.
 
-* CoAP {{RFC7252}}, also in group communication scenarios {{I-D.ietf-core-groupcomm-bis}}. These include the concepts of:
+* CoAP {{RFC7252}}, also in group communication scenarios {{I-D.ietf-core-groupcomm-bis}}. These especially include the concepts below:
 
-  - "application group", as a set of CoAP nodes that share a common set of resources; and of
+  - "application group", as a set of CoAP nodes that share a common set of resources.
 
   - "security group", as a set of CoAP nodes that share the same security material, and use it to protect and verify exchanged messages.
 
-* The OSCORE {{RFC8613}} and Group OSCORE {{I-D.ietf-core-oscore-groupcomm}} security protocols. These especially include the concepts of:
+* The OSCORE {{RFC8613}} and Group OSCORE {{I-D.ietf-core-oscore-groupcomm}} security protocols. These especially include the concepts below:
 
   - Group Manager, as the entity responsible for a set of OSCORE groups where communications among members are secured using Group OSCORE. An OSCORE group is used as security group for one or many application groups.
 
-  - Authentication credential, as the set of information associated with an entity, including that entity's public key and parameters associated with the public key. Examples of authentication credentials are CBOR Web Tokens (CWTs) and CWT Claims Sets (CCSs) {{RFC8392}}, X.509 certificates {{RFC5280}} and C509 certificates {{I-D.ietf-cose-cbor-encoded-cert}}.
+  - Authentication credential, as the set of information associated with an entity, including that entity's public key and parameters associated with the public key. Examples of authentication credentials are CBOR Web Tokens (CWTs) and CWT Claims Sets (CCSs) {{RFC8392}}, X.509 certificates {{RFC5280}}, and C509 certificates {{I-D.ietf-cose-cbor-encoded-cert}}.
 
-* The ACE framework for authentication and authorization {{RFC9200}}. The terminology for entities in the considered architecture is defined in OAuth 2.0 {{RFC6749}}. In particular, this includes Client (C), Resource Server (RS), and Authorization Server (AS).
+* The ACE framework for Authentication and Authorization {{RFC9200}}. The terminology for entities in the considered architecture is defined in OAuth 2.0 {{RFC6749}}. In particular, this includes Client (C), Resource Server (RS), and Authorization Server (AS).
 
 * The management of keying material for groups in ACE {{I-D.ietf-ace-key-groupcomm}} and specifically for OSCORE groups {{I-D.ietf-ace-key-groupcomm-oscore}}. These include the concept of group-membership resource hosted by the Group Manager, that new members access to join the OSCORE group, while current members can access to retrieve updated keying material.
 
@@ -185,7 +186,7 @@ Each group configuration is represented as a top-level link element, with the UR
 
 ## Discovery
 
-The Administrator can discover the group-collection resource from a Resource Directory (see, for instance {{I-D.hartke-t2trg-coral-reef}}) or from .well-known/core, by using the resource type "core.osc.gcoll" defined in {{Section 10.3 of I-D.ietf-ace-oscore-gm-admin}}.
+The Administrator can discover the group-collection resource from a Resource Directory (see, for instance {{I-D.hartke-t2trg-coral-reef}}) or from .well-known/core, by using the resource type "core.osc.gcoll" registered in {{Section 10.3 of I-D.ietf-ace-oscore-gm-admin}}.
 
 The Administrator can discover group-configuration resources for the group-collection resource as specified in {{collection-resource-get}} and {{collection-resource-fetch}}.
 
@@ -197,7 +198,7 @@ In order to express authorization information for the Administrator (see {{getti
 
 All communications between the involved entities rely on CoAP and MUST be secured.
 
-In particular, communications between the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE to achieve communication security, proof-of-possession and server authentication. To this end, the AS may explicitly signal the specific transport profile to use, consistently with requirements and assumptions defined in the ACE framework {{RFC9200}}.
+In particular, communications between the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE to achieve communication security, proof-of-possession, and server authentication. To this end, the AS may explicitly signal the specific transport profile to use, consistently with requirements and assumptions defined in the ACE framework {{RFC9200}}.
 
 With reference to the AS, communications between the Administrator and the AS (/token endpoint) as well as between the Group Manager and the AS (/introspect endpoint) can be secured by different means, for instance using DTLS {{RFC9147}} or OSCORE {{RFC8613}}. Further details on how the AS secures communications (with the Administrator and the Group Manager) depend on the specifically used transport profile of ACE, and are out of the scope of this document.
 
@@ -235,9 +236,9 @@ The Group manager refers to the same default values defined in {{Section 5.2 of 
 
 The same as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
 
-* The Content-Format in messages containing a payload is set to application/coral+cbor, defined in {{Section 7.2 of I-D.ietf-core-coral}}.
+* The Content-Format in messages containing a payload is set to application/coral+cbor, registered in {{Section 7.2 of I-D.ietf-core-coral}}.
 
-* The parameters 'sign_params', 'ecdh_params', 'app_groups' and 'group_policies' are referred to as "structured parameters".
+* The parameters 'sign_params', 'ecdh_params', 'app_groups', and 'group_policies' are referred to as "structured parameters".
 
 * If a message payload specifies a link element corresponding to a structured parameter, then:
 
@@ -405,7 +406,7 @@ An example of message exchange is shown below.
 
 This operation MUST be supported by the Group Manager and an Administrator.
 
-The Administrator can send a GET request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve the complete current configuration of that group.
+The Administrator can send a GET request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve the complete current configuration of that group.
 
 The same as defined in {{Section 6.4 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
 
@@ -470,7 +471,7 @@ An example of message exchange is shown below.
 
 This operation MUST be supported by the Group Manager and MAY be supported by an Administrator.
 
-The Administrator can send a FETCH request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve part of the current configuration of that group.
+The Administrator can send a FETCH request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve part of the current configuration of that group.
 
 The same as defined in {{Section 6.5 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
 
@@ -523,7 +524,7 @@ An example of message exchange is shown below.
 
 This operation MAY be supported by the Group Manager and an Administrator.
 
-The Administrator can send a POST request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.
+The Administrator can send a POST request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.
 
 The same as defined in {{Section 6.6 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following difference.
 
@@ -570,7 +571,7 @@ The same as defined in {{Section 6.6.2 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 This operation MAY be supported by the Group Manager and an Administrator.
 
-The Administrator can send a PATCH/iPATCH request {{RFC8132}} to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to update the value of only part of the group configuration.
+The Administrator can send a PATCH/iPATCH request {{RFC8132}} to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to update the value of only part of the group configuration.
 
 The same as defined in {{Section 6.7 of I-D.ietf-ace-oscore-gm-admin}} holds, with the following differences.
 
@@ -580,7 +581,7 @@ The same as defined in {{Section 6.7 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
   - 'app_group_add', with value a text string specifying the name of an application group to add to the 'app_groups' status parameter. This link element can be included multiple times.
 
-  The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the request payload includes both any 'app_group' link element as well as any 'app_group_del' and/or 'app_group_add' link element.
+  The Group Manager MUST respond with a 4.00 (Bad Request) response, in case the request payload includes any 'app_group' link element together with any 'app_group_del' and/or 'app_group_add' link element.
 
 * The Group Manager MUST respond with a 4.00 (Bad Request) response, if the request payload includes no link elements.
 
@@ -635,7 +636,7 @@ The same as defined in {{Section 6.7.2 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 This operation MUST be supported by the Group Manager and an Administrator.
 
-The Administrator can send a DELETE request to the group-configuration resource manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to delete that OSCORE group.
+The Administrator can send a DELETE request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to delete that OSCORE group.
 
 The same as defined in {{Section 6.8 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
