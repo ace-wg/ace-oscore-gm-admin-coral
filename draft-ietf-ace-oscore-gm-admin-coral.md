@@ -681,13 +681,13 @@ This document has no actions for IANA.
 
 --- back
 
-# Shared item tables for Packed CBOR # {#sec-packed-cbor-tables}
+# Shared Item Tables for Packed CBOR # {#sec-packed-cbor-tables}
 
 This appendix defines the two shared item tables that the examples in this document refer to for using Packed CBOR {{I-D.ietf-cbor-packed}}.
 
 The application-extension identifier "cri" defined in {{Section C of I-D.ietf-core-href}} is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI.
 
-## Compression of CoRAL predicates
+## Compression of CoRAL Predicates
 
 The following shared item table is used for compressing CoRAL predicates, as per {{Section 2.2 of I-D.ietf-cbor-packed}}.
 
