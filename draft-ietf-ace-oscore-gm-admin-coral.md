@@ -74,10 +74,10 @@ normative:
 informative:
   I-D.hartke-t2trg-coral-reef:
   I-D.ietf-cose-cbor-encoded-cert:
-  I-D.ietf-core-target-attr:
   RFC5280:
   RFC8392:
   RFC9147:
+  RFC9423:
 
 entity:
   SELF: "[RFC-XXXX]"
@@ -156,7 +156,7 @@ When using a URI http://www.iana.org/assignments/linkformat/SEG1/SEG2
 
 * The path segment SEG1 is the name of a web link target attribute.
 
-   Names of target attributes used in Link Format {{RFC6690}} are expected to be coordinated through the "Target Attributes" registry defined in {{I-D.ietf-core-target-attr}}.
+   Names of target attributes used in Link Format {{RFC6690}} are expected to be coordinated through the "Target Attributes" registry defined in {{RFC9423}}.
 
 * The path segment SEG2 is the value of the target attribute.
 
