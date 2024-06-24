@@ -979,7 +979,7 @@ Table of Contents
    reference to the process of rekeying OSCORE groups.
 
    The same security considerations from [I-D.ietf-ace-oscore-gm-admin]
-   also apply, as well for the security considerations for CoRAL
+   also apply, as well as the security considerations for CoRAL
    [I-D.ietf-core-coral] and Packed CBOR [I-D.ietf-cbor-packed].
 
 10.  IANA Considerations
