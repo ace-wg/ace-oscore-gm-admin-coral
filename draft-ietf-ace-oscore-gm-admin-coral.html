@@ -1670,7 +1670,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
      [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
      [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
      [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
-     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_description /,
       "rooms 1 and 2"],
      [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
      [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"],
@@ -1749,7 +1749,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
      [2, 6(35) / item 86 for core.osc.gconf:#rt /, "core.osc.gconf"],
      [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
      [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
-     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_description /,
       "rooms 1 and 2"],
      [2, 6(37) / item 90 for core.osc.gconf:#ace_groupcomm_profile /,
       "coap_group_oscore_app"],
@@ -1803,7 +1803,8 @@ If the request payload specifies a parameter that is not included in the group c
      [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, null],
      [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, null],
      [2, 6(-36) / item 87 for core.osc.gconf:#active /, null],
-     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /, null],
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_description /,
+      null],
      [2, 6(41) / item 98 for core.osc.gconf:#app_groups /, null]
    ]
 
@@ -1817,7 +1818,7 @@ If the request payload specifies a parameter that is not included in the group c
      [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5],
      [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
      [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
-     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_description /,
       "rooms 1 and 2"],
      [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
      [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"]
@@ -2324,7 +2325,7 @@ This is consistent with what is defined in <span><a href="https://datatracker.ie
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">89</td>
-              <td class="text-left" rowspan="1" colspan="1">cri'http://coreapps.org/core.osc.gconf#group_title'</td>
+              <td class="text-left" rowspan="1" colspan="1">cri'http://coreapps.org/core.osc.gconf#group_description'</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">90</td>
@@ -2435,10 +2436,13 @@ This is consistent with what is defined in <span><a href="https://datatracker.ie
             <p id="appendix-B.1-1.3.1">Fixed use of CURIEs that result in a URI with the fragment component.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.4">
-            <p id="appendix-B.1-1.4.1">Remove reference to the abandoned, custom format for error messages.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.4.1">Renamed 'group_title' as 'group_description'.<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.5">
-            <p id="appendix-B.1-1.5.1">Editorial improvements.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.5.1">Remove reference to the abandoned, custom format for error messages.<a href="#appendix-B.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.6">
+            <p id="appendix-B.1-1.6.1">Editorial improvements.<a href="#appendix-B.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
