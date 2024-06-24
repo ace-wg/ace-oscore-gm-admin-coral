@@ -110,8 +110,8 @@ Table of Contents
    11. References
      11.1.  Normative References
      11.2.  Informative References
-   Appendix A.  Shared item tables for Packed CBOR
-     A.1.  Compression of CoRAL predicates
+   Appendix A.  Shared Item Tables for Packed CBOR
+     A.1.  Compression of CoRAL Predicates
      A.2.  Compression of Values of the rt= Target Attribute
    Appendix B.  Document Updates
      B.1.  Version -01 to -02
@@ -1163,7 +1163,7 @@ Table of Contents
               DOI 10.17487/RFC9423, April 2024,
               <https://www.rfc-editor.org/rfc/rfc9423>.
 
-Appendix A.  Shared item tables for Packed CBOR
+Appendix A.  Shared Item Tables for Packed CBOR
 
    This appendix defines the two shared item tables that the examples in
    this document refer to for using Packed CBOR [I-D.ietf-cbor-packed].
@@ -1172,7 +1172,7 @@ Appendix A.  Shared item tables for Packed CBOR
    [I-D.ietf-core-href] is used to notate a CBOR Extended Diagnostic
    Notation (EDN) literal for a CRI.
 
-A.1.  Compression of CoRAL predicates
+A.1.  Compression of CoRAL Predicates
 
    The following shared item table is used for compressing CoRAL
    predicates, as per Section 2.2 of [I-D.ietf-cbor-packed].
