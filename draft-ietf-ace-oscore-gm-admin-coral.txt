@@ -114,8 +114,9 @@ Table of Contents
      A.1.  Compression of CoRAL predicates
      A.2.  Compression of Values of the rt= Target Attribute
    Appendix B.  Document Updates
-     B.1.  Version -00 to -01
-     B.2.  Version -00
+     B.1.  Version -01 to -02
+     B.2.  Version -00 to -01
+     B.3.  Version -00
    Acknowledgments
    Authors' Addresses
 
@@ -418,7 +419,7 @@ Table of Contents
       -  The payload MUST NOT include any link element corresponding to
          an inner information element of that structured parameter.
 
-      -  The link element MUST have the link target with value "false"
+      -  The link element MUST have the link target with value false
          (0xf4) for indicating the structured parameter with no
          elements.
 
@@ -1282,12 +1283,18 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -00 to -01
+B.1.  Version -01 to -02
+
+   *  Avoid quotation marks for CBOR simple values.
+
+   *  Editorial improvements.
+
+B.2.  Version -00 to -01
 
    *  Updated reference and introductory text for the CBOR EDN
       application-extension identifier "cri".
 
-B.2.  Version -00
+B.3.  Version -00
 
    *  CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.
 

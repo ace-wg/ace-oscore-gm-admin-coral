@@ -1269,10 +1269,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-document-updates" class="internal xref">Document Updates</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-version-00-to-01" class="internal xref">Version -00 to -01</a></p>
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-version-01-to-02" class="internal xref">Version -01 to -02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
-                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-version-00" class="internal xref">Version -00</a></p>
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-version-00-to-01" class="internal xref">Version -00 to -01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-version-00" class="internal xref">Version -00</a></p>
 </li>
             </ul>
 </li>
@@ -1512,7 +1515,7 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
               <p id="section-6-2.3.2.1.1">The payload <span class="bcp14">MUST NOT</span> include any link element corresponding to an inner information element of that structured parameter.<a href="#section-6-2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6-2.3.2.2">
-              <p id="section-6-2.3.2.2.1">The link element <span class="bcp14">MUST</span> have the link target with value "false" (0xf4) for indicating the structured parameter with no elements.<a href="#section-6-2.3.2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-6-2.3.2.2.1">The link element <span class="bcp14">MUST</span> have the link target with value <code>false</code> (0xf4) for indicating the structured parameter with no elements.<a href="#section-6-2.3.2.2.1" class="pilcrow">¶</a></p>
 <p id="section-6-2.3.2.2.2">
 Editor's note: this should change to using an empty CBOR array or an empty CBOR map as appropriate, once this is made explicitly possible in the binary format of link items in CoRAL (see Section 3.1.4 of <span>[<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>).<a href="#section-6-2.3.2.2.2" class="pilcrow">¶</a></p>
 </li>
@@ -2340,26 +2343,41 @@ This is consistent with what is defined in <span><a href="https://datatracker.ie
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-document-updates" class="section-name selfRef">Document Updates</a>
       </h2>
 <p id="appendix-B-1">This section is to be removed before publishing as an RFC.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div id="sec-00-01">
+<div id="sec-01-02">
 <section id="appendix-B.1">
-        <h3 id="name-version-00-to-01">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-version-00-to-01" class="section-name selfRef">Version -00 to -01</a>
+        <h3 id="name-version-01-to-02">
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-version-01-to-02" class="section-name selfRef">Version -01 to -02</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Updated reference and introductory text for the CBOR EDN application-extension identifier "cri".<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Avoid quotation marks for CBOR simple values.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.2">
+            <p id="appendix-B.1-1.2.1">Editorial improvements.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="sec-00-01">
+<section id="appendix-B.2">
+        <h3 id="name-version-00-to-01">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-version-00-to-01" class="section-name selfRef">Version -00 to -01</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.2-1.1">
+            <p id="appendix-B.2-1.1.1">Updated reference and introductory text for the CBOR EDN application-extension identifier "cri".<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="sec-00">
-<section id="appendix-B.2">
+<section id="appendix-B.3">
         <h3 id="name-version-00">
-<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-version-00" class="section-name selfRef">Version -00</a>
+<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-version-00" class="section-name selfRef">Version -00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.2-1.1">
-            <p id="appendix-B.2-1.1.1">CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.3-1.1">
+            <p id="appendix-B.3-1.1.1">CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.<a href="#appendix-B.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
