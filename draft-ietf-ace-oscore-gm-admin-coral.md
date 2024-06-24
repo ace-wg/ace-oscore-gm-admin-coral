@@ -664,7 +664,7 @@ The following holds for an Administrator.
 
 # Error Identifiers
 
-If the Group Manager sends an error response with Content-Format application/concise-problem-details+cbor {{RFC9290}} as defined in {{Section 4.1.2 of I-D.ietf-ace-key-groupcomm}}, then the 'error-id' field within the Custom Problem Detail entry 'ace-groupcomm-error' takes value from those defined in {{Section 4.1.2 of I-D.ietf-ace-key-groupcomm}} and in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}}.
+If the Group Manager sends an error response with Content-Format application/concise-problem-details+cbor {{RFC9290}} as defined in {{Section 4.1.2 of I-D.ietf-ace-key-groupcomm}}, then the 'error-id' field within the Custom Problem Detail entry 'ace-groupcomm-error' takes value from those defined in {{Section 9 of I-D.ietf-ace-key-groupcomm}} and in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}}.
 
 The same guidelines in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}} for the Administrator to handle such error identifiers holds.
 
