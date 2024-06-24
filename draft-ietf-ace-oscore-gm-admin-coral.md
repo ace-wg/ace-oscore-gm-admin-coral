@@ -217,15 +217,15 @@ A group configuration consists of a set of parameters.
 
 ## Group Configuration Representation ## {#config-repr}
 
-The same group configuration representation defined in {{Section 5.1 of I-D.ietf-ace-oscore-gm-admin}} is used, as including configuration properties and status properties.
+The same group configuration representation defined in {{Section 5.1 of I-D.ietf-ace-oscore-gm-admin}} is used, as including configuration parameters and status parameters.
 
-### Configuration Properties ### {#config-repr-config-properties}
+### Configuration Parameters ### {#config-repr-config-parameters}
 
-The same configuration properties defined in {{Section 5.1.1 of I-D.ietf-ace-oscore-gm-admin}} are used.
+The same configuration parameters defined in {{Section 5.1.1 of I-D.ietf-ace-oscore-gm-admin}} are used.
 
-### Status Properties ### {#config-repr-status-properties}
+### Status Parameters ### {#config-repr-status-parameters}
 
-The same status properties defined in {{Section 5.1.2 of I-D.ietf-ace-oscore-gm-admin}} are used.
+The same status parameters defined in {{Section 5.1.2 of I-D.ietf-ace-oscore-gm-admin}} are used.
 
 ## Default Values {#default-values}
 
@@ -298,7 +298,7 @@ The same as defined in {{Section 6.2 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * The filter criteria are specified in the request payload with top-level link elements, each of which corresponds to an entry of the group configuration (see {{config-repr}}), with the exception of non-empty structured parameters.
 
-* If names of application groups are used as filter criteria, each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.
+* If names of application groups are used as filter criteria, each element of the 'app_groups' array from the status parameters is included as a separate link element with name 'app_group'.
 
 * With the exception of the 'app_group' element, a valid request MUST NOT include the same element multiple times. Element values are the ones admitted for the corresponding labels in the POST request for creating a group configuration (see {{collection-resource-post}}).
 
@@ -352,13 +352,13 @@ The same as defined in {{Section 6.3 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * In the request payload, each link element corresponds to an entry of the group configuration (see {{config-repr}}), with the exception of non-empty structured parameters.
 
-* In the request payload, each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
+* In the request payload, each element of the 'app_groups' array from the status parameters is included as a separate element with name 'app_group'.
 
 * The Group Manager MUST respond with a 4.00 (Bad Request) response if any link element is specified multiple times in the payload of the POST request, with the exception of the 'app_group' link element.
 
 * The response payload includes one link element for each specified parameter, with the exception of non-empty structured parameters.
 
-* In the response payload, each element of the 'app_groups' array from the status properties is included as a separate element with name 'app_group'.
+* In the response payload, each element of the 'app_groups' array from the status parameters is included as a separate element with name 'app_group'.
 
 * If the Administrator performs the registration of the group-membership resource to a Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group MUST take the values possibly specified by the different 'app_group' link elements in the POST request.
 
@@ -411,7 +411,7 @@ The same as defined in {{Section 6.4 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * The response payload includes one link element for each entry of the group configuration (see {{config-repr}}), with the exception of non-empty status parameters.
 
-* Each element of the 'app_groups' array from the status properties is included as a separate link element with name 'app_group'.
+* Each element of the 'app_groups' array from the status parameters is included as a separate link element with name 'app_group'.
 
 An example of message exchange is shown below.
 
@@ -753,6 +753,8 @@ The following shared item table is used for compressing values of the rt= target
 * Fixed use of CURIEs that result in a URI with the fragment component.
 
 * Renamed 'group_title' as 'group_description'.
+
+* Status/Configuration "properties" renamed as "parameters".
 
 * POST (instead of PUT) for overwriting a group-configuration resource.
 
