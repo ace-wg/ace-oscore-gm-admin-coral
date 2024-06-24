@@ -377,7 +377,7 @@ An example of message exchange is shown below.
      [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
      [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
      [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
-     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_description /,
       "rooms 1 and 2"],
      [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
      [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"],
@@ -450,7 +450,7 @@ An example of message exchange is shown below.
      [2, 6(35) / item 86 for core.osc.gconf:#rt /, "core.osc.gconf"],
      [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
      [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
-     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_description /,
       "rooms 1 and 2"],
      [2, 6(37) / item 90 for core.osc.gconf:#ace_groupcomm_profile /,
       "coap_group_oscore_app"],
@@ -497,7 +497,8 @@ An example of message exchange is shown below.
      [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, null],
      [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, null],
      [2, 6(-36) / item 87 for core.osc.gconf:#active /, null],
-     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /, null],
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_description /,
+      null],
      [2, 6(41) / item 98 for core.osc.gconf:#app_groups /, null]
    ]
 
@@ -511,7 +512,7 @@ An example of message exchange is shown below.
      [2, 6(26) / item 68 for core.osc.gconf:#hkdf /, 5],
      [2, 6(-31) / item 77 for core.osc.gconf:#pairwise_mode /, true],
      [2, 6(-36) / item 87 for core.osc.gconf:#active /, true],
-     [2, 6(-37) / item 89 for core.osc.gconf:#group_title /,
+     [2, 6(-37) / item 89 for core.osc.gconf:#group_description /,
       "rooms 1 and 2"],
      [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 1"],
      [2, 6(39) / item 94 for core.osc.gconf:#app_group /, "room 2"]
@@ -716,7 +717,7 @@ The following shared item table is used for compressing CoRAL predicates, as per
 | 86    | cri'http://coreapps.org/core.osc.gconf#rt'                                                                                 |
 | 87    | cri'http://coreapps.org/core.osc.gconf#active'                                                                             |
 | 88    | cri'http://coreapps.org/core.osc.gconf#group_name'                                                                         |
-| 89    | cri'http://coreapps.org/core.osc.gconf#group_title'                                                                        |
+| 89    | cri'http://coreapps.org/core.osc.gconf#group_description'                                                                        |
 | 90    | cri'http://coreapps.org/core.osc.gconf <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#ace_groupcomm_profile'                    |
 | 91    | cri'http://coreapps.org/core.osc.gconf#max_stale_sets'                                                                     |
 | 92    | cri'http://coreapps.org/core.osc.gconf#exp'                                                                                |
@@ -750,6 +751,8 @@ The following shared item table is used for compressing values of the rt= target
 * Fixed use of 'linkformat' in the CURIE syntax.
 
 * Fixed use of CURIEs that result in a URI with the fragment component.
+
+* Renamed 'group_title' as 'group_description'.
 
 * Remove reference to the abandoned, custom format for error messages.
 
