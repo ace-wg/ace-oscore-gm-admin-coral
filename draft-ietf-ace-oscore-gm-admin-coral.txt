@@ -190,7 +190,7 @@ Table of Contents
       [I-D.ietf-core-coral] and Constrained Resource Identifiers (CRIs)
       [I-D.ietf-core-href].
 
-   *  The CoAP protocol [RFC7252], also in group communication scenarios
+   *  CoAP [RFC7252], also in group communication scenarios
       [I-D.ietf-core-groupcomm-bis].  These include the concepts of:
 
       -  "application group", as a set of CoAP nodes that share a common
@@ -240,11 +240,11 @@ Table of Contents
    url-path of a group-configuration resource; implementations are not
    required to use this name, and can define their own instead.
 
-   Note that, unless otherwise indicated, the term "endpoint" is used
-   here following its OAuth definition, aimed at denoting resources such
-   as /token and /introspect at the AS, and /authz-info at the RS.  This
-   document does not use the CoAP definition of "endpoint", which is "An
-   entity participating in the CoAP protocol".
+   Note that the term "endpoint" is used here following its OAuth
+   definition [RFC6749], aimed at denoting resources such as /token and
+   /introspect at the AS, and /authz-info at the RS.  This document does
+   not use the CoAP definition of "endpoint", which is "An entity
+   participating in the CoAP protocol."
 
 1.2.  Notation and Assumptions in the Examples
 
@@ -339,8 +339,8 @@ Table of Contents
 
 4.  Getting Access to the Group Manager
 
-   All communications between the involved entities rely on the CoAP
-   protocol and MUST be secured.
+   All communications between the involved entities rely on CoAP and
+   MUST be secured.
 
    In particular, communications between the Administrator and the Group
    Manager leverage protocol-specific transport profiles of ACE to
