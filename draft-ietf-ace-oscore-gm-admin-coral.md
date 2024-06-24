@@ -115,7 +115,7 @@ Readers are expected to be familiar with the terms and concepts from the followi
 
 * The Constrained RESTful Application Language (CoRAL) {{I-D.ietf-core-coral}} and Constrained Resource Identifiers (CRIs) {{I-D.ietf-core-href}}.
 
-* The CoAP protocol {{RFC7252}}, also in group communication scenarios {{I-D.ietf-core-groupcomm-bis}}. These include the concepts of:
+* CoAP {{RFC7252}}, also in group communication scenarios {{I-D.ietf-core-groupcomm-bis}}. These include the concepts of:
 
   - "application group", as a set of CoAP nodes that share a common set of resources; and of
 
@@ -135,7 +135,7 @@ Readers are also expected to be familiar with the terms and concepts used in {{I
 
 Like in {{I-D.ietf-ace-oscore-gm-admin}}, this document uses /manage as the url-path of the group-collection resource at the Group Manager when providing examples; implementations can use a different url-path. Building on that, this document uses /manage/GROUPNAME as the url-path of a group-configuration resource; implementations are not required to use this name, and can define their own instead.
 
-Note that, unless otherwise indicated, the term "endpoint" is used here following its OAuth definition, aimed at denoting resources such as /token and /introspect at the AS, and /authz-info at the RS. This document does not use the CoAP definition of "endpoint", which is "An entity participating in the CoAP protocol".
+Note that the term "endpoint" is used here following its OAuth definition {{RFC6749}}, aimed at denoting resources such as /token and /introspect at the AS, and /authz-info at the RS. This document does not use the CoAP definition of "endpoint", which is "An entity participating in the CoAP protocol."
 
 ## Notation and Assumptions in the Examples ## {#notation-coral-examples}
 
@@ -195,7 +195,7 @@ In order to express authorization information for the Administrator (see {{getti
 
 # Getting Access to the Group Manager # {#getting-access}
 
-All communications between the involved entities rely on the CoAP protocol and MUST be secured.
+All communications between the involved entities rely on CoAP and MUST be secured.
 
 In particular, communications between the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE to achieve communication security, proof-of-possession and server authentication. To this end, the AS may explicitly signal the specific transport profile to use, consistently with requirements and assumptions defined in the ACE framework {{RFC9200}}.
 
