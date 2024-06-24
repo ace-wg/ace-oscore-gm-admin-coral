@@ -1515,7 +1515,7 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
               <p id="section-6-2.3.2.1.1">The payload <span class="bcp14">MUST NOT</span> include any link element corresponding to an inner information element of that structured parameter.<a href="#section-6-2.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-6-2.3.2.2">
-              <p id="section-6-2.3.2.2.1">The link element <span class="bcp14">MUST</span> have the link target with value <code>false</code> (0xf4) for indicating the structured parameter with no elements.<a href="#section-6-2.3.2.2.1" class="pilcrow">¶</a></p>
+              <p id="section-6-2.3.2.2.1">The link element <span class="bcp14">MUST</span> have the link target with value the CBOR simple value <code>false</code> (0xf4) for indicating the structured parameter with no elements.<a href="#section-6-2.3.2.2.1" class="pilcrow">¶</a></p>
 <p id="section-6-2.3.2.2.2">
 Editor's note: this should change to using an empty CBOR array or an empty CBOR map as appropriate, once this is made explicitly possible in the binary format of link items in CoRAL (see Section 3.1.4 of <span>[<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>).<a href="#section-6-2.3.2.2.2" class="pilcrow">¶</a></p>
 </li>
@@ -1777,7 +1777,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
 <p id="section-6.5-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-11#section-6.5" class="relref">Section 6.5</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.5-4.1">
-            <p id="section-6.5-4.1.1">The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>). All the specified link elements <span class="bcp14">MUST</span> have the link target with value "null".<a href="#section-6.5-4.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.5-4.1.1">The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>). All the specified link elements <span class="bcp14">MUST</span> have the link target with value the CBOR simple value <code>null</code> (0xf6).<a href="#section-6.5-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.5-4.2">
             <p id="section-6.5-4.2.1">The request payload <span class="bcp14">MUST NOT</span> include any link element corresponding to an inner information element of a structured parameter.<a href="#section-6.5-4.2.1" class="pilcrow">¶</a></p>
