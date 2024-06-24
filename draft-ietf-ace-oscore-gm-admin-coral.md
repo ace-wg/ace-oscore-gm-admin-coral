@@ -242,7 +242,7 @@ The same as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}} holds, with
 
    - The payload MUST NOT include any link element corresponding to an inner information element of that structured parameter.
 
-   - The link element MUST have the link target with value "false" (0xf4) for indicating the structured parameter with no elements.
+   - The link element MUST have the link target with value `false` (0xf4) for indicating the structured parameter with no elements.
 
       Editor's note: this should change to using an empty CBOR array or an empty CBOR map as appropriate, once this is made explicitly possible in the binary format of link items in CoRAL (see Section 3.1.4 of {{I-D.ietf-core-coral}}).
 
@@ -797,6 +797,12 @@ The following shared item table is used for compressing values of the rt= target
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
+
+## Version -01 to -02 ## {#sec-01-02}
+
+* Avoid quotation marks for CBOR simple values.
+
+* Editorial improvements.
 
 ## Version -00 to -01 ## {#sec-00-01}
 
