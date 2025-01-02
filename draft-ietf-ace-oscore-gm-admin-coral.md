@@ -39,7 +39,6 @@ author:
 
 normative:
   I-D.ietf-core-oscore-groupcomm:
-  I-D.ietf-ace-key-groupcomm:
   I-D.ietf-ace-key-groupcomm-oscore:
   I-D.ietf-ace-oscore-gm-admin:
   I-D.ietf-core-coral:
@@ -61,6 +60,7 @@ normative:
   RFC9203:
   RFC9237:
   RFC9290:
+  RFC9594:
   CURIE-20101216:
     author:
       -
@@ -130,7 +130,7 @@ Readers are expected to be familiar with the terms and concepts from the followi
 
 * The ACE framework for Authentication and Authorization {{RFC9200}}. The terminology for entities in the considered architecture is defined in OAuth 2.0 {{RFC6749}}. In particular, this includes Client (C), Resource Server (RS), and Authorization Server (AS).
 
-* The management of keying material for groups in ACE {{I-D.ietf-ace-key-groupcomm}} and specifically for OSCORE groups {{I-D.ietf-ace-key-groupcomm-oscore}}. These include the concept of group-membership resource hosted by the Group Manager, that new members access to join the OSCORE group, while current members can access to retrieve updated keying material.
+* The management of keying material for groups in ACE {{RFC9594}} and specifically for OSCORE groups {{I-D.ietf-ace-key-groupcomm-oscore}}. These include the concept of group-membership resource hosted by the Group Manager, that new members access to join the OSCORE group, while current members can access to retrieve updated keying material.
 
 Readers are also expected to be familiar with the terms and concepts used in {{I-D.ietf-ace-oscore-gm-admin}}, with particular reference to: "Administrator", "group name", "group-collection resource", and "group-configuration resource".
 
@@ -648,15 +648,15 @@ The same as defined in {{Section 6.8.1 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 Consistently with {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, the following holds for the Group Manager.
 
-* It MUST support the top-level link elements 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
+* It MUST support the top-level link elements 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of RFC9594}}.
 
-  This is consistent with what is defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}} for the Key Distribution Center, of which the Group Manager defined in {{I-D.ietf-ace-key-groupcomm-oscore}} is a specific instance.
+  This is consistent with what is defined in {{Section 8 of RFC9594}} for the Key Distribution Center, of which the Group Manager defined in {{I-D.ietf-ace-key-groupcomm-oscore}} is a specific instance.
 
 * It MUST support the top-level link elements corresponding to all the parameters listed in {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, with the exception of 'app_groups_diff' that MUST be supported only if the Group Manager supports the selective update of a group configuration (see {{configuration-resource-patch}}).
 
 The following holds for an Administrator.
 
-* It MUST support the top-level link elements 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of I-D.ietf-ace-key-groupcomm}}.
+* It MUST support the top-level link elements 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in {{Section 8 of RFC9594}}.
 
 * It MUST support the top-level link elements corresponding to all the parameters listed in {{Section 7 of I-D.ietf-ace-oscore-gm-admin}}, with the following exceptions.
 
@@ -666,15 +666,15 @@ The following holds for an Administrator.
 
 # Error Identifiers
 
-If the Group Manager sends an error response with Content-Format application/concise-problem-details+cbor {{RFC9290}} as defined in {{Section 4.1.2 of I-D.ietf-ace-key-groupcomm}}, then the 'error-id' field within the Custom Problem Detail entry 'ace-groupcomm-error' takes value from those defined in {{Section 9 of I-D.ietf-ace-key-groupcomm}} and in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}}.
+If the Group Manager sends an error response with Content-Format application/concise-problem-details+cbor {{RFC9290}} as defined in {{Section 4.1.2 of RFC9594}}, then the 'error-id' field within the Custom Problem Detail entry 'ace-groupcomm-error' takes value from those defined in {{Section 9 of RFC9594}} and in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}}.
 
-The same guidelines in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}} for the Administrator to handle such error identifiers holds.
+The same guidelines in {{Section 8 of I-D.ietf-ace-oscore-gm-admin}} for the Administrator to handle such error identifiers hold.
 
 # Security Considerations # {#sec-security-considerations}
 
 Security considerations are inherited from the ACE framework for Authentication and Authorization {{RFC9200}}, and from the specific transport profile of ACE used between the Administrator and the Group Manager, such as {{RFC9202}} and {{RFC9203}}.
 
-The same security considerations from {{I-D.ietf-ace-key-groupcomm}} and {{I-D.ietf-ace-key-groupcomm-oscore}} also apply, with particular reference to the process of rekeying OSCORE groups.
+The same security considerations from {{RFC9594}} and {{I-D.ietf-ace-key-groupcomm-oscore}} also apply, with particular reference to the process of rekeying OSCORE groups.
 
 The same security considerations from {{I-D.ietf-ace-oscore-gm-admin}} also apply, as well as the security considerations for CoRAL {{I-D.ietf-core-coral}} and Packed CBOR {{I-D.ietf-cbor-packed}}.
 
@@ -744,6 +744,12 @@ The following shared item table is used for compressing values of the rt= target
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
+
+## Version -02 to -03 ## {#sec-02-03}
+
+* Updated references.
+
+* Editorial fixes.
 
 ## Version -01 to -02 ## {#sec-01-02}
 
