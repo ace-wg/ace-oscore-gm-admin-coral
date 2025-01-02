@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 26 December 2024                                   24 June 2024
+Expires: 6 July 2025                                      2 January 2025
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -56,11 +56,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 December 2024.
+   This Internet-Draft will expire on 6 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -114,9 +114,10 @@ Table of Contents
      A.1.  Compression of CoRAL Predicates
      A.2.  Compression of Values of the rt= Target Attribute
    Appendix B.  Document Updates
-     B.1.  Version -01 to -02
-     B.2.  Version -00 to -01
-     B.3.  Version -00
+     B.1.  Version -02 to -03
+     B.2.  Version -01 to -02
+     B.3.  Version -00 to -01
+     B.4.  Version -00
    Acknowledgments
    Authors' Addresses
 
@@ -222,8 +223,8 @@ Table of Contents
       defined in OAuth 2.0 [RFC6749].  In particular, this includes
       Client (C), Resource Server (RS), and Authorization Server (AS).
 
-   *  The management of keying material for groups in ACE
-      [I-D.ietf-ace-key-groupcomm] and specifically for OSCORE groups
+   *  The management of keying material for groups in ACE [RFC9594] and
+      specifically for OSCORE groups
       [I-D.ietf-ace-key-groupcomm-oscore].  These include the concept of
       group-membership resource hosted by the Group Manager, that new
       members access to join the OSCORE group, while current members can
@@ -921,13 +922,12 @@ Table of Contents
 
    *  It MUST support the top-level link elements
       'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding
-      to the ACE Groupcomm Parameters defined in Section 8 of
-      [I-D.ietf-ace-key-groupcomm].
+      to the ACE Groupcomm Parameters defined in Section 8 of [RFC9594].
 
-      This is consistent with what is defined in Section 8 of
-      [I-D.ietf-ace-key-groupcomm] for the Key Distribution Center, of
-      which the Group Manager defined in
-      [I-D.ietf-ace-key-groupcomm-oscore] is a specific instance.
+      This is consistent with what is defined in Section 8 of [RFC9594]
+      for the Key Distribution Center, of which the Group Manager
+      defined in [I-D.ietf-ace-key-groupcomm-oscore] is a specific
+      instance.
 
    *  It MUST support the top-level link elements corresponding to all
       the parameters listed in Section 7 of
@@ -940,8 +940,7 @@ Table of Contents
 
    *  It MUST support the top-level link elements
       'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding
-      to the ACE Groupcomm Parameters defined in Section 8 of
-      [I-D.ietf-ace-key-groupcomm].
+      to the ACE Groupcomm Parameters defined in Section 8 of [RFC9594].
 
    *  It MUST support the top-level link elements corresponding to all
       the parameters listed in Section 7 of
@@ -959,14 +958,13 @@ Table of Contents
 
    If the Group Manager sends an error response with Content-Format
    application/concise-problem-details+cbor [RFC9290] as defined in
-   Section 4.1.2 of [I-D.ietf-ace-key-groupcomm], then the 'error-id'
-   field within the Custom Problem Detail entry 'ace-groupcomm-error'
-   takes value from those defined in Section 9 of
-   [I-D.ietf-ace-key-groupcomm] and in Section 8 of
+   Section 4.1.2 of [RFC9594], then the 'error-id' field within the
+   Custom Problem Detail entry 'ace-groupcomm-error' takes value from
+   those defined in Section 9 of [RFC9594] and in Section 8 of
    [I-D.ietf-ace-oscore-gm-admin].
 
    The same guidelines in Section 8 of [I-D.ietf-ace-oscore-gm-admin]
-   for the Administrator to handle such error identifiers holds.
+   for the Administrator to handle such error identifiers hold.
 
 9.  Security Considerations
 
@@ -975,8 +973,8 @@ Table of Contents
    transport profile of ACE used between the Administrator and the Group
    Manager, such as [RFC9202] and [RFC9203].
 
-   The same security considerations from [I-D.ietf-ace-key-groupcomm]
-   and [I-D.ietf-ace-key-groupcomm-oscore] also apply, with particular
+   The same security considerations from [RFC9594] and
+   [I-D.ietf-ace-key-groupcomm-oscore] also apply, with particular
    reference to the process of rekeying OSCORE groups.
 
    The same security considerations from [I-D.ietf-ace-oscore-gm-admin]
@@ -997,13 +995,6 @@ Table of Contents
               December 2010,
               <http://www.w3.org/TR/2010/NOTE-curie-20101216>.
 
-   [I-D.ietf-ace-key-groupcomm]
-              Palombini, F. and M. Tiloca, "Key Provisioning for Group
-              Communication using ACE", Work in Progress, Internet-
-              Draft, draft-ietf-ace-key-groupcomm-19, 30 April 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-
-              groupcomm-19>.
-
    [I-D.ietf-ace-key-groupcomm-oscore]
               Tiloca, M., Park, J., and F. Palombini, "Key Management
               for OSCORE Groups in ACE", Work in Progress, Internet-
@@ -1015,15 +1006,15 @@ Table of Contents
               Tiloca, M., Höglund, R., Van der Stok, P., and F.
               Palombini, "Admin Interface for the OSCORE Group Manager",
               Work in Progress, Internet-Draft, draft-ietf-ace-oscore-
-              gm-admin-11, 4 March 2024,
+              gm-admin-12, 8 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
-              oscore-gm-admin-11>.
+              oscore-gm-admin-12>.
 
    [I-D.ietf-cbor-packed]
               Bormann, C. and M. Gütschow, "Packed CBOR", Work in
-              Progress, Internet-Draft, draft-ietf-cbor-packed-12, 2
-              March 2024, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-cbor-packed-12>.
+              Progress, Internet-Draft, draft-ietf-cbor-packed-13, 1
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-packed-13>.
 
    [I-D.ietf-core-coral]
               Amsüss, C. and T. Fossati, "The Constrained RESTful
@@ -1036,23 +1027,24 @@ Table of Contents
               Dijk, E., Wang, C., and M. Tiloca, "Group Communication
               for the Constrained Application Protocol (CoAP)", Work in
               Progress, Internet-Draft, draft-ietf-core-groupcomm-bis-
-              11, 24 April 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-core-groupcomm-bis-11>.
+              12, 21 October 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-core-
+              groupcomm-bis-12>.
 
    [I-D.ietf-core-href]
               Bormann, C. and H. Birkholz, "Constrained Resource
               Identifiers", Work in Progress, Internet-Draft, draft-
-              ietf-core-href-15, 21 April 2024,
+              ietf-core-href-16, 24 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              href-15>.
+              href-16>.
 
    [I-D.ietf-core-oscore-groupcomm]
               Tiloca, M., Selander, G., Palombini, F., Mattsson, J. P.,
               and R. Höglund, "Group Object Security for Constrained
               RESTful Environments (Group OSCORE)", Work in Progress,
-              Internet-Draft, draft-ietf-core-oscore-groupcomm-21, 4
-              March 2024, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-core-oscore-groupcomm-21>.
+              Internet-Draft, draft-ietf-core-oscore-groupcomm-23, 26
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-core-oscore-groupcomm-23>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1141,6 +1133,12 @@ Table of Contents
               DOI 10.17487/RFC9290, October 2022,
               <https://www.rfc-editor.org/rfc/rfc9290>.
 
+   [RFC9594]  Palombini, F. and M. Tiloca, "Key Provisioning for Group
+              Communication Using Authentication and Authorization for
+              Constrained Environments (ACE)", RFC 9594,
+              DOI 10.17487/RFC9594, September 2024,
+              <https://www.rfc-editor.org/rfc/rfc9594>.
+
 11.2.  Informative References
 
    [I-D.hartke-t2trg-coral-reef]
@@ -1155,9 +1153,9 @@ Table of Contents
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-09, 4 March 2024,
+              ietf-cose-cbor-encoded-cert-11, 8 July 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-09>.
+              cbor-encoded-cert-11>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -1304,7 +1302,13 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -01 to -02
+B.1.  Version -02 to -03
+
+   *  Updated references.
+
+   *  Editorial fixes.
+
+B.2.  Version -01 to -02
 
    *  Avoid quotation marks for CBOR simple values.
 
@@ -1325,12 +1329,12 @@ B.1.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.2.  Version -00 to -01
+B.3.  Version -00 to -01
 
    *  Updated reference and introductory text for the CBOR EDN
       application-extension identifier "cri".
 
-B.3.  Version -00
+B.4.  Version -00
 
    *  CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.
 
