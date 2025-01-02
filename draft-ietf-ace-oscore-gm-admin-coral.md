@@ -262,7 +262,7 @@ An example of message exchange is shown below.
 
 ~~~~~~~~~~~
 => 0.01 GET
-   Uri-Path: manage
+   Uri-Path: "manage"
 
 <= 2.05 Content
    Content-Format: 65087 (application/coral+cbor)
@@ -307,7 +307,7 @@ An example of message exchange is shown below.
 
 ~~~~~~~~~~~
 => 0.05 FETCH
-   Uri-Path: manage
+   Uri-Path: "manage"
    Content-Format: 65087 (application/coral+cbor)
 
    Payload:
@@ -367,7 +367,7 @@ An example of message exchange is shown below.
 
 ~~~~~~~~~~~
 => 0.02 POST
-   Uri-Path: manage
+   Uri-Path: "manage"
    Content-Format: 65087 (application/coral+cbor)
 
    Payload:
@@ -387,8 +387,8 @@ An example of message exchange is shown below.
    ]
 
 <= 2.01 Created
-   Location-Path: manage
-   Location-Path: gp4
+   Location-Path: "manage"
+   Location-Path: "gp4"
    Content-Format: 65087 (application/coral+cbor)
 
    Payload:
@@ -418,8 +418,8 @@ An example of message exchange is shown below.
 
 ~~~~~~~~~~~
 => 0.01 GET
-   Uri-Path: manage
-   Uri-Path: gp4
+   Uri-Path: "manage"
+   Uri-Path: "gp4"
 
 <= 2.05 Content
    Content-Format: 65087 (application/coral+cbor)
@@ -487,8 +487,8 @@ An example of message exchange is shown below.
 
 ~~~~~~~~~~~
 => 0.05 FETCH
-   Uri-Path: manage
-   Uri-Path: gp4
+   Uri-Path: "manage"
+   Uri-Path: "gp4"
    Content-Format: 65087 (application/coral+cbor)
 
    Payload:
@@ -534,8 +534,8 @@ An example of message exchange is shown below.
 
 ~~~~~~~~~~~
 => 0.02 POST
-   Uri-Path: manage
-   Uri-Path: gp4
+   Uri-Path: "manage"
+   Uri-Path: "gp4"
    Content-Format: 65087 (application/coral+cbor)
 
    Payload:
@@ -597,8 +597,8 @@ An example of message exchange is shown below.
 
 ~~~~~~~~~~~
 => 0.06 PATCH
-   Uri-Path: manage
-   Uri-Path: gp4
+   Uri-Path: "manage"
+   Uri-Path: "gp4"
    Content-Format: 65087 (application/coral+cbor)
 
    Payload:
@@ -747,6 +747,8 @@ The following shared item table is used for compressing values of the rt= target
 
 ## Version -02 to -03 ## {#sec-02-03}
 
+* Uri-Path and Location-Path as text strings in examples.
+
 * Updated references.
 
 * Editorial fixes.
@@ -782,4 +784,6 @@ The following shared item table is used for compressing values of the rt= target
 
 Most of the content in this document was originally specified in draft-ietf-ace-oscore-gm-admin, which is co-authored also by Peter van der Stok and Francesca Palombini, and where Klaus Hartke contributed in the initial definition of the resource model and interactions using CoRAL.
 
-The authors sincerely thank {{{Christian Amsüss}}}, {{{Carsten Bormann}}}, and {{{Jim Schaad}}} for their comments and feedback. This work was supported by the Sweden's Innovation Agency VINNOVA within the EUREKA CELTIC-NEXT projects CRITISEC and CYPRESS; and by the H2020 project SIFIS-Home (Grant agreement 952652).
+The authors sincerely thank {{{Christian Amsüss}}}, {{{Carsten Bormann}}}, and {{{Jim Schaad}}} for their comments and feedback.
+
+This work was supported by the Sweden's Innovation Agency VINNOVA within the EUREKA CELTIC-NEXT projects CRITISEC and CYPRESS; and by the H2020 project SIFIS-Home (Grant agreement 952652).
