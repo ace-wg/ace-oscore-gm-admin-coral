@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 6 August 2025                                   2 February 2025
+Expires: 22 December 2025                                   20 June 2025
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -14,20 +14,21 @@ Expires: 6 August 2025                                   2 February 2025
 
 Abstract
 
-   Group communication for CoAP can be secured using Group Object
-   Security for Constrained RESTful Environments (Group OSCORE).  A
-   Group Manager is responsible to handle the joining of new group
-   members, as well as to manage and distribute the group keying
-   material.  The Group Manager can provide a RESTful admin interface
-   that allows an Administrator entity to create and delete OSCORE
-   groups, as well as to retrieve and update their configuration.  This
-   document specifies how an Administrator interacts with the admin
-   interface at the Group Manager by using the Constrained RESTful
-   Application Language (CoRAL).  The ACE framework for Authentication
-   and Authorization is used to enforce authentication and authorization
-   of the Administrator at the Group Manager.  Protocol-specific
-   transport profiles of ACE are used to achieve communication security,
-   proof-of-possession, and server authentication.
+   Group communication for the Constrained Application Protocol (CoAP)
+   can be secured using Group Object Security for Constrained RESTful
+   Environments (Group OSCORE).  A Group Manager is responsible to
+   handle the joining of new group members, as well as to manage and
+   distribute the group keying material.  The Group Manager can provide
+   a RESTful admin interface that allows an Administrator entity to
+   create and delete OSCORE groups, as well as to retrieve and update
+   their configuration.  This document specifies how an Administrator
+   interacts with the admin interface at the Group Manager by using the
+   Constrained RESTful Application Language (CoRAL).  The ACE framework
+   for Authentication and Authorization is used to enforce
+   authentication and authorization of the Administrator at the Group
+   Manager.  Protocol-specific transport profiles of ACE are used to
+   achieve communication security, proof-of-possession, and server
+   authentication.
 
 Discussion Venues
 
@@ -56,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 August 2025.
+   This Internet-Draft will expire on 22 December 2025.
 
 Copyright Notice
 
@@ -76,7 +77,7 @@ Table of Contents
 
    1.  Introduction
      1.1.  Terminology
-     1.2.  Notation and Assumptions in the Examples
+     1.2.  Notation and Assumptions Used in the Examples
    2.  Group Administration
      2.1.  Managing OSCORE Groups
      2.2.  Collection Representation
@@ -114,10 +115,11 @@ Table of Contents
      A.1.  Compression of CoRAL Predicates
      A.2.  Compression of Values of the rt= Target Attribute
    Appendix B.  Document Updates
-     B.1.  Version -02 to -03
-     B.2.  Version -01 to -02
-     B.3.  Version -00 to -01
-     B.4.  Version -00
+     B.1.  Version -03 to -04
+     B.2.  Version -02 to -03
+     B.3.  Version -01 to -02
+     B.4.  Version -00 to -01
+     B.5.  Version -00
    Acknowledgments
    Authors' Addresses
 
@@ -128,7 +130,7 @@ Table of Contents
    messages are exchanged between members of a group, e.g., over IP
    multicast.  Applications relying on CoAP can achieve end-to-end
    security at the application layer by using Object Security for
-   Constrained RESTful Environments (OSCORE) [RFC8613], and especially
+   Constrained RESTful Environments (OSCORE) [RFC8613] and especially
    Group OSCORE [I-D.ietf-core-oscore-groupcomm] in group communication
    scenarios.
 
@@ -152,7 +154,7 @@ Table of Contents
    allows the Administrator to create and delete OSCORE groups, as well
    as to configure and update their configuration.
 
-   This document builds on [I-D.ietf-ace-oscore-gm-admin], and specifies
+   This document builds on [I-D.ietf-ace-oscore-gm-admin] and specifies
    how an Administrator interacts with the same RESTful admin interface
    by using the Constrained RESTful Application Language (CoRAL)
    [I-D.ietf-core-coral].  Compared to [I-D.ietf-ace-oscore-gm-admin],
@@ -169,7 +171,7 @@ Table of Contents
    In order to achieve communication security, proof-of-possession, and
    server authentication, the Administrator and the Group Manager
    leverage protocol-specific transport profiles of ACE, such as
-   [RFC9202][RFC9203].  These include also possible forthcoming
+   [RFC9202] or [RFC9203].  These also include possible forthcoming
    transport profiles that comply with the requirements in Appendix C of
    [RFC9200].
 
@@ -184,8 +186,9 @@ Table of Contents
    Readers are expected to be familiar with the terms and concepts from
    the following specifications.
 
-   *  CBOR [RFC8949], Packed CBOR [I-D.ietf-cbor-packed], and COSE
-      [RFC9052][RFC9053].
+   *  Concise Binary Object Representation (CBOR) [RFC8949], Packed CBOR
+      [I-D.ietf-cbor-packed], and CBOR Object Signing and Encryption
+      (COSE) [RFC9052][RFC9053].
 
    *  The Constrained RESTful Application Language (CoRAL)
       [I-D.ietf-core-coral] and Constrained Resource Identifiers (CRIs)
@@ -195,16 +198,16 @@ Table of Contents
       [I-D.ietf-core-groupcomm-bis].  These especially include the
       concepts below:
 
-      -  "application group", as a set of CoAP nodes that share a common
+      -  "Application group", as a set of CoAP nodes that share a common
          set of resources.
 
-      -  "security group", as a set of CoAP nodes that share the same
-         security material, and use it to protect and verify exchanged
+      -  "Security group", as a set of CoAP nodes that share the same
+         security material and use it to protect and verify exchanged
          messages.
 
-   *  The OSCORE [RFC8613] and Group OSCORE
-      [I-D.ietf-core-oscore-groupcomm] security protocols.  These
-      especially include the concepts below:
+   *  The security protocols OSCORE [RFC8613] and Group OSCORE
+      [I-D.ietf-core-oscore-groupcomm].  These especially include the
+      concepts below:
 
       -  Group Manager, as the entity responsible for a set of OSCORE
          groups where communications among members are secured using
@@ -221,17 +224,18 @@ Table of Contents
    *  The ACE framework for Authentication and Authorization [RFC9200].
       The terminology for entities in the considered architecture is
       defined in OAuth 2.0 [RFC6749].  In particular, this includes
-      Client (C), Resource Server (RS), and Authorization Server (AS).
+      client (C), resource server (RS), and authorization server (AS).
 
    *  The management of keying material for groups in ACE [RFC9594] and
       specifically for OSCORE groups
       [I-D.ietf-ace-key-groupcomm-oscore].  These include the concept of
-      group-membership resource hosted by the Group Manager, that new
-      members access to join the OSCORE group, while current members can
-      access to retrieve updated keying material.
+      group-membership resource hosted by the Group Manager.  Candidate
+      group members access such a resource to join the OSCORE group,
+      while current group members can access it to retrieve updated
+      keying material.
 
    Readers are also expected to be familiar with the terms and concepts
-   used in [I-D.ietf-ace-oscore-gm-admin], with particular reference to:
+   used in [I-D.ietf-ace-oscore-gm-admin], with particular reference to
    "Administrator", "group name", "group-collection resource", and
    "group-configuration resource".
 
@@ -240,21 +244,21 @@ Table of Contents
    when providing examples; implementations can use a different url-
    path.  Building on that, this document uses /manage/GROUPNAME as the
    url-path of a group-configuration resource; implementations are not
-   required to use this name, and can define their own instead.
+   required to use this name and can define their own instead.
 
    Note that the term "endpoint" is used here following its OAuth
    definition [RFC6749], aimed at denoting resources such as /token and
-   /introspect at the AS, and /authz-info at the RS.  This document does
-   not use the CoAP definition of "endpoint", which is "An entity
-   participating in the CoAP protocol."
+   /introspect at the AS, and /authz-info at the RS.  The CoAP
+   definition, which is "[a]n entity participating in the CoAP protocol"
+   [RFC7252], is not used in this document.
 
-1.2.  Notation and Assumptions in the Examples
+1.2.  Notation and Assumptions Used in the Examples
 
    As per Section 2.4 of [I-D.ietf-core-coral], CoRAL expresses Uniform
    Resource Identifiers (URIs) [RFC3986] as Constrained Resource
    Identifier (CRI) references [I-D.ietf-core-href].
 
-   The examples in this document use the following notation.
+   Examples in this document use the following notation.
 
    When using the CURIE syntax [CURIE-20101216], the following applies.
 
@@ -279,18 +283,18 @@ Table of Contents
 
    *  The path segment SEG2 is the value of the target attribute.
 
-   The application-extension identifier "cri" defined in Appendix C of
+   The application-extension identifier "cri" defined in Appendix B of
    [I-D.ietf-core-href] is used to notate a CBOR Extended Diagnostic
    Notation (EDN) literal for a CRI or CRI reference.  This format is
    not expected to be sent over the network.
 
    Packed CBOR [I-D.ietf-cbor-packed] is also used, thus reducing
-   representation size.  The examples especially refer to the values
-   from the two shared item tables in Appendix A.
+   representation size.  Examples in this document especially refer to
+   the values from the two shared item tables in Appendix A.
 
-   Finally, the examples consider a Group Manager with address
-   [2001:db8::ab], and use the CoAP Content-Format ID 65087 for the
-   media-type application/coral+cbor.
+   Finally, examples in this document consider a Group Manager with
+   address [2001:db8::ab] and use the CoAP Content-Format ID 65087 for
+   the media-type application/coral+cbor.
 
 2.  Group Administration
 
@@ -322,13 +326,14 @@ Table of Contents
 2.3.  Discovery
 
    The Administrator can discover the group-collection resource from a
-   Resource Directory (see, for instance [I-D.hartke-t2trg-coral-reef])
-   or from .well-known/core, by using the resource type "core.osc.gcoll"
-   registered in Section 10.3 of [I-D.ietf-ace-oscore-gm-admin].
+   Resource Directory (see, for instance, [I-D.hartke-t2trg-coral-reef])
+   or from /.well-known/core, by using the resource type
+   "core.osc.gcoll" registered in Section 10.3 of
+   [I-D.ietf-ace-oscore-gm-admin].
 
    The Administrator can discover group-configuration resources for the
-   group-collection resource as specified in Section 6.1 and
-   Section 6.2.
+   group-collection resource as specified in Section 6.1 and Section 6.2
+   of this document.
 
 3.  Format of Scope
 
@@ -356,21 +361,21 @@ Table of Contents
    the AS (/introspect endpoint) can be secured by different means, for
    instance using DTLS [RFC9147] or OSCORE [RFC8613].  Further details
    on how the AS secures communications (with the Administrator and the
-   Group Manager) depend on the specifically used transport profile of
-   ACE, and are out of the scope of this document.
+   Group Manager) depend on the transport profile of ACE specifically
+   used and are out of the scope of this document.
 
    The Administrator requests access to the Group Manager as per Steps
    1-3 in Section 4 of [I-D.ietf-ace-oscore-gm-admin].
 
    The Administrator accesses the admin interface at the Group Manager
    as per Step 4 in Section 4 of [I-D.ietf-ace-oscore-gm-admin], with
-   the difference that administrative operations are performed not as
+   the difference that administrative operations are not performed as
    defined in Section 6 of [I-D.ietf-ace-oscore-gm-admin], but instead
    as defined in Section 6 of this document.
 
 4.1.  Multiple Administrators for the Same OSCORE Group
 
-   What is defined in Section 4.1 of [I-D.ietf-ace-oscore-gm-admin]
+   What is defined in Section 4.1 of [I-D.ietf-ace-oscore-gm-admin] also
    holds for this document, with the following difference.
 
    The Administrator performs administrative operations at the Group
@@ -409,14 +414,14 @@ Table of Contents
    holds, with the following differences.
 
    *  The Content-Format in messages containing a payload is set to
-      application/coral+cbor, registered in Section 7.2 of
+      application/coral+cbor, which is registered in Section 7.2 of
       [I-D.ietf-core-coral].
 
    *  The parameters 'sign_params', 'ecdh_params', 'app_groups', and
       'group_policies' are referred to as "structured parameters".
 
    *  If a message payload specifies a link element corresponding to a
-      structured parameter, then:
+      structured parameter, then the following applies:
 
       -  The payload MUST NOT include any link element corresponding to
          an inner information element of that structured parameter.
@@ -462,18 +467,18 @@ Table of Contents
         [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp1', [
           [2, simple(6) / item 6 for linkformat:rt /,
            6(-200) / item 415 for cri'http://www.iana.org/assignments
-                                      /linkformat/rt/core.osc.gconf' /]
-        ]],
+                                      /linkformat/rt/core.osc.gconf' /]]
+        ],
         [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp2', [
           [2, simple(6) / item 6 for linkformat:rt /,
            6(-200) / item 415 for cri'http://www.iana.org/assignments
-                                      /linkformat/rt/core.osc.gconf' /]
-        ]],
+                                      /linkformat/rt/core.osc.gconf' /]]
+        ],
         [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp3', [
           [2, simple(6) / item 6 for linkformat:rt /,
            6(-200) / item 415 for cri'http://www.iana.org/assignments
-                                      /linkformat/rt/core.osc.gconf' /]
-        ]]
+                                      /linkformat/rt/core.osc.gconf' /]]
+        ]
       ]
 
 6.2.  Retrieve a List of Group Configurations by Filters
@@ -526,18 +531,18 @@ Table of Contents
        [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp1', [
          [2, simple(6) / item 6 for linkformat:rt /,
           6(-200) / item 415 for cri'http://www.iana.org/assignments
-                                     /linkformat/rt/core.osc.gconf' /]
-       ]],
+                                     /linkformat/rt/core.osc.gconf' /]]
+       ],
        [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp2', [
          [2, simple(6) / item 6 for linkformat:rt /,
           6(-200) / item 415 for cri'http://www.iana.org/assignments
-                                     /linkformat/rt/core.osc.gconf' /]
-       ]],
+                                     /linkformat/rt/core.osc.gconf' /]]
+       ],
        [2, 6(17) / item 50 for core.osc.gcoll:#item /, cri'/gp3', [
          [2, simple(6) / item 6 for linkformat:rt /,
           6(-200) / item 415 for cri'http://www.iana.org/assignments
-                                     /linkformat/rt/core.osc.gconf' /]
-       ]]
+                                     /linkformat/rt/core.osc.gconf' /]]
+       ]
       ]
 
 6.3.  Create a New Group Configuration
@@ -835,7 +840,7 @@ Table of Contents
          parameter.  This link element can be included multiple times.
 
       The Group Manager MUST respond with a 4.00 (Bad Request) response,
-      in case the request payload includes any 'app_group' link element
+      if the request payload includes any 'app_group' link element
       together with any 'app_group_del' and/or 'app_group_add' link
       element.
 
@@ -843,9 +848,8 @@ Table of Contents
       if the request payload includes no link elements.
 
    *  When the request uses specifically the iPATCH method, the Group
-      Manager MUST respond with a 4.00 (Bad Request) response, in case
-      any link element 'app_group_del' and/or 'app_group_add' is
-      included.
+      Manager MUST respond with a 4.00 (Bad Request) response, if any
+      link element 'app_group_del' and/or 'app_group_add' is included.
 
    *  When updating the 'app_groups' status parameter by difference, the
       Group Manager:
@@ -860,32 +864,33 @@ Table of Contents
 
    An example of message exchange is shown below.
 
-=> 0.06 PATCH
-   Uri-Path: "manage"
-   Uri-Path: "gp4"
-   Content-Format: 65087 (application/coral+cbor)
+ => 0.06 PATCH
+    Uri-Path: "manage"
+    Uri-Path: "gp4"
+    Content-Format: 65087 (application/coral+cbor)
 
-   Payload:
+    Payload:
 
-   [
-     [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
-     [2, 6(-40) / item 95 for core.osc.gconf:#app_group_del /, "room1"],
-     [2, 6(40) / item 96 for core.osc.gconf:#app_group_add /, "room3"],
-     [2, 6(40) / item 96 for core.osc.gconf:#app_group_add /, "room4"]
-   ]
+    [
+      [2, 6(-28) / item 71 for core.osc.gconf:#gp_enc_alg /, 10],
+      [2, 6(-40) / item 95 for core.osc.gconf:#app_group_del /,
+       "room1"],
+      [2, 6(40) / item 96 for core.osc.gconf:#app_group_add /, "room3"],
+      [2, 6(40) / item 96 for core.osc.gconf:#app_group_add /, "room4"]
+    ]
 
-<= 2.04 Changed
-   Content-Format: 65087 (application/coral+cbor)
+ <= 2.04 Changed
+    Content-Format: 65087 (application/coral+cbor)
 
-   Payload:
+    Payload:
 
-   [
-     [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
-     [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
-      cri'coap://[2001:db8::ab]/ace-group/gp4/'],
-     [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
-      cri'coap://as.example.com/token']
-   ]
+    [
+      [2, 6(36) / item 88 for core.osc.gconf:#group_name /, "gp4"],
+      [2, 6(-41) / item 97 for core.osc.gconf:#joining_uri /,
+       cri'coap://[2001:db8::ab]/ace-group/gp4/'],
+      [2, 6(43) / item 102 for core.osc.gconf:#as_uri /,
+       cri'coap://as.example.com/token']
+    ]
 
 6.7.1.  Effects on Joining Nodes
 
@@ -925,7 +930,7 @@ Table of Contents
       to the ACE Groupcomm Parameters defined in Section 8 of [RFC9594].
 
       This is consistent with what is defined in Section 8 of [RFC9594]
-      for the Key Distribution Center, of which the Group Manager
+      for the Key Distribution Center (KDC), of which the Group Manager
       defined in [I-D.ietf-ace-key-groupcomm-oscore] is a specific
       instance.
 
@@ -950,8 +955,8 @@ Table of Contents
          Administrator supports the partial retrieval of a group
          configuration by filters (see Section 6.5).
 
-      -  'app_groups_diff' parameter, which MUST be supported only if
-         the Administrator supports the selective update of a group
+      -  'app_groups_diff', which MUST be supported only if the
+         Administrator supports the selective update of a group
          configuration (see Section 6.7).
 
 8.  Error Identifiers
@@ -969,9 +974,9 @@ Table of Contents
 9.  Security Considerations
 
    Security considerations are inherited from the ACE framework for
-   Authentication and Authorization [RFC9200], and from the specific
-   transport profile of ACE used between the Administrator and the Group
-   Manager, such as [RFC9202] and [RFC9203].
+   Authentication and Authorization [RFC9200] and from the transport
+   profile of ACE specifically used between the Administrator and the
+   Group Manager, such as [RFC9202] or [RFC9203].
 
    The same security considerations from [RFC9594] and
    [I-D.ietf-ace-key-groupcomm-oscore] also apply, with particular
@@ -996,11 +1001,13 @@ Table of Contents
               <http://www.w3.org/TR/2010/NOTE-curie-20101216>.
 
    [I-D.ietf-ace-key-groupcomm-oscore]
-              Tiloca, M., Park, J., and F. Palombini, "Key Management
-              for OSCORE Groups in ACE", Work in Progress, Internet-
-              Draft, draft-ietf-ace-key-groupcomm-oscore-16, 6 March
-              2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              ace-key-groupcomm-oscore-16>.
+              Tiloca, M. and F. Palombini, "Key Management for Group
+              Object Security for Constrained RESTful Environments
+              (Group OSCORE) Using Authentication and Authorization for
+              Constrained Environments (ACE)", Work in Progress,
+              Internet-Draft, draft-ietf-ace-key-groupcomm-oscore-17, 11
+              April 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-ace-key-groupcomm-oscore-17>.
 
    [I-D.ietf-ace-oscore-gm-admin]
               Tiloca, M., Höglund, R., Van der Stok, P., and F.
@@ -1012,9 +1019,9 @@ Table of Contents
 
    [I-D.ietf-cbor-packed]
               Bormann, C. and M. Gütschow, "Packed CBOR", Work in
-              Progress, Internet-Draft, draft-ietf-cbor-packed-13, 1
-              September 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-cbor-packed-13>.
+              Progress, Internet-Draft, draft-ietf-cbor-packed-15, 12
+              May 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-cbor-packed-15>.
 
    [I-D.ietf-core-coral]
               Amsüss, C. and T. Fossati, "The Constrained RESTful
@@ -1024,27 +1031,27 @@ Table of Contents
               coral-06>.
 
    [I-D.ietf-core-groupcomm-bis]
-              Dijk, E., Wang, C., and M. Tiloca, "Group Communication
-              for the Constrained Application Protocol (CoAP)", Work in
+              Dijk, E. and M. Tiloca, "Group Communication for the
+              Constrained Application Protocol (CoAP)", Work in
               Progress, Internet-Draft, draft-ietf-core-groupcomm-bis-
-              12, 21 October 2024,
+              13, 24 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              groupcomm-bis-12>.
+              groupcomm-bis-13>.
 
    [I-D.ietf-core-href]
               Bormann, C. and H. Birkholz, "Constrained Resource
               Identifiers", Work in Progress, Internet-Draft, draft-
-              ietf-core-href-17, 24 January 2025,
+              ietf-core-href-22, 20 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              href-17>.
+              href-22>.
 
    [I-D.ietf-core-oscore-groupcomm]
               Tiloca, M., Selander, G., Palombini, F., Mattsson, J. P.,
               and R. Höglund, "Group Object Security for Constrained
               RESTful Environments (Group OSCORE)", Work in Progress,
-              Internet-Draft, draft-ietf-core-oscore-groupcomm-23, 26
-              September 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-core-oscore-groupcomm-23>.
+              Internet-Draft, draft-ietf-core-oscore-groupcomm-25, 16
+              March 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-core-oscore-groupcomm-25>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1153,9 +1160,9 @@ Table of Contents
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-12, 8 January 2025,
+              ietf-cose-cbor-encoded-cert-13, 3 March 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-12>.
+              cbor-encoded-cert-13>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -1182,7 +1189,7 @@ Appendix A.  Shared Item Tables for Packed CBOR
    This appendix defines the two shared item tables that the examples in
    this document refer to for using Packed CBOR [I-D.ietf-cbor-packed].
 
-   The application-extension identifier "cri" defined in Appendix C of
+   The application-extension identifier "cri" defined in Appendix B of
    [I-D.ietf-core-href] is used to notate a CBOR Extended Diagnostic
    Notation (EDN) literal for a CRI.
 
@@ -1281,7 +1288,7 @@ A.1.  Compression of CoRAL Predicates
      | 102   | cri'http://coreapps.org/core.osc.gconf#as_uri'        |
      +-------+-------------------------------------------------------+
 
-        Table 1: Shared item table for compressing CoRAL predicates.
+        Table 1: Shared Item Table for Compressing CoRAL Predicates.
 
 A.2.  Compression of Values of the rt= Target Attribute
 
@@ -1295,14 +1302,20 @@ A.2.  Compression of Values of the rt= Target Attribute
        |       | /core.osc.gconf'                                  |
        +-------+---------------------------------------------------+
 
-          Table 2: Shared item table for compressing values of the
-                           rt= target attribute.
+          Table 2: Shared Item Table for Compressing Values of the
+                           rt= Target Attribute.
 
 Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -02 to -03
+B.1.  Version -03 to -04
+
+   *  Updated references.
+
+   *  Editorial improvements and fixes.
+
+B.2.  Version -02 to -03
 
    *  Uri-Path and Location-Path as text strings in examples.
 
@@ -1310,7 +1323,7 @@ B.1.  Version -02 to -03
 
    *  Editorial fixes.
 
-B.2.  Version -01 to -02
+B.3.  Version -01 to -02
 
    *  Avoid quotation marks for CBOR simple values.
 
@@ -1331,12 +1344,12 @@ B.2.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.3.  Version -00 to -01
+B.4.  Version -00 to -01
 
    *  Updated reference and introductory text for the CBOR EDN
       application-extension identifier "cri".
 
-B.4.  Version -00
+B.5.  Version -00
 
    *  CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.
 
