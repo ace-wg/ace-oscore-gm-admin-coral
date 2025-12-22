@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 22 December 2025                                   20 June 2025
+Expires: 25 June 2026                                   22 December 2025
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 December 2025.
+   This Internet-Draft will expire on 25 June 2026.
 
 Copyright Notice
 
@@ -112,14 +112,16 @@ Table of Contents
      11.1.  Normative References
      11.2.  Informative References
    Appendix A.  Shared Item Tables for Packed CBOR
-     A.1.  Compression of CoRAL Predicates
-     A.2.  Compression of Values of the rt= Target Attribute
+     A.1.  Compacting CoRAL Predicates with Packed CBOR
+     A.2.  Compacting Values of the rt= Target Attribute with Packed
+           CBOR
    Appendix B.  Document Updates
-     B.1.  Version -03 to -04
-     B.2.  Version -02 to -03
-     B.3.  Version -01 to -02
-     B.4.  Version -00 to -01
-     B.5.  Version -00
+     B.1.  Version -04 to -05
+     B.2.  Version -03 to -04
+     B.3.  Version -02 to -03
+     B.4.  Version -01 to -02
+     B.5.  Version -00 to -01
+     B.6.  Version -00
    Acknowledgments
    Authors' Addresses
 
@@ -127,8 +129,8 @@ Table of Contents
 
    The Constrained Application Protocol (CoAP) [RFC7252] can also be
    used for group communication [I-D.ietf-core-groupcomm-bis], where
-   messages are exchanged between members of a group, e.g., over IP
-   multicast.  Applications relying on CoAP can achieve end-to-end
+   messages are exchanged between members of a group (e.g., over IP
+   multicast).  Applications relying on CoAP can achieve end-to-end
    security at the application layer by using Object Security for
    Constrained RESTful Environments (OSCORE) [RFC8613] and especially
    Group OSCORE [I-D.ietf-core-oscore-groupcomm] in group communication
@@ -136,10 +138,10 @@ Table of Contents
 
    When group communication for CoAP is protected with Group OSCORE,
    nodes are required to explicitly join the correct OSCORE group.  To
-   this end, a joining node interacts with a Group Manager (GM) entity
-   responsible for that group, and retrieves the required keying
-   material to securely communicate with other group members using Group
-   OSCORE.
+   this end, a joining node interacts with a Group Manager entity
+   responsible for that group, and it retrieves from the Group Manager
+   the required keying material to securely communicate with other group
+   members using Group OSCORE.
 
    The method in [I-D.ietf-ace-key-groupcomm-oscore] specifies how nodes
    can join an OSCORE group through the respective Group Manager.  Such
@@ -148,11 +150,12 @@ Table of Contents
    as authentication and authorization of joining nodes (clients) at the
    Group Manager (resource server).
 
-   [I-D.ietf-ace-oscore-gm-admin] specifies a RESTful admin interface at
-   the Group Manager, intended for an Administrator as a separate entity
-   external to the Group Manager and its application.  The interface
-   allows the Administrator to create and delete OSCORE groups, as well
-   as to configure and update their configuration.
+   Furthermore, [I-D.ietf-ace-oscore-gm-admin] specifies a RESTful admin
+   interface at the Group Manager, which is intended for an
+   Administrator as a separate entity external to the Group Manager and
+   its application.  The interface allows the Administrator to create
+   and delete OSCORE groups, as well as to configure and update their
+   configuration.
 
    This document builds on [I-D.ietf-ace-oscore-gm-admin] and specifies
    how an Administrator interacts with the same RESTful admin interface
@@ -162,7 +165,7 @@ Table of Contents
    the way the group configurations are organized and represented.
 
    Interaction examples using Packed CBOR [I-D.ietf-cbor-packed] are
-   provided, and are expressed in CBOR diagnostic notation as defined in
+   provided and are expressed in CBOR diagnostic notation as defined in
    Section 8 of [RFC8949] and Appendix G of [RFC8610].  Section 1.2
    provides the notation and assumptions used in the examples.
 
@@ -283,10 +286,10 @@ Table of Contents
 
    *  The path segment SEG2 is the value of the target attribute.
 
-   The application-extension identifier "cri" defined in Appendix B of
-   [I-D.ietf-core-href] is used to notate a CBOR Extended Diagnostic
-   Notation (EDN) literal for a CRI or CRI reference.  This format is
-   not expected to be sent over the network.
+   The application-extension identifier "cri" defined in Section 3.4 of
+   [I-D.ietf-cbor-edn-literals] is used to notate a CBOR Extended
+   Diagnostic Notation (EDN) literal for a CRI or CRI reference.  This
+   format is not expected to be sent over the network.
 
    Packed CBOR [I-D.ietf-cbor-packed] is also used, thus reducing
    representation size.  Examples in this document especially refer to
@@ -294,7 +297,7 @@ Table of Contents
 
    Finally, examples in this document consider a Group Manager with
    address [2001:db8::ab] and use the CoAP Content-Format ID 65087 for
-   the media-type application/coral+cbor.
+   the media type "application/coral+cbor".
 
 2.  Group Administration
 
@@ -303,10 +306,9 @@ Table of Contents
 
 2.1.  Managing OSCORE Groups
 
-   The same resource model defined in Section 2.1 of
-   [I-D.ietf-ace-oscore-gm-admin] as based on a group-collection
-   resource and multiple group-configuration resources is used in this
-   document.
+   This document uses the same resource model defined in Section 2.1 of
+   [I-D.ietf-ace-oscore-gm-admin], which is based on a group-collection
+   resource and multiple group-configuration resources.
 
    When accessing such resources, the Administrator relies on the same
    interface defined in Section 6 of [I-D.ietf-ace-oscore-gm-admin], for
@@ -320,7 +322,7 @@ Table of Contents
    resources.
 
    Each group configuration is represented as a top-level link element,
-   with the URI of the group-configuration resource as link target, and
+   with the URI of the group-configuration resource as link target and
    with http://coreapps.org/core.osc.gcoll#item as relation type.
 
 2.3.  Discovery
@@ -714,7 +716,7 @@ Table of Contents
       parameter.
 
    *  The response payload includes the requested configuration
-      parameters and status parameters, and is formatted as in the
+      parameters and status parameters, and is formatted like the
       response payload of a GET request to a group-configuration
       resource (see Section 6.4).
 
@@ -1005,9 +1007,9 @@ Table of Contents
               Object Security for Constrained RESTful Environments
               (Group OSCORE) Using Authentication and Authorization for
               Constrained Environments (ACE)", Work in Progress,
-              Internet-Draft, draft-ietf-ace-key-groupcomm-oscore-17, 11
-              April 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-ace-key-groupcomm-oscore-17>.
+              Internet-Draft, draft-ietf-ace-key-groupcomm-oscore-18, 28
+              August 2025, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-ace-key-groupcomm-oscore-18>.
 
    [I-D.ietf-ace-oscore-gm-admin]
               Tiloca, M., Höglund, R., Van der Stok, P., and F.
@@ -1017,11 +1019,18 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
               oscore-gm-admin-13>.
 
+   [I-D.ietf-cbor-edn-literals]
+              Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
+              Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
+              literals-19, 16 October 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
+              edn-literals-19>.
+
    [I-D.ietf-cbor-packed]
               Bormann, C. and M. Gütschow, "Packed CBOR", Work in
-              Progress, Internet-Draft, draft-ietf-cbor-packed-15, 12
-              May 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-cbor-packed-15>.
+              Progress, Internet-Draft, draft-ietf-cbor-packed-17, 15
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-packed-17>.
 
    [I-D.ietf-core-coral]
               Amsüss, C. and T. Fossati, "The Constrained RESTful
@@ -1034,24 +1043,24 @@ Table of Contents
               Dijk, E. and M. Tiloca, "Group Communication for the
               Constrained Application Protocol (CoAP)", Work in
               Progress, Internet-Draft, draft-ietf-core-groupcomm-bis-
-              13, 24 February 2025,
+              15, 25 September 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              groupcomm-bis-13>.
+              groupcomm-bis-15>.
 
    [I-D.ietf-core-href]
               Bormann, C. and H. Birkholz, "Constrained Resource
               Identifiers", Work in Progress, Internet-Draft, draft-
-              ietf-core-href-22, 20 March 2025,
+              ietf-core-href-30, 21 November 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              href-22>.
+              href-30>.
 
    [I-D.ietf-core-oscore-groupcomm]
               Tiloca, M., Selander, G., Palombini, F., Mattsson, J. P.,
               and R. Höglund, "Group Object Security for Constrained
               RESTful Environments (Group OSCORE)", Work in Progress,
-              Internet-Draft, draft-ietf-core-oscore-groupcomm-25, 16
-              March 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-core-oscore-groupcomm-25>.
+              Internet-Draft, draft-ietf-core-oscore-groupcomm-27, 12
+              September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-core-oscore-groupcomm-27>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1160,9 +1169,9 @@ Table of Contents
               Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
               M. Furuhed, "CBOR Encoded X.509 Certificates (C509
               Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-13, 3 March 2025,
+              ietf-cose-cbor-encoded-cert-15, 18 August 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-13>.
+              cbor-encoded-cert-15>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -1189,13 +1198,13 @@ Appendix A.  Shared Item Tables for Packed CBOR
    This appendix defines the two shared item tables that the examples in
    this document refer to for using Packed CBOR [I-D.ietf-cbor-packed].
 
-   The application-extension identifier "cri" defined in Appendix B of
-   [I-D.ietf-core-href] is used to notate a CBOR Extended Diagnostic
-   Notation (EDN) literal for a CRI.
+   The application-extension identifier "cri" defined in Section 3.4 of
+   [I-D.ietf-cbor-edn-literals] is used to notate a CBOR Extended
+   Diagnostic Notation (EDN) literal for a CRI.
 
-A.1.  Compression of CoRAL Predicates
+A.1.  Compacting CoRAL Predicates with Packed CBOR
 
-   The following shared item table is used for compressing CoRAL
+   The following shared item table is used for compacting CoRAL
    predicates, as per Section 2.2 of [I-D.ietf-cbor-packed].
 
      +=======+=======================================================+
@@ -1288,11 +1297,11 @@ A.1.  Compression of CoRAL Predicates
      | 102   | cri'http://coreapps.org/core.osc.gconf#as_uri'        |
      +-------+-------------------------------------------------------+
 
-        Table 1: Shared Item Table for Compressing CoRAL Predicates.
+        Table 1: Shared Item Table for Compacting CoRAL Predicates.
 
-A.2.  Compression of Values of the rt= Target Attribute
+A.2.  Compacting Values of the rt= Target Attribute with Packed CBOR
 
-   The following shared item table is used for compressing values of the
+   The following shared item table is used for compacting values of the
    rt= target attribute, as per Section 2.2 of [I-D.ietf-cbor-packed].
 
        +=======+===================================================+
@@ -1302,20 +1311,29 @@ A.2.  Compression of Values of the rt= Target Attribute
        |       | /core.osc.gconf'                                  |
        +-------+---------------------------------------------------+
 
-          Table 2: Shared Item Table for Compressing Values of the
+          Table 2: Shared Item Table for Compacting Values of the
                            rt= Target Attribute.
 
 Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -03 to -04
+B.1.  Version -04 to -05
+
+   *  Use "compacting" instead of "compressing" when referring to Packed
+      CBOR.
+
+   *  Updated references.
+
+   *  Editorial fixes and improvements.
+
+B.2.  Version -03 to -04
 
    *  Updated references.
 
    *  Editorial improvements and fixes.
 
-B.2.  Version -02 to -03
+B.3.  Version -02 to -03
 
    *  Uri-Path and Location-Path as text strings in examples.
 
@@ -1323,7 +1341,7 @@ B.2.  Version -02 to -03
 
    *  Editorial fixes.
 
-B.3.  Version -01 to -02
+B.4.  Version -01 to -02
 
    *  Avoid quotation marks for CBOR simple values.
 
@@ -1344,12 +1362,12 @@ B.3.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.4.  Version -00 to -01
+B.5.  Version -00 to -01
 
    *  Updated reference and introductory text for the CBOR EDN
       application-extension identifier "cri".
 
-B.5.  Version -00
+B.6.  Version -00
 
    *  CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.
 
