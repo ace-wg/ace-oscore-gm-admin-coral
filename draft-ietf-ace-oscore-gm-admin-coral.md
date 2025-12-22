@@ -42,6 +42,7 @@ normative:
   I-D.ietf-core-groupcomm-bis:
   I-D.ietf-cbor-packed:
   I-D.ietf-core-href:
+  I-D.ietf-cbor-edn-literals:
   RFC3986:
   RFC6690:
   RFC6749:
@@ -89,17 +90,17 @@ Group communication for the Constrained Application Protocol (CoAP) can be secur
 
 # Introduction # {#intro}
 
-The Constrained Application Protocol (CoAP) {{RFC7252}} can also be used for group communication {{I-D.ietf-core-groupcomm-bis}}, where messages are exchanged between members of a group, e.g., over IP multicast. Applications relying on CoAP can achieve end-to-end security at the application layer by using Object Security for Constrained RESTful Environments (OSCORE) {{RFC8613}} and especially Group OSCORE {{I-D.ietf-core-oscore-groupcomm}} in group communication scenarios.
+The Constrained Application Protocol (CoAP) {{RFC7252}} can also be used for group communication {{I-D.ietf-core-groupcomm-bis}}, where messages are exchanged between members of a group (e.g., over IP multicast). Applications relying on CoAP can achieve end-to-end security at the application layer by using Object Security for Constrained RESTful Environments (OSCORE) {{RFC8613}} and especially Group OSCORE {{I-D.ietf-core-oscore-groupcomm}} in group communication scenarios.
 
-When group communication for CoAP is protected with Group OSCORE, nodes are required to explicitly join the correct OSCORE group. To this end, a joining node interacts with a Group Manager (GM) entity responsible for that group, and retrieves the required keying material to securely communicate with other group members using Group OSCORE.
+When group communication for CoAP is protected with Group OSCORE, nodes are required to explicitly join the correct OSCORE group. To this end, a joining node interacts with a Group Manager entity responsible for that group, and it retrieves from the Group Manager the required keying material to securely communicate with other group members using Group OSCORE.
 
 The method in {{I-D.ietf-ace-key-groupcomm-oscore}} specifies how nodes can join an OSCORE group through the respective Group Manager. Such a method builds on the ACE framework for Authentication and Authorization {{RFC9200}}, so ensuring a secure joining process as well as authentication and authorization of joining nodes (clients) at the Group Manager (resource server).
 
-{{I-D.ietf-ace-oscore-gm-admin}} specifies a RESTful admin interface at the Group Manager, intended for an Administrator as a separate entity external to the Group Manager and its application. The interface allows the Administrator to create and delete OSCORE groups, as well as to configure and update their configuration.
+Furthermore, {{I-D.ietf-ace-oscore-gm-admin}} specifies a RESTful admin interface at the Group Manager, which is intended for an Administrator as a separate entity external to the Group Manager and its application. The interface allows the Administrator to create and delete OSCORE groups, as well as to configure and update their configuration.
 
 This document builds on {{I-D.ietf-ace-oscore-gm-admin}} and specifies how an Administrator interacts with the same RESTful admin interface by using the Constrained RESTful Application Language (CoRAL) {{I-D.ietf-core-coral}}. Compared to {{I-D.ietf-ace-oscore-gm-admin}}, there is no change in the admin interface and its operations, nor in the way the group configurations are organized and represented.
 
-Interaction examples using Packed CBOR {{I-D.ietf-cbor-packed}} are provided, and are expressed in CBOR diagnostic notation as defined in {{Section 8 of RFC8949}} and {{Section G of RFC8610}}. {{notation-coral-examples}} provides the notation and assumptions used in the examples.
+Interaction examples using Packed CBOR {{I-D.ietf-cbor-packed}} are provided and are expressed in CBOR diagnostic notation as defined in {{Section 8 of RFC8949}} and {{Section G of RFC8610}}. {{notation-coral-examples}} provides the notation and assumptions used in the examples.
 
 The ACE framework is used to ensure authentication and authorization of the Administrator (client) at the Group Manager (resource server). In order to achieve communication security, proof-of-possession, and server authentication, the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE, such as {{RFC9202}} or {{RFC9203}}. These also include possible forthcoming transport profiles that comply with the requirements in {{Section C of RFC9200}}.
 
@@ -159,11 +160,11 @@ When using a URI http://www.iana.org/assignments/linkformat/SEG1/SEG2
 
 * The path segment SEG2 is the value of the target attribute.
 
-The application-extension identifier "cri" defined in {{Section B of I-D.ietf-core-href}} is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI or CRI reference. This format is not expected to be sent over the network.
+The application-extension identifier "cri" defined in {{Section 3.4 of I-D.ietf-cbor-edn-literals}} is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI or CRI reference. This format is not expected to be sent over the network.
 
 Packed CBOR {{I-D.ietf-cbor-packed}} is also used, thus reducing representation size. Examples in this document especially refer to the values from the two shared item tables in {{sec-packed-cbor-tables}}.
 
-Finally, examples in this document consider a Group Manager with address \[2001:db8::ab\] and use the CoAP Content-Format ID 65087 for the media-type application/coral+cbor.
+Finally, examples in this document consider a Group Manager with address \[2001:db8::ab\] and use the CoAP Content-Format ID 65087 for the media type "application/coral+cbor".
 
 # Group Administration # {#overview}
 
@@ -171,7 +172,7 @@ The group administration is enforced as defined in {{Section 2 of I-D.ietf-ace-o
 
 ## Managing OSCORE Groups ## {#managing-groups}
 
-The same resource model defined in {{Section 2.1 of I-D.ietf-ace-oscore-gm-admin}} as based on a group-collection resource and multiple group-configuration resources is used in this document.
+This document uses the same resource model defined in {{Section 2.1 of I-D.ietf-ace-oscore-gm-admin}}, which is based on a group-collection resource and multiple group-configuration resources.
 
 When accessing such resources, the Administrator relies on the same interface defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}}, for which differences that apply when using CoRAL are compiled in {{interactions}} of this document.
 
@@ -179,7 +180,7 @@ When accessing such resources, the Administrator relies on the same interface de
 
 A collection of group configurations is represented as a CoRAL document containing the list of corresponding group-configuration resources.
 
-Each group configuration is represented as a top-level link element, with the URI of the group-configuration resource as link target, and with http://coreapps.org/core.osc.gcoll#item as relation type.
+Each group configuration is represented as a top-level link element, with the URI of the group-configuration resource as link target and with http://coreapps.org/core.osc.gcoll#item as relation type.
 
 ## Discovery
 
@@ -476,7 +477,7 @@ The same as defined in {{Section 6.5 of I-D.ietf-ace-oscore-gm-admin}} holds, wi
 
 * The request payload MUST NOT include any link element corresponding to an inner information element of a structured parameter.
 
-* The response payload includes the requested configuration parameters and status parameters, and is formatted as in the response payload of a GET request to a group-configuration resource (see {{configuration-resource-get}}).
+* The response payload includes the requested configuration parameters and status parameters, and is formatted like the response payload of a GET request to a group-configuration resource (see {{configuration-resource-get}}).
 
   If the request payload specifies a parameter that is not included in the group configuration, then the response payload MUST NOT include a corresponding link element.
 
@@ -686,11 +687,11 @@ This document has no actions for IANA.
 
 This appendix defines the two shared item tables that the examples in this document refer to for using Packed CBOR {{I-D.ietf-cbor-packed}}.
 
-The application-extension identifier "cri" defined in {{Section B of I-D.ietf-core-href}} is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI.
+The application-extension identifier "cri" defined in {{Section 3.4 of I-D.ietf-cbor-edn-literals}} is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI.
 
-## Compression of CoRAL Predicates
+## Compacting CoRAL Predicates with Packed CBOR
 
-The following shared item table is used for compressing CoRAL predicates, as per {{Section 2.2 of I-D.ietf-cbor-packed}}.
+The following shared item table is used for compacting CoRAL predicates, as per {{Section 2.2 of I-D.ietf-cbor-packed}}.
 
 | Index | Item                                                                                                                       |
 | 6     | cri'http://www.iana.org/assignments/linkformat/rt'                                                                         |
@@ -730,18 +731,26 @@ The following shared item table is used for compressing CoRAL predicates, as per
 | 100   | cri'http://coreapps.org/core.osc.gconf#group_policies <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.key_update_check_interval' |
 | 101   | cri'http://coreapps.org/core.osc.gconf#group_policies <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.exp_delta'                 |
 | 102   | cri'http://coreapps.org/core.osc.gconf#as_uri'                                                                             |
-{: #table-packed-cbor-table-1 title="Shared Item Table for Compressing CoRAL Predicates." align="center"}
+{: #table-packed-cbor-table-1 title="Shared Item Table for Compacting CoRAL Predicates." align="center"}
 
-## Compression of Values of the rt= Target Attribute
+## Compacting Values of the rt= Target Attribute with Packed CBOR
 
-The following shared item table is used for compressing values of the rt= target attribute, as per {{Section 2.2 of I-D.ietf-cbor-packed}}.
+The following shared item table is used for compacting values of the rt= target attribute, as per {{Section 2.2 of I-D.ietf-cbor-packed}}.
 
 | Index | Item                                                                                                        |
 | 415   | cri'http://www.iana.org/assignments/linkformat/rt <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/core.osc.gconf' |
-{: #table-packed-cbor-table-2 title="Shared Item Table for Compressing Values of the rt= Target Attribute." align="center"}
+{: #table-packed-cbor-table-2 title="Shared Item Table for Compacting Values of the rt= Target Attribute." align="center"}
 
 # Document Updates # {#sec-document-updates}
 {:removeinrfc}
+
+## Version -04 to -05 ## {#sec-04-05}
+
+* Use "compacting" instead of "compressing" when referring to Packed CBOR.
+
+* Updated references.
+
+* Editorial fixes and improvements.
 
 ## Version -03 to -04 ## {#sec-03-04}
 
