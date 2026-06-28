@@ -8,24 +8,25 @@
 <meta content="Marco Tiloca" name="author">
 <meta content="Rikard Höglund" name="author">
 <meta content="
-       Group communication for the Constrained Application Protocol (CoAP) can be secured using Group Object Security for Constrained RESTful Environments (Group OSCORE). A Group Manager is responsible to handle the joining of new group members, as well as to manage and distribute the group keying material. The Group Manager can provide a RESTful admin interface that allows an Administrator entity to create and delete OSCORE groups, as well as to retrieve and update their configuration. This document specifies how an Administrator interacts with the admin interface at the Group Manager by using the Constrained RESTful Application Language (CoRAL). The ACE framework for Authentication and Authorization is used to enforce authentication and authorization of the Administrator at the Group Manager. Protocol-specific transport profiles of ACE are used to achieve communication security, proof-of-possession, and server authentication. 
+       Group communication for the Constrained Application Protocol (CoAP) can be secured using Group Object Security for Constrained RESTful Environments (Group OSCORE). A Group Manager is responsible to handle the joining of new group members, as well as to manage and distribute the group keying material. The Group Manager can provide a RESTful admin interface that allows an Administrator entity to create and delete OSCORE groups, as well as to retrieve and update their configuration. This document specifies how an Administrator interacts with the admin interface at the Group Manager by using the Constrained RESTful Application Language (CoRAL). The ACE framework for Authentication and Authorization is used to enforce authentication and authorization of the Administrator at the Group Manager. Protocol-specific transport profiles of ACE are used to achieve communication security, proof of possession, and server authentication. 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-ace-oscore-gm-admin-coral-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
-    Python 3.12.12
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.5.1
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
-    requests 2.32.5
-    wcwidth 0.2.14
+    requests 2.33.1
+    wcwidth 0.8.1
 -->
 <link href="draft-ietf-ace-oscore-gm-admin-coral.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -166,7 +167,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -174,7 +175,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -291,16 +293,19 @@ h1, h2, h3, h4, h5, h6 {
   font-size-adjust: 0.5;
   color: var(--title-color);
 }
-h1#title {
-  font-size: 32px;
-  line-height: 40px;
-  clear: both;
-}
-h1#title, h1#rfcnum {
-  margin: 1.5em 0 0.2em;
-}
-h1#rfcnum + h1#title {
-  margin: 0.2em 0;
+h1 {
+  &#title {
+    font-size: 32px;
+    line-height: 40px;
+    clear: both;
+    margin: 1.5em 0 0.2em;
+  }
+  &#rfcnum {
+    margin: 1.5em 0 0.2em;
+    & + h1#title {
+      margin: 0.2em 0;
+    }
+  }
 }
 
 h1, h2, h3 {
@@ -320,10 +325,10 @@ h4, h5, h6 {
 #abstract+p {
   font-size: 18px;
   line-height: 24px;
-}
-#abstract+p code, #abstract+p samp, #abstract+p tt {
-  font-size: 16px;
-  line-height: 0;
+  & code, & samp, & tt {
+    font-size: 16px;
+    line-height: 0;
+  }
 }
 
 p {
@@ -334,59 +339,59 @@ p {
 div {
   margin: 0;
 }
-.alignRight.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignRight.art-text pre {
-  padding: 0;
-  width: auto;
-}
 .alignRight {
   margin: 1em 0;
-}
-.alignRight > *:first-child {
-  border: none;
-  margin: 0;
-  float: right;
-  clear: both;
-}
-.alignRight > *:nth-child(2) {
-  clear: both;
-  display: block;
-  border: none;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    margin: 0;
+    float: right;
+    clear: both;
+  }
+  & > *:nth-child(2) {
+    clear: both;
+    display: block;
+    border: none;
+  }
 }
 svg {
   display: block;
-}
-/* font-family isn't space-separated, but =~ will have to do */
-svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
-  font-family: var(--font-mono);
-}
-.alignCenter.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignCenter.art-text pre {
-  padding: 0;
-  width: auto;
+  /* font-family isn't space-separated, but =~ will have to do */
+  &[font-family~="monospace" i], & [font-family~="monospace" i] {
+    font-family: var(--font-mono);
+  }
 }
 .alignCenter {
   margin: 1em 0;
-}
-.alignCenter > *:first-child {
-  border: none;
-  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
-     support flexbox yet.
-  */
-  display: table;
-  margin: 0 auto;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+       support flexbox yet.
+    */
+    display: table;
+    margin: 0 auto;
+  }
 }
 
 /* lists */
@@ -424,26 +429,25 @@ dl {
     --indent: 5ch;
     & > dt {
       min-width: calc(var(--indent) - 2ch);
+      float: none;
     }
-  }
-  &.olPercent > dt {
-    float: none;
   }
 
   dl > dd > & {
     margin-top: 0.5em;
     margin-bottom: 0;
   }
-}
-dl:not(.dlNewline) > dt {
-  float: left;
-  margin-right: 2ch;
-  min-width: 8ch;
-}
-dl > dd {
-  margin-bottom: .8em;
-  margin-left: var(--indent) !important; /* stupid element overrides */
-  min-height: 2ex;
+
+  &:not(.dlNewline) > dt {
+    float: left;
+    margin-right: 2ch;
+    min-width: 8ch;
+  }
+  & > dd {
+    margin-bottom: .8em;
+    margin-left: var(--indent) !important; /* stupid element overrides */
+    min-height: 2ex;
+  }
 }
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
@@ -459,20 +463,22 @@ dl > dd {
 }
 
 /* links */
-a, a[href].selfRef:hover {
+a {
   text-decoration: none;
+  &[href] {
+    color: var(--link-color);
+    &:hover { text-decoration: underline; }
+    &.selfRef {
+      color: var(--text-color);
+      &:hover {
+        text-decoration: none;
+        background-color: var(--highlight-color);
+      }
+    }
+  }
 }
-a[href] {
-  color: var(--link-color);
-}
-a[href].selfRef, .iref + a[href].internal {
+.iref + a[href].internal {
   color: var(--text-color);
-}
-a[href]:hover {
-  text-decoration: underline;
-}
-a[href].selfRef:hover {
-  background-color: var(--highlight-color);
 }
 a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
@@ -508,9 +514,9 @@ img {
 figure {
   margin: 0.5em 0;
   padding: 0;
-}
-figure blockquote {
-  margin: 0.8em 0.4em 0.4em;
+  & blockquote {
+    margin: 0.8em 0.4em 0.4em;
+  }
 }
 figcaption, caption {
   font-style: italic;
@@ -520,17 +526,19 @@ figcaption, caption {
 }
 @media screen {
   /* Auto-collapse boilerplate. */
-  :is(#status-of-memo, #copyright) p {
-    margin: -2px 0;
-    max-height: 0;
-    transition: max-height 2s ease, margin 0.5s ease 0.5s;
-    overflow: hidden;
-  }
-  :is(#status-of-memo, #copyright):hover p,
-  :is(#status-of-memo, #copyright) h2:target ~ p {
-    margin: 0.5em 0;
-    max-height: 500px;
-    overflow: auto;
+  :is(#status-of-memo, #copyright) {
+    & p {
+      margin: -2px 0;
+      max-height: 0;
+      transition: max-height 2s ease, margin 0.5s ease 0.5s;
+      overflow: hidden;
+    }
+    &:hover p,
+    & h2:target ~ p {
+      margin: 0.5em 0;
+      max-height: 500px;
+      overflow: auto;
+    }
   }
   pre, svg {
     display: inline-block;
@@ -566,6 +574,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -579,25 +588,17 @@ table {
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
-}
-table.right {
-  margin-left: auto;
-}
-table.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-table.left {
-  margin-right: auto;
-}
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
+  &.right { margin-left: auto; }
+  &.center { margin-left: auto; margin-right: auto; }
+  &.left { margin-right: auto; }
+  & .text-left { text-align: left; }
+  & .text-center { text-align: center; }
+  & .text-right { text-align: right; }
+  & caption {
+    margin: 0;
+    padding: 3px 0 3px 1em;
+  }
+  & p { margin: 0; }
 }
 
 thead, tbody {
@@ -617,13 +618,6 @@ th {
 :is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
   background-color: var(--highlight-color);
 }
-table caption {
-  margin: 0;
-  padding: 3px 0 3px 1em;
-}
-table p {
-  margin: 0;
-}
 
 /* pilcrow */
 a.pilcrow {
@@ -634,18 +628,16 @@ a.pilcrow {
     color: var(--pilcrow-weak);
     &:hover { text-decoration: none; }
   }
-}
-@media not print {
-  :hover > a.pilcrow {
-    opacity: 1;
+  @media not print {
+    :hover > &, &:focus {
+      opacity: 1;
+    }
+    &[href]:hover {
+      color: var(--pilcrow-strong);
+      background-color: transparent;
+    }
   }
-  a.pilcrow[href]:hover {
-    color: var(--pilcrow-strong);
-    background-color: transparent;
-  }
-}
-@media print {
-  a.pilcrow {
+  @media print {
     display: none;
   }
 }
@@ -704,9 +696,9 @@ sub, sup {
   font-size: 0.9em;
   font-style: italic;
   margin-top: 2em;
-}
-.docInfo .prepared {
-  float: right;
+  & .prepared {
+    float: right;
+  }
 }
 
 /* table of contents */
@@ -796,23 +788,27 @@ hr.addr {
   max-width: calc(100% - 16px);
 }
 @media (min-width: 500px) {
-  #authors-addresses > section {
-    column-count: 2;
-    column-gap: 20px;
-  }
-  #authors-addresses > section > h2 {
-    column-span: all;
-  }
-  /* hack for break-inside: avoid-column */
-  #authors-addresses address {
-    display: inline-block;
-    break-inside: avoid-column;
+  #authors-addresses {
+    & > section {
+      column-count: 2;
+      column-gap: 20px;
+    }
+    & > section > h2 {
+      column-span: all;
+    }
+    /* hack for break-inside: avoid-column */
+    & address {
+      display: inline-block;
+      break-inside: avoid-column;
+    }
   }
 }
 
 /* Comments */
-.rfcEditorRemove p:first-of-type {
-  font-style: italic;
+.rfcEditorRemove {
+  & p:first-of-type {
+    font-style: italic;
+  }
 }
 .cref {
   background-color: rgba(249, 232, 105, 0.3);
@@ -823,19 +819,21 @@ hr.addr {
 }
 
 @media screen {
-  #toc nav {
-    font-family: var(--font-title);
-    font-weight: 360;
-    & > ul { margin-bottom: 2em; }
-    & ul {
-      margin: 0 0 0 4px;
-      & :is(p, li) {
-        margin: 2px 0;
+  #toc {
+    & nav {
+      font-family: var(--font-title);
+      font-weight: 360;
+      & > ul { margin-bottom: 2em; }
+      & ul {
+        margin: 0 0 0 4px;
+        & :is(p, li) {
+          margin: 2px 0;
+        }
       }
     }
-  }
-  #toc a.toplink {
-    float: right;
+    & a.toplink {
+      float: right;
+    }
   }
 }
 @media not screen {
@@ -856,54 +854,54 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 2px 0 2px 6px;
-    padding-right: 1em;
-    font-size: 18px;
-    line-height: 24px;
-    min-width: 190px;
-    text-align: right;
-    background-color: #444;
-    color: white;
-    cursor: pointer;
-    &::before { /* css hamburger */
-      float: right;
-      position: relative;
-      width: 1em;
-      height: 1px;
-      left: -164px;
-      margin: 8px 0 0 0;
-      background: white none repeat scroll 0 0;
-      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-      content: "";
+    & h2 {
+      margin: 0;
+      padding: 2px 0 2px 6px;
+      padding-right: 1em;
+      font-size: 18px;
+      line-height: 24px;
+      min-width: 190px;
+      text-align: right;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      &::before { /* css hamburger */
+        float: right;
+        position: relative;
+        width: 1em;
+        height: 1px;
+        left: -164px;
+        margin: 8px 0 0 0;
+        background: white none repeat scroll 0 0;
+        box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+        content: "";
+      }
     }
-  }
-  #toc nav {
-    display: none;
-    background-color: var(--background-color);
-    padding: 0.5em 1em 1em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    height: calc(100vh - 48px);
-    border-left: 1px solid #ddd;
-  }
-  #toc.active {
-    opacity: 1;
-    & nav { display: block; }
-  }
-  /* Make the collapsed ToC header render white on gray also when it's a link */
-  #toc h2 a,
-  #toc h2 a:is(:link, :focus, :hover),
-  #toc a.toplink,
-  #toc a.toplink:hover {
-    color: white;
-    background-color: #444;
-    text-decoration: none;
-  }
-  #toc a.toplink {
-    margin: 2px 0.5em 0;
+    & nav {
+      display: none;
+      background-color: var(--background-color);
+      padding: 0.5em 1em 1em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      height: calc(100vh - 48px);
+      border-left: 1px solid #ddd;
+    }
+    &.active {
+      opacity: 1;
+      & nav { display: block; }
+    }
+    /* Make the collapsed ToC header render white on gray also when it's a link */
+    & h2 a,
+    & h2 a:is(:link, :focus, :hover),
+    & a.toplink,
+    & a.toplink:hover {
+      color: white;
+      background-color: #444;
+      text-decoration: none;
+    }
+    & a.toplink {
+      margin: 2px 0.5em 0;
+    }
   }
 }
 
@@ -922,26 +920,26 @@ hr.addr {
     margin: 0;
     padding: 0;
     z-index: 1;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 0.25em 1em 1em 0;
-  }
-  #toc nav {
-    display: block;
-    height: calc(90vh - 84px);
-    bottom: 0;
-    padding: 0.5em 0 2em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
+    & h2 {
+      margin: 0;
+      padding: 0.25em 1em 1em 0;
+    }
+    & nav {
+      display: block;
+      height: calc(90vh - 84px);
+      bottom: 0;
+      padding: 0.5em 0 2em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    & a.toplink {
+      margin: 8px 0.5em 0;
+    }
   }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
-  }
-  #toc a.toplink {
-    margin: 8px 0.5em 0;
   }
 }
 
@@ -957,12 +955,13 @@ hr.addr {
   #n-copyright-notice {
     border-bottom: none;
   }
-  #toc, #n-introduction {
-    page-break-before: always;
-  }
   #toc {
+    page-break-before: always;
     border-top: none;
     padding-top: 0;
+  }
+  #n-introduction {
+    page-break-before: always;
   }
   figure, pre, .vcard {
     page-break-inside: avoid;
@@ -1024,17 +1023,19 @@ hr.addr {
 }
 
 /* SVG Trick: a prefix match works because only black and white are allowed */
-svg :is([stroke="black"], [stroke^="#000"]) {
-  stroke: var(--text-color);
-}
-svg :is([stroke="white"], [stroke^="#fff"]) {
-  stroke: var(--background-color);
-}
-svg :is([fill="black"], [fill^="#000"], :not([fill])) {
-  fill: var(--text-color);
-}
-svg :is([fill="white"], [fill^="#fff"]) {
-  fill: var(--background-color);
+svg {
+  & :is([stroke="black"], [stroke^="#000"]) {
+    stroke: var(--text-color);
+  }
+  & :is([stroke="white"], [stroke^="#fff"]) {
+    stroke: var(--background-color);
+  }
+  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+    fill: var(--text-color);
+  }
+  & :is([fill="white"], [fill^="#fff"]) {
+    fill: var(--background-color);
+  }
 }
 </style>
 
@@ -1044,11 +1045,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CoRAL Admin Interface for the OSCORE GM</td>
-<td class="right">December 2025</td>
+<td class="right">June 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Tiloca &amp; Höglund</td>
-<td class="center">Expires 25 June 2026</td>
+<td class="center">Expires 30 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1061,12 +1062,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-ace-oscore-gm-admin-coral-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-22" class="published">22 December 2025</time>
+<time datetime="2026-06-28" class="published">28 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-25">25 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-30">30 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1083,7 +1084,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Using the Constrained RESTful Application Language (CoRAL) with the Admin Interface for the OSCORE Group Manager</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Group communication for the Constrained Application Protocol (CoAP) can be secured using Group Object Security for Constrained RESTful Environments (Group OSCORE). A Group Manager is responsible to handle the joining of new group members, as well as to manage and distribute the group keying material. The Group Manager can provide a RESTful admin interface that allows an Administrator entity to create and delete OSCORE groups, as well as to retrieve and update their configuration. This document specifies how an Administrator interacts with the admin interface at the Group Manager by using the Constrained RESTful Application Language (CoRAL). The ACE framework for Authentication and Authorization is used to enforce authentication and authorization of the Administrator at the Group Manager. Protocol-specific transport profiles of ACE are used to achieve communication security, proof-of-possession, and server authentication.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">Group communication for the Constrained Application Protocol (CoAP) can be secured using Group Object Security for Constrained RESTful Environments (Group OSCORE). A Group Manager is responsible to handle the joining of new group members, as well as to manage and distribute the group keying material. The Group Manager can provide a RESTful admin interface that allows an Administrator entity to create and delete OSCORE groups, as well as to retrieve and update their configuration. This document specifies how an Administrator interacts with the admin interface at the Group Manager by using the Constrained RESTful Application Language (CoRAL). The ACE framework for Authentication and Authorization is used to enforce authentication and authorization of the Administrator at the Group Manager. Protocol-specific transport profiles of ACE are used to achieve communication security, proof of possession, and server authentication.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-discussion-venues">
@@ -1115,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 30 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1124,7 +1125,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1151,7 +1152,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-notation-and-assumptions-us" class="internal xref">Notation and Assumptions Used in the Examples</a></p>
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-notation-and-assumptions-in" class="internal xref">Notation and Assumptions in Examples</a></p>
 </li>
             </ul>
 </li>
@@ -1287,22 +1288,25 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.13.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-document-updates" class="internal xref">Document Updates</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-version-04-to-05" class="internal xref">Version -04 to -05</a></p>
+                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-version-05-to-06" class="internal xref">Version -05 to -06</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
-                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-version-03-to-04" class="internal xref">Version -03 to -04</a></p>
+                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-version-04-to-05" class="internal xref">Version -04 to -05</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
-                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-version-02-to-03" class="internal xref">Version -02 to -03</a></p>
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-version-03-to-04" class="internal xref">Version -03 to -04</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.4">
-                <p id="section-toc.1-1.13.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-version-01-to-02" class="internal xref">Version -01 to -02</a></p>
+                <p id="section-toc.1-1.13.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-version-02-to-03" class="internal xref">Version -02 to -03</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.5">
-                <p id="section-toc.1-1.13.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-version-00-to-01" class="internal xref">Version -00 to -01</a></p>
+                <p id="section-toc.1-1.13.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-version-01-to-02" class="internal xref">Version -01 to -02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.6">
-                <p id="section-toc.1-1.13.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-version-00" class="internal xref">Version -00</a></p>
+                <p id="section-toc.1-1.13.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-version-00-to-01" class="internal xref">Version -00 to -01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.7">
+                <p id="section-toc.1-1.13.2.7.1"><a href="#appendix-B.7" class="auto internal xref">B.7</a>.  <a href="#name-version-00" class="internal xref">Version -00</a></p>
 </li>
             </ul>
 </li>
@@ -1327,7 +1331,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-1-4">Furthermore, <span>[<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> specifies a RESTful admin interface at the Group Manager, which is intended for an Administrator as a separate entity external to the Group Manager and its application. The interface allows the Administrator to create and delete OSCORE groups, as well as to configure and update their configuration.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">This document builds on <span>[<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> and specifies how an Administrator interacts with the same RESTful admin interface by using the Constrained RESTful Application Language (CoRAL) <span>[<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>. Compared to <span>[<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, there is no change in the admin interface and its operations, nor in the way the group configurations are organized and represented.<a href="#section-1-5" class="pilcrow">¶</a></p>
 <p id="section-1-6">Interaction examples using Packed CBOR <span>[<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span> are provided and are expressed in CBOR diagnostic notation as defined in <span><a href="https://rfc-editor.org/rfc/rfc8949#section-8" class="relref">Section 8</a> of [<a href="#RFC8949" class="cite xref">RFC8949</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8610#appendix-G" class="relref">Appendix G</a> of [<a href="#RFC8610" class="cite xref">RFC8610</a>]</span>. <a href="#notation-coral-examples" class="auto internal xref">Section 1.2</a> provides the notation and assumptions used in the examples.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7">The ACE framework is used to ensure authentication and authorization of the Administrator (client) at the Group Manager (resource server). In order to achieve communication security, proof-of-possession, and server authentication, the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE, such as <span>[<a href="#RFC9202" class="cite xref">RFC9202</a>]</span> or <span>[<a href="#RFC9203" class="cite xref">RFC9203</a>]</span>. These also include possible forthcoming transport profiles that comply with the requirements in <span><a href="https://rfc-editor.org/rfc/rfc9200#appendix-C" class="relref">Appendix C</a> of [<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-7">The ACE framework is used to ensure authentication and authorization of the Administrator (client) at the Group Manager (resource server). In order to achieve communication security, proof of possession, and server authentication, the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE, such as <span>[<a href="#RFC9202" class="cite xref">RFC9202</a>]</span> or <span>[<a href="#RFC9203" class="cite xref">RFC9203</a>]</span>. These also include possible forthcoming transport profiles that comply with the requirements in <span><a href="https://rfc-editor.org/rfc/rfc9200#appendix-C" class="relref">Appendix C</a> of [<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>.<a href="#section-1-7" class="pilcrow">¶</a></p>
 <div id="terminology">
 <section id="section-1.1">
         <h3 id="name-terminology">
@@ -1360,7 +1364,7 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
             <p id="section-1.1-3.4.1">The security protocols OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span> and Group OSCORE <span>[<a href="#I-D.ietf-core-oscore-groupcomm" class="cite xref">I-D.ietf-core-oscore-groupcomm</a>]</span>. These especially include the concepts below:<a href="#section-1.1-3.4.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1.1-3.4.2.1">
-                <p id="section-1.1-3.4.2.1.1">Group Manager, as the entity responsible for a set of OSCORE groups where communications among members are secured using Group OSCORE. An OSCORE group is used as security group for one or many application groups.<a href="#section-1.1-3.4.2.1.1" class="pilcrow">¶</a></p>
+                <p id="section-1.1-3.4.2.1.1">Group Manager, as the entity responsible for a set of OSCORE groups where communications among members are secured using Group OSCORE. An OSCORE group is used as the security group for one or many application groups.<a href="#section-1.1-3.4.2.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-1.1-3.4.2.2">
                 <p id="section-1.1-3.4.2.2.1">Authentication credential, as the set of information associated with an entity, including that entity's public key and parameters associated with the public key. Examples of authentication credentials are CBOR Web Tokens (CWTs) and CWT Claims Sets (CCSs) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>, X.509 certificates <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>, and C509 certificates <span>[<a href="#I-D.ietf-cose-cbor-encoded-cert" class="cite xref">I-D.ietf-cose-cbor-encoded-cert</a>]</span>.<a href="#section-1.1-3.4.2.2.1" class="pilcrow">¶</a></p>
@@ -1381,8 +1385,8 @@ appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">�
 </div>
 <div id="notation-coral-examples">
 <section id="section-1.2">
-        <h3 id="name-notation-and-assumptions-us">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-notation-and-assumptions-us" class="section-name selfRef">Notation and Assumptions Used in the Examples</a>
+        <h3 id="name-notation-and-assumptions-in">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-notation-and-assumptions-in" class="section-name selfRef">Notation and Assumptions in Examples</a>
         </h3>
 <p id="section-1.2-1">As per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-coral-06#section-2.4" class="relref">Section 2.4</a> of [<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>, CoRAL expresses Uniform Resource Identifiers (URIs) <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> as Constrained Resource Identifier (CRI) references <span>[<a href="#I-D.ietf-core-href" class="cite xref">I-D.ietf-core-href</a>]</span>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">Examples in this document use the following notation.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
@@ -1405,13 +1409,13 @@ This URI is to be defined with IANA, together with other URIs that build on it t
 <li class="normal" id="section-1.2-6.1">
             <p id="section-1.2-6.1.1">The path segment SEG1 is the name of a web link target attribute.<a href="#section-1.2-6.1.1" class="pilcrow">¶</a></p>
 <p id="section-1.2-6.1.2">
-Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> are expected to be coordinated through the "Target Attributes" registry defined in <span>[<a href="#RFC9423" class="cite xref">RFC9423</a>]</span>.<a href="#section-1.2-6.1.2" class="pilcrow">¶</a></p>
+Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="cite xref">RFC6690</a>]</span> are expected to be coordinated through the "Target Attributes" registry <span>[<a href="#IANA.Target.Attributes" class="cite xref">IANA.Target.Attributes</a>]</span>.<a href="#section-1.2-6.1.2" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.2-6.2">
             <p id="section-1.2-6.2.1">The path segment SEG2 is the value of the target attribute.<a href="#section-1.2-6.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-1.2-7">The application-extension identifier "cri" defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-19#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span> is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI or CRI reference. This format is not expected to be sent over the network.<a href="#section-1.2-7" class="pilcrow">¶</a></p>
+<p id="section-1.2-7">The application-extension identifier "cri" defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-26#section-3.6" class="relref">Section 3.6</a> of [<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span> is used to notate a Concise Diagnostic Notation (CDN) literal for a CRI or CRI reference. This format is not expected to be sent over the network.<a href="#section-1.2-7" class="pilcrow">¶</a></p>
 <p id="section-1.2-8">Packed CBOR <span>[<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span> is also used, thus reducing representation size. Examples in this document especially refer to the values from the two shared item tables in <a href="#sec-packed-cbor-tables" class="auto internal xref">Appendix A</a>.<a href="#section-1.2-8" class="pilcrow">¶</a></p>
 <p id="section-1.2-9">Finally, examples in this document consider a Group Manager with address [2001:db8::ab] and use the CoAP Content-Format ID 65087 for the media type "application/coral+cbor".<a href="#section-1.2-9" class="pilcrow">¶</a></p>
 </section>
@@ -1423,14 +1427,14 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
       <h2 id="name-group-administration">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-group-administration" class="section-name selfRef">Group Administration</a>
       </h2>
-<p id="section-2-1">The group administration is enforced as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-2" class="relref">Section 2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-1">The group administration is enforced as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-2" class="relref">Section 2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div id="managing-groups">
 <section id="section-2.1">
         <h3 id="name-managing-oscore-groups">
 <a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-managing-oscore-groups" class="section-name selfRef">Managing OSCORE Groups</a>
         </h3>
-<p id="section-2.1-1">This document uses the same resource model defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-2.1" class="relref">Section 2.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, which is based on a group-collection resource and multiple group-configuration resources.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">When accessing such resources, the Administrator relies on the same interface defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, for which differences that apply when using CoRAL are compiled in <a href="#interactions" class="auto internal xref">Section 6</a> of this document.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">This document uses the same resource model defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-2.1" class="relref">Section 2.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, which is based on a group-collection resource and multiple group-configuration resources.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">When accessing such resources, the Administrator relies on the same interface defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, for which differences that apply when using CoRAL are compiled in <a href="#interactions" class="auto internal xref">Section 6</a> of this document.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="collection-representation">
@@ -1447,7 +1451,7 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
         <h3 id="name-discovery">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-discovery" class="section-name selfRef">Discovery</a>
         </h3>
-<p id="section-2.3-1">The Administrator can discover the group-collection resource from a Resource Directory (see, for instance, <span>[<a href="#I-D.hartke-t2trg-coral-reef" class="cite xref">I-D.hartke-t2trg-coral-reef</a>]</span>) or from /.well-known/core, by using the resource type "core.osc.gcoll" registered in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-10.3" class="relref">Section 10.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">The Administrator can discover the group-collection resource from a Resource Directory (see, for instance, <span>[<a href="#I-D.hartke-t2trg-coral-reef" class="cite xref">I-D.hartke-t2trg-coral-reef</a>]</span>) or from /.well-known/core, by using the resource type "core.osc.gcoll" registered in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-11.3" class="relref">Section 11.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3-2">The Administrator can discover group-configuration resources for the group-collection resource as specified in <a href="#collection-resource-get" class="auto internal xref">Section 6.1</a> and <a href="#collection-resource-fetch" class="auto internal xref">Section 6.2</a> of this document.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1458,7 +1462,7 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
       <h2 id="name-format-of-scope">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-format-of-scope" class="section-name selfRef">Format of Scope</a>
       </h2>
-<p id="section-3-1">In order to express authorization information for the Administrator (see <a href="#getting-access" class="auto internal xref">Section 4</a>), the same format and encoding of scope defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> is used, as relying on the Authorization Information Format (AIF) <span>[<a href="#RFC9237" class="cite xref">RFC9237</a>]</span> and the extended AIF data model AIF-OSCORE-GROUPCOMM defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-oscore-18#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-ace-key-groupcomm-oscore" class="cite xref">I-D.ietf-ace-key-groupcomm-oscore</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">In order to express authorization information for the Administrator (see <a href="#getting-access" class="auto internal xref">Section 4</a>), the same format and encoding of scope defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> is used, as relying on the Authorization Information Format (AIF) <span>[<a href="#RFC9237" class="cite xref">RFC9237</a>]</span> and the extended AIF data model AIF-OSCORE-GROUPCOMM originally defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-oscore-21#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-ace-key-groupcomm-oscore" class="cite xref">I-D.ietf-ace-key-groupcomm-oscore</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="getting-access">
@@ -1467,17 +1471,17 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-getting-access-to-the-group" class="section-name selfRef">Getting Access to the Group Manager</a>
       </h2>
 <p id="section-4-1">All communications between the involved entities rely on CoAP and <span class="bcp14">MUST</span> be secured.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">In particular, communications between the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE to achieve communication security, proof-of-possession, and server authentication. To this end, the AS may explicitly signal the specific transport profile to use, consistently with requirements and assumptions defined in the ACE framework <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>.<a href="#section-4-2" class="pilcrow">¶</a></p>
-<p id="section-4-3">With reference to the AS, communications between the Administrator and the AS (/token endpoint) as well as between the Group Manager and the AS (/introspect endpoint) can be secured by different means, for instance using DTLS <span>[<a href="#RFC9147" class="cite xref">RFC9147</a>]</span> or OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>. Further details on how the AS secures communications (with the Administrator and the Group Manager) depend on the transport profile of ACE specifically used and are out of the scope of this document.<a href="#section-4-3" class="pilcrow">¶</a></p>
-<p id="section-4-4">The Administrator requests access to the Group Manager as per Steps 1-3 in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-4" class="relref">Section 4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-4-4" class="pilcrow">¶</a></p>
-<p id="section-4-5">The Administrator accesses the admin interface at the Group Manager as per Step 4 in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-4" class="relref">Section 4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with the difference that administrative operations are not performed as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, but instead as defined in <a href="#interactions" class="auto internal xref">Section 6</a> of this document.<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-2">In particular, communications between the Administrator and the Group Manager leverage protocol-specific transport profiles of ACE to achieve communication security, proof of possession, and server authentication. To this end, the AS may explicitly signal the specific transport profile to use, consistent with requirements and assumptions defined in the ACE framework <span>[<a href="#RFC9200" class="cite xref">RFC9200</a>]</span>.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">With reference to the AS, communications between the Administrator and the AS (/token endpoint) as well as between the Group Manager and the AS (/introspect endpoint) can be secured by different means, for instance using DTLS <span>[<a href="#RFC9147" class="cite xref">RFC9147</a>]</span> or OSCORE <span>[<a href="#RFC8613" class="cite xref">RFC8613</a>]</span>. Further details on how the AS secures communications (with the Administrator and the Group Manager) depend on the transport profile of ACE used, and they are out of the scope of this document.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">The Administrator requests access to the Group Manager as per Steps 1-3 in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-4" class="relref">Section 4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-5">The Administrator accesses the admin interface at the Group Manager as per Step 4 in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-4" class="relref">Section 4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with the difference that administrative operations are not performed as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, but instead as defined in <a href="#interactions" class="auto internal xref">Section 6</a> of this document.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <div id="multiple-administrators-for-the-same-oscore-group">
 <section id="section-4.1">
         <h3 id="name-multiple-administrators-for">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-multiple-administrators-for" class="section-name selfRef">Multiple Administrators for the Same OSCORE Group</a>
         </h3>
-<p id="section-4.1-1">What is defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-4.1" class="relref">Section 4.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> also holds for this document, with the following difference.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">The Administrator performs administrative operations at the Group Manager not as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, but instead as defined in <a href="#interactions" class="auto internal xref">Section 6</a> of this document.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">What is defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-4.1" class="relref">Section 4.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> also holds for this document, with the following difference.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2">The Administrator performs administrative operations at the Group Manager not as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, but instead as defined in <a href="#interactions" class="auto internal xref">Section 6</a> of this document.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1493,13 +1497,13 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
         <h3 id="name-group-configuration-represe">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-group-configuration-represe" class="section-name selfRef">Group Configuration Representation</a>
         </h3>
-<p id="section-5.1-1">The same group configuration representation defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-5.1" class="relref">Section 5.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> is used, as including configuration parameters and status parameters.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">The same group configuration representation defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-5.1" class="relref">Section 5.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> is used, as including configuration parameters and status parameters.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <div id="config-repr-config-parameters">
 <section id="section-5.1.1">
           <h4 id="name-configuration-parameters">
 <a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-configuration-parameters" class="section-name selfRef">Configuration Parameters</a>
           </h4>
-<p id="section-5.1.1-1">The same configuration parameters defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-5.1.1" class="relref">Section 5.1.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> are used.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.1-1">The same configuration parameters defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-5.1.1" class="relref">Section 5.1.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> are used.<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="config-repr-status-parameters">
@@ -1507,7 +1511,7 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
           <h4 id="name-status-parameters">
 <a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-status-parameters" class="section-name selfRef">Status Parameters</a>
           </h4>
-<p id="section-5.1.2-1">The same status parameters defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-5.1.2" class="relref">Section 5.1.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> are used.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.1.2-1">The same status parameters defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-5.1.2" class="relref">Section 5.1.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> are used.<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1517,7 +1521,7 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
         <h3 id="name-default-values">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-default-values" class="section-name selfRef">Default Values</a>
         </h3>
-<p id="section-5.2-1">The Group manager refers to the same default values defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-5.2" class="relref">Section 5.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">The Group Manager refers to the same default values defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-5.2" class="relref">Section 5.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1527,10 +1531,10 @@ Names of target attributes used in Link Format <span>[<a href="#RFC6690" class="
       <h2 id="name-interactions-with-the-group">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-interactions-with-the-group" class="section-name selfRef">Interactions with the Group Manager</a>
       </h2>
-<p id="section-6-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6-2.1">
-          <p id="section-6-2.1.1">The Content-Format in messages containing a payload is set to application/coral+cbor, which is registered in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-coral-06#section-7.2" class="relref">Section 7.2</a> of [<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>.<a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
+          <p id="section-6-2.1.1">The Content-Format in messages containing a payload is set to "application/coral+cbor", which is registered in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-coral-06#section-7.2" class="relref">Section 7.2</a> of [<a href="#I-D.ietf-core-coral" class="cite xref">I-D.ietf-core-coral</a>]</span>.<a href="#section-6-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-2.2">
           <p id="section-6-2.2.1">The parameters 'sign_params', 'ecdh_params', 'app_groups', and 'group_policies' are referred to as "structured parameters".<a href="#section-6-2.2.1" class="pilcrow">¶</a></p>
@@ -1559,7 +1563,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         </h3>
 <p id="section-6.1-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and an Administrator.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">The Administrator can send a GET request to the group-collection resource, in order to retrieve a list of the existing OSCORE groups at the Group Manager.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
-<p id="section-6.1-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.1" class="relref">Section 6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.1" class="relref">Section 6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <p id="section-6.1-4">An example of message exchange is shown below.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.1-5">
 <pre>
@@ -1600,7 +1604,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         </h3>
 <p id="section-6.2-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and <span class="bcp14">MAY</span> be supported by an Administrator.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">The Administrator can send a FETCH request to the group-collection resource, in order to retrieve a list of the existing OSCORE groups that fully match a set of specified filter criteria.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
-<p id="section-6.2-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.2" class="relref">Section 6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.2" class="relref">Section 6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.2-4.1">
             <p id="section-6.2-4.1.1">The filter criteria are specified in the request payload with top-level link elements, each of which corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.2-4.1.1" class="pilcrow">¶</a></p>
@@ -1661,7 +1665,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         </h3>
 <p id="section-6.3-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and an Administrator.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">The Administrator can send a POST request to the group-collection resource, in order to create a new OSCORE group at the Group Manager.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
-<p id="section-6.3-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.3" class="relref">Section 6.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.3-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.3" class="relref">Section 6.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.3-4.1">
             <p id="section-6.3-4.1.1">In the request payload, each link element corresponds to an entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty structured parameters.<a href="#section-6.3-4.1.1" class="pilcrow">¶</a></p>
@@ -1730,7 +1734,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         </h3>
 <p id="section-6.4-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and an Administrator.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2">The Administrator can send a GET request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve the complete current configuration of that group.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
-<p id="section-6.4-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.4" class="relref">Section 6.4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
+<p id="section-6.4-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.4" class="relref">Section 6.4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.4-4.1">
             <p id="section-6.4-4.1.1">The response payload includes one link element for each entry of the group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>), with the exception of non-empty status parameters.<a href="#section-6.4-4.1.1" class="pilcrow">¶</a></p>
@@ -1801,7 +1805,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         </h3>
 <p id="section-6.5-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and <span class="bcp14">MAY</span> be supported by an Administrator.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 <p id="section-6.5-2">The Administrator can send a FETCH request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve part of the current configuration of that group.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
-<p id="section-6.5-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.5" class="relref">Section 6.5</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
+<p id="section-6.5-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.5" class="relref">Section 6.5</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.5-4.1">
             <p id="section-6.5-4.1.1">The request payload includes one link element for each requested configuration parameter or status parameter of the current group configuration (see <a href="#config-repr" class="auto internal xref">Section 5.1</a>). All the specified link elements <span class="bcp14">MUST</span> have the link target with value the CBOR simple value <code>null</code> (0xf6).<a href="#section-6.5-4.1.1" class="pilcrow">¶</a></p>
@@ -1861,7 +1865,7 @@ If the request payload specifies a parameter that is not included in the group c
         </h3>
 <p id="section-6.6-1">This operation <span class="bcp14">MAY</span> be supported by the Group Manager and an Administrator.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 <p id="section-6.6-2">The Administrator can send a POST request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
-<p id="section-6.6-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.6" class="relref">Section 6.6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following difference.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
+<p id="section-6.6-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.6" class="relref">Section 6.6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following difference.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.6-4.1">
             <p id="section-6.6-4.1.1">If the Administrator updates the registration of the group-membership resource in the Resource Directory on behalf of the Group Manager, then the names of the application groups using the OSCORE group <span class="bcp14">MUST</span> take the values possibly specified by the different 'app_group' link elements in the POST request.<a href="#section-6.6-4.1.1" class="pilcrow">¶</a></p>
@@ -1901,7 +1905,7 @@ If the request payload specifies a parameter that is not included in the group c
           <h4 id="name-effects-on-joining-nodes">
 <a href="#section-6.6.1" class="section-number selfRef">6.6.1. </a><a href="#name-effects-on-joining-nodes" class="section-name selfRef">Effects on Joining Nodes</a>
           </h4>
-<p id="section-6.6.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.6.1" class="relref">Section 6.6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.6.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.6.1" class="relref">Section 6.6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sssec-effects-overwrite-group-members">
@@ -1909,7 +1913,7 @@ If the request payload specifies a parameter that is not included in the group c
           <h4 id="name-effects-on-the-group-member">
 <a href="#section-6.6.2" class="section-number selfRef">6.6.2. </a><a href="#name-effects-on-the-group-member" class="section-name selfRef">Effects on the Group Members</a>
           </h4>
-<p id="section-6.6.2-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.6.2" class="relref">Section 6.6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.6.2-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.6.2" class="relref">Section 6.6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.6.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1921,7 +1925,7 @@ If the request payload specifies a parameter that is not included in the group c
         </h3>
 <p id="section-6.7-1">This operation <span class="bcp14">MAY</span> be supported by the Group Manager and an Administrator.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 <p id="section-6.7-2">The Administrator can send a PATCH/iPATCH request <span>[<a href="#RFC8132" class="cite xref">RFC8132</a>]</span> to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to update the value of only part of the group configuration.<a href="#section-6.7-2" class="pilcrow">¶</a></p>
-<p id="section-6.7-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.7" class="relref">Section 6.7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.7-3" class="pilcrow">¶</a></p>
+<p id="section-6.7-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.7" class="relref">Section 6.7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.7-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.7-4.1">
             <p id="section-6.7-4.1.1">If the request payload specifies names of application groups to be removed from or added to the 'app_groups' status parameter, then such names are specified by means of the following top-level link elements.<a href="#section-6.7-4.1.1" class="pilcrow">¶</a></p>
@@ -1991,7 +1995,7 @@ The Group Manager <span class="bcp14">MUST</span> respond with a 4.00 (Bad Reque
           <h4 id="name-effects-on-joining-nodes-2">
 <a href="#section-6.7.1" class="section-number selfRef">6.7.1. </a><a href="#name-effects-on-joining-nodes-2" class="section-name selfRef">Effects on Joining Nodes</a>
           </h4>
-<p id="section-6.7.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.7.1" class="relref">Section 6.7.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.7.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.7.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.7.1" class="relref">Section 6.7.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.7.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="effects-on-the-group-members">
@@ -1999,7 +2003,7 @@ The Group Manager <span class="bcp14">MUST</span> respond with a 4.00 (Bad Reque
           <h4 id="name-effects-on-the-group-members">
 <a href="#section-6.7.2" class="section-number selfRef">6.7.2. </a><a href="#name-effects-on-the-group-members" class="section-name selfRef">Effects on the Group Members</a>
           </h4>
-<p id="section-6.7.2-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.7.2" class="relref">Section 6.7.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.7.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.7.2-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.7.2" class="relref">Section 6.7.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2011,13 +2015,13 @@ The Group Manager <span class="bcp14">MUST</span> respond with a 4.00 (Bad Reque
         </h3>
 <p id="section-6.8-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and an Administrator.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
 <p id="section-6.8-2">The Administrator can send a DELETE request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to delete that OSCORE group.<a href="#section-6.8-2" class="pilcrow">¶</a></p>
-<p id="section-6.8-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.8" class="relref">Section 6.8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.8-3" class="pilcrow">¶</a></p>
+<p id="section-6.8-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.8" class="relref">Section 6.8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.8-3" class="pilcrow">¶</a></p>
 <div id="effects-on-the-group-members-1">
 <section id="section-6.8.1">
           <h4 id="name-effects-on-the-group-members-2">
 <a href="#section-6.8.1" class="section-number selfRef">6.8.1. </a><a href="#name-effects-on-the-group-members-2" class="section-name selfRef">Effects on the Group Members</a>
           </h4>
-<p id="section-6.8.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-6.8.1" class="relref">Section 6.8.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.8.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.8.1-1">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.8.1" class="relref">Section 6.8.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.8.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2029,7 +2033,7 @@ The Group Manager <span class="bcp14">MUST</span> respond with a 4.00 (Bad Reque
       <h2 id="name-support-of-top-level-link-e">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-support-of-top-level-link-e" class="section-name selfRef">Support of Top-Level Link Elements</a>
       </h2>
-<p id="section-7-1">Consistently with <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, the following holds for the Group Manager.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1">Consistent with <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, the following holds for the Group Manager.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7-2.1">
           <p id="section-7-2.1.1">It <span class="bcp14">MUST</span> support the top-level link elements 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in <span><a href="https://rfc-editor.org/rfc/rfc9594#section-8" class="relref">Section 8</a> of [<a href="#RFC9594" class="cite xref">RFC9594</a>]</span>.<a href="#section-7-2.1.1" class="pilcrow">¶</a></p>
@@ -2037,7 +2041,7 @@ The Group Manager <span class="bcp14">MUST</span> respond with a 4.00 (Bad Reque
 This is consistent with what is defined in <span><a href="https://rfc-editor.org/rfc/rfc9594#section-8" class="relref">Section 8</a> of [<a href="#RFC9594" class="cite xref">RFC9594</a>]</span> for the Key Distribution Center (KDC), of which the Group Manager defined in <span>[<a href="#I-D.ietf-ace-key-groupcomm-oscore" class="cite xref">I-D.ietf-ace-key-groupcomm-oscore</a>]</span> is a specific instance.<a href="#section-7-2.1.2" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-7-2.2">
-          <p id="section-7-2.2.1">It <span class="bcp14">MUST</span> support the top-level link elements corresponding to all the parameters listed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with the exception of 'app_groups_diff' that <span class="bcp14">MUST</span> be supported only if the Group Manager supports the selective update of a group configuration (see <a href="#configuration-resource-patch" class="auto internal xref">Section 6.7</a>).<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
+          <p id="section-7-2.2.1">It <span class="bcp14">MUST</span> support the top-level link elements corresponding to all the parameters listed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with the exception of 'app_groups_diff' that <span class="bcp14">MUST</span> be supported only if the Group Manager supports the selective update of a group configuration (see <a href="#configuration-resource-patch" class="auto internal xref">Section 6.7</a>).<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-7-3">The following holds for an Administrator.<a href="#section-7-3" class="pilcrow">¶</a></p>
@@ -2046,7 +2050,7 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
           <p id="section-7-4.1.1">It <span class="bcp14">MUST</span> support the top-level link elements 'ace_groupcomm_profile', 'exp', and 'group_policies' corresponding to the ACE Groupcomm Parameters defined in <span><a href="https://rfc-editor.org/rfc/rfc9594#section-8" class="relref">Section 8</a> of [<a href="#RFC9594" class="cite xref">RFC9594</a>]</span>.<a href="#section-7-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-7-4.2">
-          <p id="section-7-4.2.1">It <span class="bcp14">MUST</span> support the top-level link elements corresponding to all the parameters listed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with the following exceptions.<a href="#section-7-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-7-4.2.1">It <span class="bcp14">MUST</span> support the top-level link elements corresponding to all the parameters listed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>, with the following exceptions.<a href="#section-7-4.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7-4.2.2.1">
               <p id="section-7-4.2.2.1.1">'conf_filter', which <span class="bcp14">MUST</span> be supported only if the Administrator supports the partial retrieval of a group configuration by filters (see <a href="#configuration-resource-fetch" class="auto internal xref">Section 6.5</a>).<a href="#section-7-4.2.2.1.1" class="pilcrow">¶</a></p>
@@ -2064,8 +2068,8 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
       <h2 id="name-error-identifiers">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-error-identifiers" class="section-name selfRef">Error Identifiers</a>
       </h2>
-<p id="section-8-1">If the Group Manager sends an error response with Content-Format application/concise-problem-details+cbor <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> as defined in <span><a href="https://rfc-editor.org/rfc/rfc9594#section-4.1.2" class="relref">Section 4.1.2</a> of [<a href="#RFC9594" class="cite xref">RFC9594</a>]</span>, then the 'error-id' field within the Custom Problem Detail entry 'ace-groupcomm-error' takes value from those defined in <span><a href="https://rfc-editor.org/rfc/rfc9594#section-9" class="relref">Section 9</a> of [<a href="#RFC9594" class="cite xref">RFC9594</a>]</span> and in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2">The same guidelines in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> for the Administrator to handle such error identifiers hold.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-1">If the Group Manager sends an error response with Content-Format "application/concise-problem-details+cbor" <span>[<a href="#RFC9290" class="cite xref">RFC9290</a>]</span> as defined in <span><a href="https://rfc-editor.org/rfc/rfc9594#section-4.1.2" class="relref">Section 4.1.2</a> of [<a href="#RFC9594" class="cite xref">RFC9594</a>]</span>, then the 'error-id' field within the Custom Problem Detail entry 'ace-groupcomm-error' takes value from those defined in <span><a href="https://rfc-editor.org/rfc/rfc9594#section-9" class="relref">Section 9</a> of [<a href="#RFC9594" class="cite xref">RFC9594</a>]</span> and in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">The same guidelines in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-8" class="relref">Section 8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> for the Administrator to handle such error identifiers hold.<a href="#section-8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-security-considerations">
@@ -2103,19 +2107,19 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
 <dd class="break"></dd>
 <dt id="I-D.ietf-ace-key-groupcomm-oscore">[I-D.ietf-ace-key-groupcomm-oscore]</dt>
         <dd>
-<span class="refAuthor">Tiloca, M.</span> and <span class="refAuthor">F. Palombini</span>, <span class="refTitle">"Key Management for Group Object Security for Constrained RESTful Environments (Group OSCORE) Using Authentication and Authorization for Constrained Environments (ACE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ace-key-groupcomm-oscore-18</span>, <time datetime="2025-08-28" class="refDate">28 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-oscore-18">https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-oscore-18</a>&gt;</span>. </dd>
+<span class="refAuthor">Tiloca, M.</span> and <span class="refAuthor">F. Palombini</span>, <span class="refTitle">"Key Management for Group Object Security for Constrained RESTful Environments (Group OSCORE) Using Authentication and Authorization for Constrained Environments (ACE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ace-key-groupcomm-oscore-21</span>, <time datetime="2026-03-14" class="refDate">14 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-oscore-21">https://datatracker.ietf.org/doc/html/draft-ietf-ace-key-groupcomm-oscore-21</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-ace-oscore-gm-admin">[I-D.ietf-ace-oscore-gm-admin]</dt>
         <dd>
-<span class="refAuthor">Tiloca, M.</span>, <span class="refAuthor">Höglund, R.</span>, <span class="refAuthor">Van der Stok, P.</span>, and <span class="refAuthor">F. Palombini</span>, <span class="refTitle">"Admin Interface for the OSCORE Group Manager"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ace-oscore-gm-admin-13</span>, <time datetime="2025-01-08" class="refDate">8 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13">https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-13</a>&gt;</span>. </dd>
+<span class="refAuthor">Tiloca, M.</span>, <span class="refAuthor">Höglund, R.</span>, <span class="refAuthor">Van der Stok, P.</span>, and <span class="refAuthor">F. Palombini</span>, <span class="refTitle">"Admin Interface for the OSCORE Group Manager"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ace-oscore-gm-admin-17</span>, <time datetime="2026-03-26" class="refDate">26 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17">https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-cbor-edn-literals">[I-D.ietf-cbor-edn-literals]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"CBOR Extended Diagnostic Notation (EDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-19</span>, <time datetime="2025-10-16" class="refDate">16 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-19">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-19</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Concise Diagnostic Notation (CDN)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-edn-literals-26</span>, <time datetime="2026-06-15" class="refDate">15 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-26">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-26</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-cbor-packed">[I-D.ietf-cbor-packed]</dt>
         <dd>
-<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">M. Gütschow</span>, <span class="refTitle">"Packed CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-packed-17</span>, <time datetime="2025-10-15" class="refDate">15 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-packed-17">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-packed-17</a>&gt;</span>. </dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">M. Gütschow</span>, <span class="refTitle">"Packed CBOR"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cbor-packed-19</span>, <time datetime="2026-02-02" class="refDate">2 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-packed-19">https://datatracker.ietf.org/doc/html/draft-ietf-cbor-packed-19</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-core-coral">[I-D.ietf-core-coral]</dt>
         <dd>
@@ -2123,7 +2127,7 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
 <dd class="break"></dd>
 <dt id="I-D.ietf-core-groupcomm-bis">[I-D.ietf-core-groupcomm-bis]</dt>
         <dd>
-<span class="refAuthor">Dijk, E.</span> and <span class="refAuthor">M. Tiloca</span>, <span class="refTitle">"Group Communication for the Constrained Application Protocol (CoAP)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-groupcomm-bis-15</span>, <time datetime="2025-09-25" class="refDate">25 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-groupcomm-bis-15">https://datatracker.ietf.org/doc/html/draft-ietf-core-groupcomm-bis-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Dijk, E.</span> and <span class="refAuthor">M. Tiloca</span>, <span class="refTitle">"Group Communication for the Constrained Application Protocol (CoAP)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-groupcomm-bis-18</span>, <time datetime="2026-02-10" class="refDate">10 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-groupcomm-bis-18">https://datatracker.ietf.org/doc/html/draft-ietf-core-groupcomm-bis-18</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-core-href">[I-D.ietf-core-href]</dt>
         <dd>
@@ -2131,7 +2135,7 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
 <dd class="break"></dd>
 <dt id="I-D.ietf-core-oscore-groupcomm">[I-D.ietf-core-oscore-groupcomm]</dt>
         <dd>
-<span class="refAuthor">Tiloca, M.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Palombini, F.</span>, <span class="refAuthor">Mattsson, J. P.</span>, and <span class="refAuthor">R. Höglund</span>, <span class="refTitle">"Group Object Security for Constrained RESTful Environments (Group OSCORE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-oscore-groupcomm-27</span>, <time datetime="2025-09-12" class="refDate">12 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-oscore-groupcomm-27">https://datatracker.ietf.org/doc/html/draft-ietf-core-oscore-groupcomm-27</a>&gt;</span>. </dd>
+<span class="refAuthor">Tiloca, M.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Palombini, F.</span>, <span class="refAuthor">Mattsson, J. P.</span>, and <span class="refAuthor">R. Höglund</span>, <span class="refTitle">"Group Object Security for Constrained RESTful Environments (Group OSCORE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-oscore-groupcomm-28</span>, <time datetime="2025-12-23" class="refDate">23 December 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-oscore-groupcomm-28">https://datatracker.ietf.org/doc/html/draft-ietf-core-oscore-groupcomm-28</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -2220,7 +2224,11 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
 <dd class="break"></dd>
 <dt id="I-D.ietf-cose-cbor-encoded-cert">[I-D.ietf-cose-cbor-encoded-cert]</dt>
         <dd>
-<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, and <span class="refAuthor">M. Furuhed</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-15</span>, <time datetime="2025-08-18" class="refDate">18 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-15">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Mattsson, J. P.</span>, <span class="refAuthor">Selander, G.</span>, <span class="refAuthor">Raza, S.</span>, <span class="refAuthor">Höglund, J.</span>, <span class="refAuthor">Furuhed, M.</span>, and <span class="refAuthor">L. Liao</span>, <span class="refTitle">"CBOR Encoded X.509 Certificates (C509 Certificates)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-cbor-encoded-cert-19</span>, <time datetime="2026-05-11" class="refDate">11 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-19">https://datatracker.ietf.org/doc/html/draft-ietf-cose-cbor-encoded-cert-19</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA.Target.Attributes">[IANA.Target.Attributes]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Target Attributes"</span>, <span>&lt;<a href="https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#target-attributes">https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#target-attributes</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC5280">[RFC5280]</dt>
         <dd>
@@ -2231,12 +2239,8 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8392">https://www.rfc-editor.org/rfc/rfc8392</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9147">[RFC9147]</dt>
-        <dd>
-<span class="refAuthor">Rescorla, E.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">N. Modadugu</span>, <span class="refTitle">"The Datagram Transport Layer Security (DTLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 9147</span>, <span class="seriesInfo">DOI 10.17487/RFC9147</span>, <time datetime="2022-04" class="refDate">April 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9147">https://www.rfc-editor.org/rfc/rfc9147</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9423">[RFC9423]</dt>
       <dd>
-<span class="refAuthor">Bormann, C.</span>, <span class="refTitle">"Constrained RESTful Environments (CoRE) Target Attributes Registry"</span>, <span class="seriesInfo">RFC 9423</span>, <span class="seriesInfo">DOI 10.17487/RFC9423</span>, <time datetime="2024-04" class="refDate">April 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9423">https://www.rfc-editor.org/rfc/rfc9423</a>&gt;</span>. </dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">N. Modadugu</span>, <span class="refTitle">"The Datagram Transport Layer Security (DTLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 9147</span>, <span class="seriesInfo">DOI 10.17487/RFC9147</span>, <time datetime="2022-04" class="refDate">April 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9147">https://www.rfc-editor.org/rfc/rfc9147</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2249,13 +2253,13 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-shared-item-tables-for-pack" class="section-name selfRef">Shared Item Tables for Packed CBOR</a>
       </h2>
 <p id="appendix-A-1">This appendix defines the two shared item tables that the examples in this document refer to for using Packed CBOR <span>[<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<p id="appendix-A-2">The application-extension identifier "cri" defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-19#section-3.4" class="relref">Section 3.4</a> of [<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span> is used to notate a CBOR Extended Diagnostic Notation (EDN) literal for a CRI.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">The application-extension identifier "cri" defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-literals-26#section-3.6" class="relref">Section 3.6</a> of [<a href="#I-D.ietf-cbor-edn-literals" class="cite xref">I-D.ietf-cbor-edn-literals</a>]</span> is used to notate a Concise Diagnostic Notation (CDN) literal for a CRI.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <div id="compacting-coral-predicates-with-packed-cbor">
 <section id="appendix-A.1">
         <h3 id="name-compacting-coral-predicates">
 <a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-compacting-coral-predicates" class="section-name selfRef">Compacting CoRAL Predicates with Packed CBOR</a>
         </h3>
-<p id="appendix-A.1-1">The following shared item table is used for compacting CoRAL predicates, as per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-packed-17#section-2.2" class="relref">Section 2.2</a> of [<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-1">The following shared item table is used for compacting CoRAL predicates, as per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-packed-19#section-2.2" class="relref">Section 2.2</a> of [<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <span id="name-shared-item-table-for-compa"></span><div id="_table-packed-cbor-table-1">
 <table class="center" id="table-1">
           <caption>
@@ -2427,7 +2431,7 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
         <h3 id="name-compacting-values-of-the-rt">
 <a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-compacting-values-of-the-rt" class="section-name selfRef">Compacting Values of the rt= Target Attribute with Packed CBOR</a>
         </h3>
-<p id="appendix-A.2-1">The following shared item table is used for compacting values of the rt= target attribute, as per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-packed-17#section-2.2" class="relref">Section 2.2</a> of [<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-1">The following shared item table is used for compacting values of the rt= target attribute, as per <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-cbor-packed-19#section-2.2" class="relref">Section 2.2</a> of [<a href="#I-D.ietf-cbor-packed" class="cite xref">I-D.ietf-cbor-packed</a>]</span>.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
 <span id="name-shared-item-table-for-compac"></span><div id="_table-packed-cbor-table-2">
 <table class="center" id="table-2">
           <caption>
@@ -2458,110 +2462,125 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-document-updates" class="section-name selfRef">Document Updates</a>
       </h2>
 <p id="appendix-B-1">This section is to be removed before publishing as an RFC.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div id="sec-04-05">
+<div id="sec-05-06">
 <section id="appendix-B.1">
-        <h3 id="name-version-04-to-05">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-version-04-to-05" class="section-name selfRef">Version -04 to -05</a>
+        <h3 id="name-version-05-to-06">
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-version-05-to-06" class="section-name selfRef">Version -05 to -06</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Use "compacting" instead of "compressing" when referring to Packed CBOR.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Updated references.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">Updated references.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.1-1.3">
-            <p id="appendix-B.1-1.3.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+        </ul>
+</section>
+</div>
+<div id="sec-04-05">
+<section id="appendix-B.2">
+        <h3 id="name-version-04-to-05">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-version-04-to-05" class="section-name selfRef">Version -04 to -05</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.2-1.1">
+            <p id="appendix-B.2-1.1.1">Use "compacting" instead of "compressing" when referring to Packed CBOR.<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.2-1.2">
+            <p id="appendix-B.2-1.2.1">Updated references.<a href="#appendix-B.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.2-1.3">
+            <p id="appendix-B.2-1.3.1">Editorial fixes and improvements.<a href="#appendix-B.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="sec-03-04">
-<section id="appendix-B.2">
+<section id="appendix-B.3">
         <h3 id="name-version-03-to-04">
-<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-version-03-to-04" class="section-name selfRef">Version -03 to -04</a>
+<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-version-03-to-04" class="section-name selfRef">Version -03 to -04</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.2-1.1">
-            <p id="appendix-B.2-1.1.1">Updated references.<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.3-1.1">
+            <p id="appendix-B.3-1.1.1">Updated references.<a href="#appendix-B.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.2-1.2">
-            <p id="appendix-B.2-1.2.1">Editorial improvements and fixes.<a href="#appendix-B.2-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.3-1.2">
+            <p id="appendix-B.3-1.2.1">Editorial improvements and fixes.<a href="#appendix-B.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="sec-02-03">
-<section id="appendix-B.3">
+<section id="appendix-B.4">
         <h3 id="name-version-02-to-03">
-<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-version-02-to-03" class="section-name selfRef">Version -02 to -03</a>
+<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-version-02-to-03" class="section-name selfRef">Version -02 to -03</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.3-1.1">
-            <p id="appendix-B.3-1.1.1">Uri-Path and Location-Path as text strings in examples.<a href="#appendix-B.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.4-1.1">
+            <p id="appendix-B.4-1.1.1">Uri-Path and Location-Path as text strings in examples.<a href="#appendix-B.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.3-1.2">
-            <p id="appendix-B.3-1.2.1">Updated references.<a href="#appendix-B.3-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.4-1.2">
+            <p id="appendix-B.4-1.2.1">Updated references.<a href="#appendix-B.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.3-1.3">
-            <p id="appendix-B.3-1.3.1">Editorial fixes.<a href="#appendix-B.3-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.4-1.3">
+            <p id="appendix-B.4-1.3.1">Editorial fixes.<a href="#appendix-B.4-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="sec-01-02">
-<section id="appendix-B.4">
+<section id="appendix-B.5">
         <h3 id="name-version-01-to-02">
-<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-version-01-to-02" class="section-name selfRef">Version -01 to -02</a>
+<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-version-01-to-02" class="section-name selfRef">Version -01 to -02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.4-1.1">
-            <p id="appendix-B.4-1.1.1">Avoid quotation marks for CBOR simple values.<a href="#appendix-B.4-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.5-1.1">
+            <p id="appendix-B.5-1.1.1">Avoid quotation marks for CBOR simple values.<a href="#appendix-B.5-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-1.2">
-            <p id="appendix-B.4-1.2.1">Fixed use of 'linkformat' in the CURIE syntax.<a href="#appendix-B.4-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.5-1.2">
+            <p id="appendix-B.5-1.2.1">Fixed use of 'linkformat' in the CURIE syntax.<a href="#appendix-B.5-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-1.3">
-            <p id="appendix-B.4-1.3.1">Fixed use of CURIEs that result in a URI with the fragment component.<a href="#appendix-B.4-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.5-1.3">
+            <p id="appendix-B.5-1.3.1">Fixed use of CURIEs that result in a URI with the fragment component.<a href="#appendix-B.5-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-1.4">
-            <p id="appendix-B.4-1.4.1">Renamed 'group_title' as 'group_description'.<a href="#appendix-B.4-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.5-1.4">
+            <p id="appendix-B.5-1.4.1">Renamed 'group_title' as 'group_description'.<a href="#appendix-B.5-1.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-1.5">
-            <p id="appendix-B.4-1.5.1">Status/Configuration "properties" renamed as "parameters".<a href="#appendix-B.4-1.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.5-1.5">
+            <p id="appendix-B.5-1.5.1">Status/Configuration "properties" renamed as "parameters".<a href="#appendix-B.5-1.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-1.6">
-            <p id="appendix-B.4-1.6.1">POST (instead of PUT) for overwriting a group-configuration resource.<a href="#appendix-B.4-1.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.5-1.6">
+            <p id="appendix-B.5-1.6.1">POST (instead of PUT) for overwriting a group-configuration resource.<a href="#appendix-B.5-1.6.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-1.7">
-            <p id="appendix-B.4-1.7.1">Remove reference to the abandoned, custom format for error messages.<a href="#appendix-B.4-1.7.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.5-1.7">
+            <p id="appendix-B.5-1.7.1">Remove reference to the abandoned, custom format for error messages.<a href="#appendix-B.5-1.7.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-1.8">
-            <p id="appendix-B.4-1.8.1">Editorial improvements.<a href="#appendix-B.4-1.8.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.5-1.8">
+            <p id="appendix-B.5-1.8.1">Editorial improvements.<a href="#appendix-B.5-1.8.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="sec-00-01">
-<section id="appendix-B.5">
+<section id="appendix-B.6">
         <h3 id="name-version-00-to-01">
-<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-version-00-to-01" class="section-name selfRef">Version -00 to -01</a>
+<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-version-00-to-01" class="section-name selfRef">Version -00 to -01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.5-1.1">
-            <p id="appendix-B.5-1.1.1">Updated reference and introductory text for the CBOR EDN application-extension identifier "cri".<a href="#appendix-B.5-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.6-1.1">
+            <p id="appendix-B.6-1.1.1">Updated reference and introductory text for the CBOR EDN application-extension identifier "cri".<a href="#appendix-B.6-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="sec-00">
-<section id="appendix-B.6">
+<section id="appendix-B.7">
         <h3 id="name-version-00">
-<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-version-00" class="section-name selfRef">Version -00</a>
+<a href="#appendix-B.7" class="section-number selfRef">B.7. </a><a href="#name-version-00" class="section-name selfRef">Version -00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.6-1.1">
-            <p id="appendix-B.6-1.1.1">CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.<a href="#appendix-B.6-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.7-1.1">
+            <p id="appendix-B.7-1.1.1">CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.<a href="#appendix-B.7-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2587,7 +2606,7 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
         <div dir="auto" class="left"><span class="fn nameRole">Marco Tiloca</span></div>
 <div dir="auto" class="left"><span class="org">RISE AB</span></div>
 <div dir="auto" class="left"><span class="street-address">Isafjordsgatan 22</span></div>
-<div dir="auto" class="left">SE-<span class="postal-code">16440 Stockholm</span> <span class="locality">Kista</span>
+<div dir="auto" class="left">SE-<span class="postal-code">164 40</span> <span class="locality">Kista</span>
 </div>
 <div dir="auto" class="left"><span class="country-name">Sweden</span></div>
 <div class="email">
@@ -2599,7 +2618,7 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
         <div dir="auto" class="left"><span class="fn nameRole">Rikard Höglund</span></div>
 <div dir="auto" class="left"><span class="org">RISE AB</span></div>
 <div dir="auto" class="left"><span class="street-address">Isafjordsgatan 22</span></div>
-<div dir="auto" class="left">SE-<span class="postal-code">16440 Stockholm</span> <span class="locality">Kista</span>
+<div dir="auto" class="left">SE-<span class="postal-code">164 40</span> <span class="locality">Kista</span>
 </div>
 <div dir="auto" class="left"><span class="country-name">Sweden</span></div>
 <div class="email">

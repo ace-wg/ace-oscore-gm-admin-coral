@@ -5,7 +5,7 @@
 ACE Working Group                                              M. Tiloca
 Internet-Draft                                                R. Höglund
 Intended status: Standards Track                                 RISE AB
-Expires: 25 June 2026                                   22 December 2025
+Expires: 30 December 2026                                   28 June 2026
 
 
   Using the Constrained RESTful Application Language (CoRAL) with the
@@ -27,7 +27,7 @@ Abstract
    for Authentication and Authorization is used to enforce
    authentication and authorization of the Administrator at the Group
    Manager.  Protocol-specific transport profiles of ACE are used to
-   achieve communication security, proof-of-possession, and server
+   achieve communication security, proof of possession, and server
    authentication.
 
 Discussion Venues
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 June 2026.
+   This Internet-Draft will expire on 30 December 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -77,7 +77,7 @@ Table of Contents
 
    1.  Introduction
      1.1.  Terminology
-     1.2.  Notation and Assumptions Used in the Examples
+     1.2.  Notation and Assumptions in Examples
    2.  Group Administration
      2.1.  Managing OSCORE Groups
      2.2.  Collection Representation
@@ -116,12 +116,13 @@ Table of Contents
      A.2.  Compacting Values of the rt= Target Attribute with Packed
            CBOR
    Appendix B.  Document Updates
-     B.1.  Version -04 to -05
-     B.2.  Version -03 to -04
-     B.3.  Version -02 to -03
-     B.4.  Version -01 to -02
-     B.5.  Version -00 to -01
-     B.6.  Version -00
+     B.1.  Version -05 to -06
+     B.2.  Version -04 to -05
+     B.3.  Version -03 to -04
+     B.4.  Version -02 to -03
+     B.5.  Version -01 to -02
+     B.6.  Version -00 to -01
+     B.7.  Version -00
    Acknowledgments
    Authors' Addresses
 
@@ -171,7 +172,7 @@ Table of Contents
 
    The ACE framework is used to ensure authentication and authorization
    of the Administrator (client) at the Group Manager (resource server).
-   In order to achieve communication security, proof-of-possession, and
+   In order to achieve communication security, proof of possession, and
    server authentication, the Administrator and the Group Manager
    leverage protocol-specific transport profiles of ACE, such as
    [RFC9202] or [RFC9203].  These also include possible forthcoming
@@ -214,8 +215,8 @@ Table of Contents
 
       -  Group Manager, as the entity responsible for a set of OSCORE
          groups where communications among members are secured using
-         Group OSCORE.  An OSCORE group is used as security group for
-         one or many application groups.
+         Group OSCORE.  An OSCORE group is used as the security group
+         for one or many application groups.
 
       -  Authentication credential, as the set of information associated
          with an entity, including that entity's public key and
@@ -255,7 +256,7 @@ Table of Contents
    definition, which is "[a]n entity participating in the CoAP protocol"
    [RFC7252], is not used in this document.
 
-1.2.  Notation and Assumptions Used in the Examples
+1.2.  Notation and Assumptions in Examples
 
    As per Section 2.4 of [I-D.ietf-core-coral], CoRAL expresses Uniform
    Resource Identifiers (URIs) [RFC3986] as Constrained Resource
@@ -282,14 +283,14 @@ Table of Contents
 
       Names of target attributes used in Link Format [RFC6690] are
       expected to be coordinated through the "Target Attributes"
-      registry defined in [RFC9423].
+      registry [IANA.Target.Attributes].
 
    *  The path segment SEG2 is the value of the target attribute.
 
-   The application-extension identifier "cri" defined in Section 3.4 of
-   [I-D.ietf-cbor-edn-literals] is used to notate a CBOR Extended
-   Diagnostic Notation (EDN) literal for a CRI or CRI reference.  This
-   format is not expected to be sent over the network.
+   The application-extension identifier "cri" defined in Section 3.6 of
+   [I-D.ietf-cbor-edn-literals] is used to notate a Concise Diagnostic
+   Notation (CDN) literal for a CRI or CRI reference.  This format is
+   not expected to be sent over the network.
 
    Packed CBOR [I-D.ietf-cbor-packed] is also used, thus reducing
    representation size.  Examples in this document especially refer to
@@ -330,7 +331,7 @@ Table of Contents
    The Administrator can discover the group-collection resource from a
    Resource Directory (see, for instance, [I-D.hartke-t2trg-coral-reef])
    or from /.well-known/core, by using the resource type
-   "core.osc.gcoll" registered in Section 10.3 of
+   "core.osc.gcoll" registered in Section 11.3 of
    [I-D.ietf-ace-oscore-gm-admin].
 
    The Administrator can discover group-configuration resources for the
@@ -343,8 +344,8 @@ Table of Contents
    (see Section 4), the same format and encoding of scope defined in
    Section 3 of [I-D.ietf-ace-oscore-gm-admin] is used, as relying on
    the Authorization Information Format (AIF) [RFC9237] and the extended
-   AIF data model AIF-OSCORE-GROUPCOMM defined in Section 3 of
-   [I-D.ietf-ace-key-groupcomm-oscore].
+   AIF data model AIF-OSCORE-GROUPCOMM originally defined in Section 3
+   of [I-D.ietf-ace-key-groupcomm-oscore].
 
 4.  Getting Access to the Group Manager
 
@@ -353,9 +354,9 @@ Table of Contents
 
    In particular, communications between the Administrator and the Group
    Manager leverage protocol-specific transport profiles of ACE to
-   achieve communication security, proof-of-possession, and server
+   achieve communication security, proof of possession, and server
    authentication.  To this end, the AS may explicitly signal the
-   specific transport profile to use, consistently with requirements and
+   specific transport profile to use, consistent with requirements and
    assumptions defined in the ACE framework [RFC9200].
 
    With reference to the AS, communications between the Administrator
@@ -363,8 +364,8 @@ Table of Contents
    the AS (/introspect endpoint) can be secured by different means, for
    instance using DTLS [RFC9147] or OSCORE [RFC8613].  Further details
    on how the AS secures communications (with the Administrator and the
-   Group Manager) depend on the transport profile of ACE specifically
-   used and are out of the scope of this document.
+   Group Manager) depend on the transport profile of ACE used, and they
+   are out of the scope of this document.
 
    The Administrator requests access to the Group Manager as per Steps
    1-3 in Section 4 of [I-D.ietf-ace-oscore-gm-admin].
@@ -407,7 +408,7 @@ Table of Contents
 
 5.2.  Default Values
 
-   The Group manager refers to the same default values defined in
+   The Group Manager refers to the same default values defined in
    Section 5.2 of [I-D.ietf-ace-oscore-gm-admin].
 
 6.  Interactions with the Group Manager
@@ -416,7 +417,7 @@ Table of Contents
    holds, with the following differences.
 
    *  The Content-Format in messages containing a payload is set to
-      application/coral+cbor, which is registered in Section 7.2 of
+      "application/coral+cbor", which is registered in Section 7.2 of
       [I-D.ietf-core-coral].
 
    *  The parameters 'sign_params', 'ecdh_params', 'app_groups', and
@@ -924,7 +925,7 @@ Table of Contents
 
 7.  Support of Top-Level Link Elements
 
-   Consistently with Section 7 of [I-D.ietf-ace-oscore-gm-admin], the
+   Consistent with Section 7 of [I-D.ietf-ace-oscore-gm-admin], the
    following holds for the Group Manager.
 
    *  It MUST support the top-level link elements
@@ -964,7 +965,7 @@ Table of Contents
 8.  Error Identifiers
 
    If the Group Manager sends an error response with Content-Format
-   application/concise-problem-details+cbor [RFC9290] as defined in
+   "application/concise-problem-details+cbor" [RFC9290] as defined in
    Section 4.1.2 of [RFC9594], then the 'error-id' field within the
    Custom Problem Detail entry 'ace-groupcomm-error' takes value from
    those defined in Section 9 of [RFC9594] and in Section 8 of
@@ -1007,30 +1008,29 @@ Table of Contents
               Object Security for Constrained RESTful Environments
               (Group OSCORE) Using Authentication and Authorization for
               Constrained Environments (ACE)", Work in Progress,
-              Internet-Draft, draft-ietf-ace-key-groupcomm-oscore-18, 28
-              August 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-ace-key-groupcomm-oscore-18>.
+              Internet-Draft, draft-ietf-ace-key-groupcomm-oscore-21, 14
+              March 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-ace-key-groupcomm-oscore-21>.
 
    [I-D.ietf-ace-oscore-gm-admin]
               Tiloca, M., Höglund, R., Van der Stok, P., and F.
               Palombini, "Admin Interface for the OSCORE Group Manager",
               Work in Progress, Internet-Draft, draft-ietf-ace-oscore-
-              gm-admin-13, 8 January 2025,
+              gm-admin-17, 26 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
-              oscore-gm-admin-13>.
+              oscore-gm-admin-17>.
 
    [I-D.ietf-cbor-edn-literals]
-              Bormann, C., "CBOR Extended Diagnostic Notation (EDN)",
-              Work in Progress, Internet-Draft, draft-ietf-cbor-edn-
-              literals-19, 16 October 2025,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-cbor-
-              edn-literals-19>.
+              Bormann, C., "Concise Diagnostic Notation (CDN)", Work in
+              Progress, Internet-Draft, draft-ietf-cbor-edn-literals-26,
+              15 June 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-edn-literals-26>.
 
    [I-D.ietf-cbor-packed]
               Bormann, C. and M. Gütschow, "Packed CBOR", Work in
-              Progress, Internet-Draft, draft-ietf-cbor-packed-17, 15
-              October 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-cbor-packed-17>.
+              Progress, Internet-Draft, draft-ietf-cbor-packed-19, 2
+              February 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-cbor-packed-19>.
 
    [I-D.ietf-core-coral]
               Amsüss, C. and T. Fossati, "The Constrained RESTful
@@ -1043,9 +1043,9 @@ Table of Contents
               Dijk, E. and M. Tiloca, "Group Communication for the
               Constrained Application Protocol (CoAP)", Work in
               Progress, Internet-Draft, draft-ietf-core-groupcomm-bis-
-              15, 25 September 2025,
+              18, 10 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              groupcomm-bis-15>.
+              groupcomm-bis-18>.
 
    [I-D.ietf-core-href]
               Bormann, C. and H. Birkholz, "Constrained Resource
@@ -1058,9 +1058,9 @@ Table of Contents
               Tiloca, M., Selander, G., Palombini, F., Mattsson, J. P.,
               and R. Höglund, "Group Object Security for Constrained
               RESTful Environments (Group OSCORE)", Work in Progress,
-              Internet-Draft, draft-ietf-core-oscore-groupcomm-27, 12
-              September 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-core-oscore-groupcomm-27>.
+              Internet-Draft, draft-ietf-core-oscore-groupcomm-28, 23
+              December 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-core-oscore-groupcomm-28>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1166,12 +1166,17 @@ Table of Contents
               coral-reef-04>.
 
    [I-D.ietf-cose-cbor-encoded-cert]
-              Mattsson, J. P., Selander, G., Raza, S., Höglund, J., and
-              M. Furuhed, "CBOR Encoded X.509 Certificates (C509
-              Certificates)", Work in Progress, Internet-Draft, draft-
-              ietf-cose-cbor-encoded-cert-15, 18 August 2025,
+              Mattsson, J. P., Selander, G., Raza, S., Höglund, J.,
+              Furuhed, M., and L. Liao, "CBOR Encoded X.509 Certificates
+              (C509 Certificates)", Work in Progress, Internet-Draft,
+              draft-ietf-cose-cbor-encoded-cert-19, 11 May 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              cbor-encoded-cert-15>.
+              cbor-encoded-cert-19>.
+
+   [IANA.Target.Attributes]
+              IANA, "Target Attributes",
+              <https://www.iana.org/assignments/core-parameters/core-
+              parameters.xhtml#target-attributes>.
 
    [RFC5280]  Cooper, D., Santesson, S., Farrell, S., Boeyen, S.,
               Housley, R., and W. Polk, "Internet X.509 Public Key
@@ -1188,19 +1193,14 @@ Table of Contents
               1.3", RFC 9147, DOI 10.17487/RFC9147, April 2022,
               <https://www.rfc-editor.org/rfc/rfc9147>.
 
-   [RFC9423]  Bormann, C., "Constrained RESTful Environments (CoRE)
-              Target Attributes Registry", RFC 9423,
-              DOI 10.17487/RFC9423, April 2024,
-              <https://www.rfc-editor.org/rfc/rfc9423>.
-
 Appendix A.  Shared Item Tables for Packed CBOR
 
    This appendix defines the two shared item tables that the examples in
    this document refer to for using Packed CBOR [I-D.ietf-cbor-packed].
 
-   The application-extension identifier "cri" defined in Section 3.4 of
-   [I-D.ietf-cbor-edn-literals] is used to notate a CBOR Extended
-   Diagnostic Notation (EDN) literal for a CRI.
+   The application-extension identifier "cri" defined in Section 3.6 of
+   [I-D.ietf-cbor-edn-literals] is used to notate a Concise Diagnostic
+   Notation (CDN) literal for a CRI.
 
 A.1.  Compacting CoRAL Predicates with Packed CBOR
 
@@ -1318,7 +1318,13 @@ Appendix B.  Document Updates
 
    This section is to be removed before publishing as an RFC.
 
-B.1.  Version -04 to -05
+B.1.  Version -05 to -06
+
+   *  Updated references.
+
+   *  Editorial fixes and improvements.
+
+B.2.  Version -04 to -05
 
    *  Use "compacting" instead of "compressing" when referring to Packed
       CBOR.
@@ -1327,13 +1333,13 @@ B.1.  Version -04 to -05
 
    *  Editorial fixes and improvements.
 
-B.2.  Version -03 to -04
+B.3.  Version -03 to -04
 
    *  Updated references.
 
    *  Editorial improvements and fixes.
 
-B.3.  Version -02 to -03
+B.4.  Version -02 to -03
 
    *  Uri-Path and Location-Path as text strings in examples.
 
@@ -1341,7 +1347,7 @@ B.3.  Version -02 to -03
 
    *  Editorial fixes.
 
-B.4.  Version -01 to -02
+B.5.  Version -01 to -02
 
    *  Avoid quotation marks for CBOR simple values.
 
@@ -1362,12 +1368,12 @@ B.4.  Version -01 to -02
 
    *  Editorial improvements.
 
-B.5.  Version -00 to -01
+B.6.  Version -00 to -01
 
    *  Updated reference and introductory text for the CBOR EDN
       application-extension identifier "cri".
 
-B.6.  Version -00
+B.7.  Version -00
 
    *  CoRAL content taken out from draft-ietf-ace-oscore-gm-admin-08.
 
@@ -1391,7 +1397,7 @@ Authors' Addresses
    Marco Tiloca
    RISE AB
    Isafjordsgatan 22
-   SE-16440 Stockholm Kista
+   SE-164 40 Kista
    Sweden
    Email: marco.tiloca@ri.se
 
@@ -1399,6 +1405,6 @@ Authors' Addresses
    Rikard Höglund
    RISE AB
    Isafjordsgatan 22
-   SE-16440 Stockholm Kista
+   SE-164 40 Kista
    Sweden
    Email: rikard.hoglund@ri.se
