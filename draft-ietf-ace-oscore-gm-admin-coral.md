@@ -253,9 +253,9 @@ The same as defined in {{Section 6 of I-D.ietf-ace-oscore-gm-admin}} holds, with
 
 * If a message payload specifies an information element of a structured parameter from the group configuration, then that information element MUST be specified by means of the corresponding link element.
 
-## Retrieve the Full List of Group Configurations ## {#collection-resource-get}
+## Retrieve a List of Group Configurations ## {#collection-resource-get}
 
-This operation MUST be supported by the Group Manager and an Administrator.
+This operation MUST be supported by the Group Manager.
 
 The Administrator can send a GET request to the group-collection resource, in order to retrieve a list of the existing OSCORE groups at the Group Manager.
 
@@ -294,7 +294,7 @@ An example of message exchange is shown below.
 
 ## Retrieve a List of Group Configurations by Filters ## {#collection-resource-fetch}
 
-This operation MUST be supported by the Group Manager and MAY be supported by an Administrator.
+This operation MUST be supported by the Group Manager.
 
 The Administrator can send a FETCH request to the group-collection resource, in order to retrieve a list of the existing OSCORE groups that fully match a set of specified filter criteria.
 
@@ -348,7 +348,7 @@ An example of message exchange is shown below.
 
 ## Create a New Group Configuration ## {#collection-resource-post}
 
-This operation MUST be supported by the Group Manager and an Administrator.
+This operation MUST be supported by the Group Manager.
 
 The Administrator can send a POST request to the group-collection resource, in order to create a new OSCORE group at the Group Manager.
 
@@ -407,7 +407,7 @@ An example of message exchange is shown below.
 
 ## Retrieve a Group Configuration ## {#configuration-resource-get}
 
-This operation MUST be supported by the Group Manager and an Administrator.
+This operation MUST be supported by the Group Manager.
 
 The Administrator can send a GET request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve the complete current configuration of that group.
 
@@ -472,7 +472,7 @@ An example of message exchange is shown below.
 
 ## Retrieve Part of a Group Configuration by Filters ## {#configuration-resource-fetch}
 
-This operation MUST be supported by the Group Manager and MAY be supported by an Administrator.
+This operation MUST be supported by the Group Manager.
 
 The Administrator can send a FETCH request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve part of the current configuration of that group.
 
@@ -525,7 +525,7 @@ An example of message exchange is shown below.
 
 ## Overwrite a Group Configuration ## {#configuration-resource-post}
 
-This operation MAY be supported by the Group Manager and an Administrator.
+This operation MAY be supported by the Group Manager.
 
 The Administrator can send a POST request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.
 
@@ -572,7 +572,7 @@ The same as defined in {{Section 6.6.2 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 ## Selective Update of a Group Configuration ## {#configuration-resource-patch}
 
-This operation MAY be supported by the Group Manager and an Administrator.
+This operation MAY be supported by the Group Manager.
 
 The Administrator can send a PATCH/iPATCH request {{RFC8132}} to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to update the value of only part of the group configuration.
 
@@ -638,7 +638,7 @@ The same as defined in {{Section 6.7.2 of I-D.ietf-ace-oscore-gm-admin}} holds.
 
 ## Delete a Group Configuration ## {#configuration-resource-delete}
 
-This operation MUST be supported by the Group Manager and an Administrator.
+This operation MUST be supported by the Group Manager.
 
 The Administrator can send a DELETE request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to delete that OSCORE group.
 
@@ -750,6 +750,8 @@ The following shared item table is used for compacting values of the rt= target 
 {:removeinrfc}
 
 ## Version -05 to -06 ## {#sec-05-06}
+
+* Removed unnecessary normative language, aligned with draft-ietf-ace-oscore-gm-admin.
 
 * Updated references.
 
