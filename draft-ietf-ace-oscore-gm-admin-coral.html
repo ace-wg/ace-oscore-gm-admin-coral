@@ -1204,10 +1204,10 @@ svg {
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-interactions-with-the-group" class="internal xref">Interactions with the Group Manager</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-retrieve-the-full-list-of-g" class="internal xref">Retrieve the Full List of Group Configurations</a></p>
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-retrieve-a-list-of-group-co" class="internal xref">Retrieve a List of Group Configurations</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-retrieve-a-list-of-group-co" class="internal xref">Retrieve a List of Group Configurations by Filters</a></p>
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-retrieve-a-list-of-group-con" class="internal xref">Retrieve a List of Group Configurations by Filters</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
                 <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.  <a href="#name-create-a-new-group-configur" class="internal xref">Create a New Group Configuration</a></p>
@@ -1558,10 +1558,10 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
       </ul>
 <div id="collection-resource-get">
 <section id="section-6.1">
-        <h3 id="name-retrieve-the-full-list-of-g">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-retrieve-the-full-list-of-g" class="section-name selfRef">Retrieve the Full List of Group Configurations</a>
+        <h3 id="name-retrieve-a-list-of-group-co">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-retrieve-a-list-of-group-co" class="section-name selfRef">Retrieve a List of Group Configurations</a>
         </h3>
-<p id="section-6.1-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and an Administrator.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">The Administrator can send a GET request to the group-collection resource, in order to retrieve a list of the existing OSCORE groups at the Group Manager.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.1-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.1" class="relref">Section 6.1</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <p id="section-6.1-4">An example of message exchange is shown below.<a href="#section-6.1-4" class="pilcrow">¶</a></p>
@@ -1599,10 +1599,10 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
 </div>
 <div id="collection-resource-fetch">
 <section id="section-6.2">
-        <h3 id="name-retrieve-a-list-of-group-co">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-retrieve-a-list-of-group-co" class="section-name selfRef">Retrieve a List of Group Configurations by Filters</a>
+        <h3 id="name-retrieve-a-list-of-group-con">
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-retrieve-a-list-of-group-con" class="section-name selfRef">Retrieve a List of Group Configurations by Filters</a>
         </h3>
-<p id="section-6.2-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and <span class="bcp14">MAY</span> be supported by an Administrator.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">The Administrator can send a FETCH request to the group-collection resource, in order to retrieve a list of the existing OSCORE groups that fully match a set of specified filter criteria.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.2" class="relref">Section 6.2</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1663,7 +1663,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-create-a-new-group-configur">
 <a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-create-a-new-group-configur" class="section-name selfRef">Create a New Group Configuration</a>
         </h3>
-<p id="section-6.3-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and an Administrator.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">The Administrator can send a POST request to the group-collection resource, in order to create a new OSCORE group at the Group Manager.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.3" class="relref">Section 6.3</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1732,7 +1732,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-retrieve-a-group-configurat">
 <a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-retrieve-a-group-configurat" class="section-name selfRef">Retrieve a Group Configuration</a>
         </h3>
-<p id="section-6.4-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and an Administrator.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
+<p id="section-6.4-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2">The Administrator can send a GET request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve the complete current configuration of that group.<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <p id="section-6.4-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.4" class="relref">Section 6.4</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.4-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1803,7 +1803,7 @@ Editor's note: this should change to using an empty CBOR array or an empty CBOR 
         <h3 id="name-retrieve-part-of-a-group-co">
 <a href="#section-6.5" class="section-number selfRef">6.5. </a><a href="#name-retrieve-part-of-a-group-co" class="section-name selfRef">Retrieve Part of a Group Configuration by Filters</a>
         </h3>
-<p id="section-6.5-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and <span class="bcp14">MAY</span> be supported by an Administrator.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
+<p id="section-6.5-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager.<a href="#section-6.5-1" class="pilcrow">¶</a></p>
 <p id="section-6.5-2">The Administrator can send a FETCH request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to retrieve part of the current configuration of that group.<a href="#section-6.5-2" class="pilcrow">¶</a></p>
 <p id="section-6.5-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.5" class="relref">Section 6.5</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.5-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1863,7 +1863,7 @@ If the request payload specifies a parameter that is not included in the group c
         <h3 id="name-overwrite-a-group-configura">
 <a href="#section-6.6" class="section-number selfRef">6.6. </a><a href="#name-overwrite-a-group-configura" class="section-name selfRef">Overwrite a Group Configuration</a>
         </h3>
-<p id="section-6.6-1">This operation <span class="bcp14">MAY</span> be supported by the Group Manager and an Administrator.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
+<p id="section-6.6-1">This operation <span class="bcp14">MAY</span> be supported by the Group Manager.<a href="#section-6.6-1" class="pilcrow">¶</a></p>
 <p id="section-6.6-2">The Administrator can send a POST request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to overwrite the current configuration of that group with a new one.<a href="#section-6.6-2" class="pilcrow">¶</a></p>
 <p id="section-6.6-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.6" class="relref">Section 6.6</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following difference.<a href="#section-6.6-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1923,7 +1923,7 @@ If the request payload specifies a parameter that is not included in the group c
         <h3 id="name-selective-update-of-a-group">
 <a href="#section-6.7" class="section-number selfRef">6.7. </a><a href="#name-selective-update-of-a-group" class="section-name selfRef">Selective Update of a Group Configuration</a>
         </h3>
-<p id="section-6.7-1">This operation <span class="bcp14">MAY</span> be supported by the Group Manager and an Administrator.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
+<p id="section-6.7-1">This operation <span class="bcp14">MAY</span> be supported by the Group Manager.<a href="#section-6.7-1" class="pilcrow">¶</a></p>
 <p id="section-6.7-2">The Administrator can send a PATCH/iPATCH request <span>[<a href="#RFC8132" class="cite xref">RFC8132</a>]</span> to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to update the value of only part of the group configuration.<a href="#section-6.7-2" class="pilcrow">¶</a></p>
 <p id="section-6.7-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.7" class="relref">Section 6.7</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds, with the following differences.<a href="#section-6.7-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2013,7 +2013,7 @@ The Group Manager <span class="bcp14">MUST</span> respond with a 4.00 (Bad Reque
         <h3 id="name-delete-a-group-configuratio">
 <a href="#section-6.8" class="section-number selfRef">6.8. </a><a href="#name-delete-a-group-configuratio" class="section-name selfRef">Delete a Group Configuration</a>
         </h3>
-<p id="section-6.8-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager and an Administrator.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
+<p id="section-6.8-1">This operation <span class="bcp14">MUST</span> be supported by the Group Manager.<a href="#section-6.8-1" class="pilcrow">¶</a></p>
 <p id="section-6.8-2">The Administrator can send a DELETE request to the group-configuration resource /manage/GROUPNAME associated with an OSCORE group with group name GROUPNAME, in order to delete that OSCORE group.<a href="#section-6.8-2" class="pilcrow">¶</a></p>
 <p id="section-6.8-3">The same as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-ace-oscore-gm-admin-17#section-6.8" class="relref">Section 6.8</a> of [<a href="#I-D.ietf-ace-oscore-gm-admin" class="cite xref">I-D.ietf-ace-oscore-gm-admin</a>]</span> holds.<a href="#section-6.8-3" class="pilcrow">¶</a></p>
 <div id="effects-on-the-group-members-1">
@@ -2469,10 +2469,13 @@ This is consistent with what is defined in <span><a href="https://rfc-editor.org
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Updated references.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Removed unnecessary normative language, aligned with draft-ietf-ace-oscore-gm-admin.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="appendix-B.1-1.2">
-            <p id="appendix-B.1-1.2.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.2.1">Updated references.<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.3">
+            <p id="appendix-B.1-1.3.1">Editorial fixes and improvements.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>

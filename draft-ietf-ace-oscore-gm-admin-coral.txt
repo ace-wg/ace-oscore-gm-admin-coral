@@ -91,7 +91,7 @@ Table of Contents
        5.1.2.  Status Parameters
      5.2.  Default Values
    6.  Interactions with the Group Manager
-     6.1.  Retrieve the Full List of Group Configurations
+     6.1.  Retrieve a List of Group Configurations
      6.2.  Retrieve a List of Group Configurations by Filters
      6.3.  Create a New Group Configuration
      6.4.  Retrieve a Group Configuration
@@ -443,10 +443,9 @@ Table of Contents
       information element MUST be specified by means of the
       corresponding link element.
 
-6.1.  Retrieve the Full List of Group Configurations
+6.1.  Retrieve a List of Group Configurations
 
-   This operation MUST be supported by the Group Manager and an
-   Administrator.
+   This operation MUST be supported by the Group Manager.
 
    The Administrator can send a GET request to the group-collection
    resource, in order to retrieve a list of the existing OSCORE groups
@@ -486,8 +485,7 @@ Table of Contents
 
 6.2.  Retrieve a List of Group Configurations by Filters
 
-   This operation MUST be supported by the Group Manager and MAY be
-   supported by an Administrator.
+   This operation MUST be supported by the Group Manager.
 
    The Administrator can send a FETCH request to the group-collection
    resource, in order to retrieve a list of the existing OSCORE groups
@@ -550,8 +548,7 @@ Table of Contents
 
 6.3.  Create a New Group Configuration
 
-   This operation MUST be supported by the Group Manager and an
-   Administrator.
+   This operation MUST be supported by the Group Manager.
 
    The Administrator can send a POST request to the group-collection
    resource, in order to create a new OSCORE group at the Group Manager.
@@ -624,8 +621,7 @@ Table of Contents
 
 6.4.  Retrieve a Group Configuration
 
-   This operation MUST be supported by the Group Manager and an
-   Administrator.
+   This operation MUST be supported by the Group Manager.
 
    The Administrator can send a GET request to the group-configuration
    resource /manage/GROUPNAME associated with an OSCORE group with group
@@ -695,8 +691,7 @@ Table of Contents
 
 6.5.  Retrieve Part of a Group Configuration by Filters
 
-   This operation MUST be supported by the Group Manager and MAY be
-   supported by an Administrator.
+   This operation MUST be supported by the Group Manager.
 
    The Administrator can send a FETCH request to the group-configuration
    resource /manage/GROUPNAME associated with an OSCORE group with group
@@ -762,8 +757,7 @@ Table of Contents
 
 6.6.  Overwrite a Group Configuration
 
-   This operation MAY be supported by the Group Manager and an
-   Administrator.
+   This operation MAY be supported by the Group Manager.
 
    The Administrator can send a POST request to the group-configuration
    resource /manage/GROUPNAME associated with an OSCORE group with group
@@ -818,8 +812,7 @@ Table of Contents
 
 6.7.  Selective Update of a Group Configuration
 
-   This operation MAY be supported by the Group Manager and an
-   Administrator.
+   This operation MAY be supported by the Group Manager.
 
    The Administrator can send a PATCH/iPATCH request [RFC8132] to the
    group-configuration resource /manage/GROUPNAME associated with an
@@ -907,8 +900,7 @@ Table of Contents
 
 6.8.  Delete a Group Configuration
 
-   This operation MUST be supported by the Group Manager and an
-   Administrator.
+   This operation MUST be supported by the Group Manager.
 
    The Administrator can send a DELETE request to the group-
    configuration resource /manage/GROUPNAME associated with an OSCORE
@@ -1319,6 +1311,9 @@ Appendix B.  Document Updates
    This section is to be removed before publishing as an RFC.
 
 B.1.  Version -05 to -06
+
+   *  Removed unnecessary normative language, aligned with draft-ietf-
+      ace-oscore-gm-admin.
 
    *  Updated references.
 
